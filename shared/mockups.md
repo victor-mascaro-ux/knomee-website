@@ -44,6 +44,12 @@ their own look. The shared pieces live in `shared/site.css`.
 
 ## Words inside mockups
 - Life events are events: Graduation, not Education.
-- A conversation starter is the ask itself ("Ask about…" or the question), and it
-  follows from what the person just answered. It never repeats what the card
-  already shows.
+- A conversation starter is a question the advisor can put to the client, in the
+  client's own terms ("What does enough look like for you?"). Never an instruction
+  to the advisor. It follows from what the person just answered and never repeats
+  what the card already shows.
+- Life events read in ink, not teal.
+- Readiness (Prospect or Goal) always shows its stage-of-change art,
+  `assets/ttm/TTM-1…5.svg` for Pre-Contemplation … Maintenance, never a generic icon.
+- Every adventure or section icon sits on its white disc with a soft drop shadow,
+  and each card section carries its icon from the app.

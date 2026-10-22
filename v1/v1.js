@@ -2,10 +2,9 @@
    V1 · "Both sides"
    1. Under the hero: a prospect answers on their phone and Jordan's
       card beside it fills in.
-   2. Interactive discovery: three product questions; the advisor
-      view beside them updates live.
-   3. The feature explorer's pinned list follows the feature you've
-      scrolled to.
+   2. Interactive discovery: the Goals adventure and a life event; the
+      advisor view beside them updates live.
+   3. The feature explorer pins while you scroll; each feature slides in.
    Text inside these mockups is product UI with invented people.
    ============================================================ */
 (function () {
@@ -32,9 +31,11 @@
     requestAnimationFrame(step);
   }
   const STAGES = ['Pre-Contemplation', 'Contemplation', 'Preparation', 'Action', 'Maintenance'];
-  function setMeter(meter, k, stageEl) {
+  // Readiness always wears its stage's art (assets/ttm/TTM-1…5).
+  function setMeter(meter, k, stageEl, artEl) {
     $$('i', meter).forEach((bar, i) => bar.classList.toggle('on', i < k));
     if (stageEl) stageEl.textContent = k ? STAGES[k - 1] : '—';
+    if (artEl) artEl.src = `../assets/ttm/TTM-${Math.max(1, k)}.svg`;
   }
 
   /* =========================================================
@@ -48,12 +49,12 @@
     const screen = $('.stage-phone .phone-screen', root);
     const scr = { values: $('.ps-values', root), confidence: $('.ps-confidence', root), done: $('.ps-done', root), fid: $('.ps-fid', root) };
     const chip = (v) => $(`.joy-photo[data-v="${v}"]`, root);
-    const next = $('.ps-next', root);
     const tap = $('.ps-tap', root);
     const kq = $('[data-kq]', root);
     const pill = $('[data-tier]', root);
     const meter = $('[data-meter]', root);
     const stageWord = $('[data-stage]', root);
+    const stageArt = $('[data-stage-ic]', root);
     const tags = $('[data-tags]', root);
     const starter = $('[data-starter]', root);
     const pauseBtn = $('.stage-pause', root);
@@ -101,13 +102,13 @@
       $$('.joy-photo', root).forEach((c) => c.classList.remove('is-on'));
       scr.confidence.classList.remove('is-strong');
       kqVal = 0; kq.textContent = '–'; paintTier(kq, pill, 0);
-      setMeter(meter, 0, stageWord); tags.innerHTML = ''; starter.textContent = '';
+      setMeter(meter, 0, stageWord, stageArt); tags.innerHTML = ''; starter.textContent = '';
     };
 
     if (reduced.matches) {
       show('fid'); scr.confidence.classList.add('is-strong');
       chip('security').classList.add('is-on'); chip('family').classList.add('is-on');
-      addTag('Security'); addTag('Supporting my family'); kq.textContent = '82'; paintTier(kq, pill, 82); setMeter(meter, 4, stageWord); starter.textContent = STARTER;
+      addTag('Security'); addTag('Supporting my family'); kq.textContent = '82'; paintTier(kq, pill, 82); setMeter(meter, 4, stageWord, stageArt); starter.textContent = STARTER;
       return;
     }
 
@@ -116,16 +117,15 @@
         reset();
         await wait(1000);
         tapOn(chip('security')); await wait(180); chip('security').classList.add('is-on');
-        await wait(260); addTag('Security'); setMeter(meter, 1, stageWord); setKQ(24);
+        await wait(260); addTag('Security'); setMeter(meter, 1, stageWord, stageArt); setKQ(24);
         await wait(1100);
         tapOn(chip('family')); await wait(180); chip('family').classList.add('is-on');
-        await wait(260); addTag('Supporting my family'); setMeter(meter, 2, stageWord); setKQ(46);
+        await wait(260); addTag('Supporting my family'); setMeter(meter, 2, stageWord, stageArt); setKQ(46);
         await wait(1100);
-        tapOn(next); next.classList.add('is-pressed'); await wait(160); next.classList.remove('is-pressed');
-        await wait(200); show('confidence');
+        show('confidence');
         await wait(700); scr.confidence.classList.add('is-strong');
-        await wait(600); setMeter(meter, 3, stageWord); setKQ(68);
-        await wait(800); setMeter(meter, 4, stageWord); setKQ(82);
+        await wait(600); setMeter(meter, 3, stageWord, stageArt); setKQ(68);
+        await wait(800); setMeter(meter, 4, stageWord, stageArt); setKQ(82);
         await wait(1400); show('done');
         await wait(2100); show('fid');
         await wait(700); await type(STARTER);
@@ -152,19 +152,20 @@
     const back = $('[data-back]', wrap);
     const nextBtn = $('[data-next]', wrap);
     const nav = $('.q-nav', wrap);
-    const goals = $$('.goal-card', wrap);
-    const range = $('#q-conf', wrap);
+    const goals = $$('.goal-opt', wrap);
+    const levels = $$('.ttm-opt', wrap);
     const events = $$('.q-event', wrap);
     const m = {
-      kq: $('[data-m-kq]', wrap), tier: $('[data-m-tier]', wrap), meter: $('[data-m-meter]', wrap),
-      goal: $('[data-m-goal]', wrap), conf: $('[data-m-conf]', wrap), event: $('[data-m-event]', wrap),
-      starter: $('[data-m-starter]', wrap), mini: $('[data-mini-kq]', wrap), stage: $('[data-m-stage]', wrap),
+      kq: $('[data-m-kq]', wrap), tier: $('[data-m-tier]', wrap), meter: $('[data-m-meter]', wrap), stage: $('[data-m-stage]', wrap),
+      goal: $('[data-m-goal]', wrap), ready: $('[data-m-ready]', wrap), event: $('[data-m-event]', wrap),
+      starter: $('[data-m-starter]', wrap), mini: $('[data-mini-kq]', wrap),
+      stageArt: $('[data-m-stage-ic]', wrap), readyArt: $('[data-m-ready-ic]', wrap),
     };
-    // The starter is the ask, built from the goal and the life event they chose.
+    // The starter is a question for the client, built from their goal and event.
     const EVENT_Q = { 'Retirement': 'retirement', 'New Business': 'the new business', 'Property Purchase': 'the property purchase', 'Graduation': 'the graduation', 'New Baby': 'the new baby', 'Relocation': 'the move' };
     const EMPTY = '<span class="ma-empty">—</span>';
-    // Each question belongs to its own Knomee adventure; the header follows along.
-    const ADV = [['goals', 'Goals'], ['confidence', 'Confidence'], ['life-events', 'Life Events']];
+    // The first two questions are the Goals adventure's; the header follows along.
+    const ADV = [['goals', 'Goals'], ['goals', 'Goals'], ['life-events', 'Life Events']];
     const adv = $('[data-adv]', wrap);
     const setAdv = (i) => {
       const [icon, name] = ADV[Math.min(i, ADV.length - 1)];
@@ -174,40 +175,30 @@
       label.textContent = name;
       adv.classList.remove('swap'); void adv.offsetWidth; adv.classList.add('swap');
     };
-    // The Confidence gauge: the needle follows the slider, its wedge lights up.
-    const needle = $('.dial--try', wrap);
-    const gaugeWord = $('[data-gauge-word]', wrap);
-    const paintGauge = () => {
-      const v = +range.value, word = v < 34 ? 'Weak' : v < 67 ? 'Moderate' : 'Strong';
-      needle.style.setProperty('--a', (-88 + v * 1.76).toFixed(1) + 'deg');
-      $$('path[data-w]', needle).forEach((p) => p.classList.toggle('on', p.dataset.w === word));
-      if (gaugeWord.textContent !== word) { gaugeWord.textContent = word; gaugeWord.classList.remove('swap'); void gaugeWord.offsetWidth; gaugeWord.classList.add('swap'); }
-    };
 
     let at = 0, kqShown = 0;
-    const st = { goal: null, conf: 50, confTouched: false, event: null };
+    const st = { goal: null, level: null, event: null };
 
     const flash = (el) => { const row = el.closest('div'); row.classList.remove('flash'); void row.offsetWidth; row.classList.add('flash'); };
-    const confWord = (v) => (v < 34 ? 'Weak' : v < 67 ? 'Moderate' : 'Strong');
-    const score = () => {
-      if (!st.goal) return null;
-      const s = 30 + (st.confTouched ? st.conf * 0.4 : 0) + (st.event ? 14 : 0);
-      return Math.max(0, Math.min(96, Math.round(s)));
-    };
+    const score = () => (st.goal ? Math.min(96, 30 + (st.level ? +st.level * 12 : 0) + (st.event ? 10 : 0)) : null);
     const paintScore = () => {
       const s = score();
+      setMeter(m.meter, st.level ? +st.level : 0, m.stage, m.stageArt);
+      m.readyArt.src = `../assets/ttm/TTM-${st.level || 1}.svg`;
       if (s === null) {
         m.kq.textContent = '–'; m.kq.className = 'kq kq-lg tier-3';
         m.tier.className = 'tier-pill tier-pill--nurture'; m.tier.textContent = 'Nurture';
         m.mini.textContent = '–'; m.mini.className = 'kq tier-3';
-        setMeter(m.meter, 0, m.stage); kqShown = 0; return;
+        kqShown = 0; return;
       }
       tween(kqShown, s, 700, (v) => { m.kq.textContent = v; m.mini.textContent = v; });
       kqShown = s; paintTier(m.kq, m.tier, s); paintTier(m.mini, null, s); bump(m.kq); bump(m.mini);
-      setMeter(m.meter, Math.ceil(s / 20), m.stage);
     };
     const paintGoal = () => { m.goal.innerHTML = st.goal ? `<span class="ma-pill">${st.goal}</span>` : EMPTY; flash(m.goal); };
-    const paintConf = () => { m.conf.className = ''; m.conf.textContent = `${confWord(st.conf)} · ${st.conf}`; flash(m.conf); };
+    const paintLevel = () => {
+      m.ready.innerHTML = st.level ? `<img class="ma-ttm" src="../assets/ttm/TTM-${st.level}.svg" alt="">${STAGES[st.level - 1]}` : EMPTY;
+      flash(m.ready);
+    };
     const paintEvent = () => {
       const b = events.find((e) => e.dataset.event === st.event);
       m.event.innerHTML = b ? `<img src="${$('img', b).getAttribute('src')}" alt="">${st.event}` : EMPTY;
@@ -227,12 +218,7 @@
       nav.classList.toggle('is-final', i === 3);
     };
 
-    const sun = range.closest('[data-sun]');
-    const paintRange = () => { sun.style.setProperty('--v', range.value); paintGauge(); };
-    range.addEventListener('input', () => { st.conf = +range.value; st.confTouched = true; paintRange(); paintConf(); paintScore(); });
-    paintRange();
-
-    // Goals and life events are both single choices: click, or arrow keys to move and pick.
+    // Every question is a single choice: click, or arrow keys to move and pick.
     const radios = (items, key, paint) => {
       const pick = (b) => {
         items.forEach((e) => { const on = e === b; e.setAttribute('aria-checked', String(on)); e.tabIndex = on ? 0 : -1; });
@@ -251,18 +237,17 @@
       });
       return () => items.forEach((e, i) => { e.setAttribute('aria-checked', 'false'); e.tabIndex = i === 0 ? 0 : -1; });
     };
-    const clearGoals = radios(goals, 'goal', paintGoal);
-    const clearEvents = radios(events, 'event', paintEvent);
+    const clears = [radios(goals, 'goal', paintGoal), radios(levels, 'level', paintLevel), radios(events, 'event', paintEvent)];
 
     nextBtn.addEventListener('click', async () => {
-      if (at === 0 && !st.goal) { nudge(); return; }
-      if (at === 1 && !st.confTouched) { st.confTouched = true; paintConf(); paintScore(); }
-      if (at === 2 && !st.event) { nudge(); return; }
-      if (at < 2) { go(at + 1); const f = $('button, input', steps[at]); if (f) f.focus({ preventScroll: true }); return; }
+      const need = ['goal', 'level', 'event'][at];
+      if (need && !st[need]) { nudge(); return; }
+      if (at < 2) { go(at + 1); const f = $('button', steps[at]); if (f) f.focus({ preventScroll: true }); return; }
 
       const r = nextBtn.getBoundingClientRect();
       go(3);
-      const text = `Ask how ${EVENT_Q[st.event]} changes their plans for ${st.goal.toLowerCase()}.`;
+      const plan = st.goal.charAt(0).toLowerCase() + st.goal.slice(1);
+      const text = `“How does ${EVENT_Q[st.event]} change your plan to ${plan}?”`;
       confetti(r.left + r.width / 2, r.top + r.height / 2, 70);
       m.starter.classList.add('typing');
       await window.Knomee.typeText(m.starter, text, 18);
@@ -272,12 +257,9 @@
     back.addEventListener('click', () => { if (at > 0) go(at - 1); });
 
     $('[data-restart]', wrap).addEventListener('click', () => {
-      st.goal = null; st.conf = 50; st.confTouched = false; st.event = null;
-      clearGoals();
-      range.value = 50; sun.classList.add('is-untouched'); paintRange();
-      clearEvents();
-      m.goal.innerHTML = EMPTY; m.conf.className = 'ma-empty'; m.conf.textContent = '—';
-      m.event.innerHTML = EMPTY; m.starter.innerHTML = EMPTY;
+      st.goal = null; st.level = null; st.event = null;
+      clears.forEach((c) => c());
+      m.goal.innerHTML = EMPTY; m.ready.innerHTML = EMPTY; m.event.innerHTML = EMPTY; m.starter.innerHTML = EMPTY;
       paintScore(); go(0); goals[0].focus({ preventScroll: true });
     });
 
@@ -285,22 +267,44 @@
   }
 
   /* =========================================================
-     3. FEATURE EXPLORER — the pinned list follows the feature on screen
+     3. FEATURE EXPLORER — the section pins while you scroll through it;
+        each third of the scroll slides the next feature in.
      ========================================================= */
   function explorer() {
     const sec = $('.explorer');
     if (!sec) return;
+    const track = $('.ex-track', sec);
+    const sticky = $('.ex-sticky', sec);
     const panels = $$('.panel', sec);
     const items = $$('.ex-item', sec);
     panels.forEach((p) => $$('.ui-group, .ui-row, .uc-card, .us-q, .us-values', p).forEach((el, i) => el.style.setProperty('--r', i)));
-    if (!('IntersectionObserver' in window)) return;
-    const io = new IntersectionObserver((entries) => {
-      entries.forEach((e) => {
-        if (!e.isIntersecting) return;
-        items.forEach((it) => it.classList.toggle('is-active', it.getAttribute('href') === '#' + e.target.id));
-      });
-    }, { rootMargin: '-45% 0px -45% 0px' });
-    panels.forEach((p) => io.observe(p));
+    const pinned = window.matchMedia('(min-width: 901px)');
+    const headerH = () => parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--header-h')) || 72;
+    const span = () => Math.max(1, track.offsetHeight - sticky.offsetHeight);
+    let at = -1;
+    const set = (i) => {
+      if (i === at) return;
+      at = i;
+      panels.forEach((p, n) => { p.classList.toggle('is-active', n === i); p.classList.toggle('is-before', n < i); });
+      items.forEach((it, n) => it.classList.toggle('is-active', n === i));
+    };
+    let queued = false;
+    const update = () => {
+      queued = false;
+      if (!pinned.matches) { panels.forEach((p) => p.classList.remove('is-before')); at = -1; return; }
+      const p = Math.min(0.999, Math.max(0, (headerH() - track.getBoundingClientRect().top) / span()));
+      set(Math.floor(p * panels.length));
+    };
+    addEventListener('scroll', () => { if (!queued) { queued = true; requestAnimationFrame(update); } }, { passive: true });
+    addEventListener('resize', update);
+    update();
+    // A heading scrolls to its feature's stretch of the section.
+    items.forEach((it, i) => it.addEventListener('click', (e) => {
+      if (!pinned.matches) return;
+      e.preventDefault();
+      const top = window.scrollY + track.getBoundingClientRect().top - headerH() + span() * (i + 0.5) / panels.length;
+      window.scrollTo({ top, behavior: reduced.matches ? 'auto' : 'smooth' });
+    }));
   }
 
   const init = () => { stage(); mirror(); explorer(); };

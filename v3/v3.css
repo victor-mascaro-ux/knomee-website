@@ -105,8 +105,10 @@ svg use { pointer-events: none; }
 /* 30% faster: time to convert, before (100) and after (70). */
 .sc-conv { flex-direction: column; align-items: stretch; justify-content: flex-end; gap: 6px; }
 .sc-conv i { height: 10px; transform: scaleX(0); transform-origin: left; }
-.sc-conv .sc-before { width: 100%; background: var(--k-grape-light); transition-delay: 0.2s; }
-.sc-conv .sc-after { width: 70%; background: var(--k-grape); transition-delay: 0.55s; }
+/* 30% faster: conversion speed, before 100 and after 130 — the faster, longer
+   bar is the dark one, the slower one light. */
+.sc-conv .sc-before { width: 76.92%; background: var(--k-grape-light); transition-delay: 0.2s; }
+.sc-conv .sc-after { width: 100%; background: var(--k-grape); transition-delay: 0.55s; }
 .s-conv.is-in .sc-conv i { transform: scaleX(1); }
 
 /* 90% completion: r = 19, circumference 2π·19 = 119.381; 90% = 107.443. */
@@ -296,6 +298,17 @@ svg use { pointer-events: none; }
 .typing b { width: 7px; height: 7px; border-radius: 50%; background: var(--k-steel); animation: blinkDot 1.2s ease-in-out infinite; }
 .typing b:nth-child(2) { animation-delay: .15s; } .typing b:nth-child(3) { animation-delay: .3s; }
 @keyframes blinkDot { 0%, 60%, 100% { transform: translateY(0); opacity: .5; } 30% { transform: translateY(-4px); opacity: 1; } }
+/* Hover replays the conversation: each bubble pops in turn, its lines draw
+   out again, and the typing dots hurry. */
+.f-convo:hover .bub { animation: bubPop 0.6s var(--ease-pop) both; }
+.f-convo:hover .b2 { animation-delay: 0.12s; }
+.f-convo:hover .b3 { animation-delay: 0.24s; }
+.f-convo:hover .bub.typing { animation-delay: 0.36s; }
+.f-convo:hover .bub i { transform-origin: left; animation: lineDraw 0.7s var(--ease-standard) both; }
+.f-convo:hover .bub.me i { transform-origin: right; }
+.f-convo:hover .typing b { animation-duration: 0.6s; }
+@keyframes bubPop { 0% { transform: translateY(6px) scale(0.94); } 60% { transform: translateY(-2px) scale(1.03); } 100% { transform: none; } }
+@keyframes lineDraw { from { transform: scaleX(0.2); } to { transform: none; } }
 
 /* Scale: advisors across the firm light up, team by team. */
 .team { display: grid; grid-template-columns: repeat(7, 34px); gap: 10px; }
@@ -424,7 +437,9 @@ svg use { pointer-events: none; }
 .r-orbit { position: absolute; inset: 0; width: 100%; height: 100%; animation: orbit 40s linear infinite; }
 .r-orbit circle { fill: none; stroke: var(--k-lilac); stroke-width: 1.5; stroke-dasharray: 2 7; stroke-linecap: round; }
 @keyframes orbit { to { transform: rotate(360deg); } }
-.r-photo::after { content: ""; position: absolute; right: 9%; top: 12%; width: 22px; height: 22px; border-radius: 50%; background: var(--k-lime); box-shadow: 0 0 0 6px var(--k-white); }
+/* The lime dot sits on the dashed orbit itself and travels round with it. */
+.r-orbit .r-dot-ring { fill: var(--k-white); stroke: none; }
+.r-orbit .r-dot { fill: var(--k-lime); stroke: none; }
 .r-copy h2 { font-size: clamp(30px, 3.4vw, 44px); }
 .r-copy .lead { margin-top: var(--space-16); }
 .r-person { display: grid; gap: 2px; margin: var(--space-24) 0 var(--space-16); padding-left: 16px; border-left: 3px solid var(--k-grape); }
@@ -502,3 +517,11 @@ svg use { pointer-events: none; }
   .marker-stroke { animation: none; transform: scaleX(1) skewX(-10deg); }
   .f-discovery .joy-photo, .f-discovery .adv-row img, .insight-card, .insight-card .kq, .insight-card .meter i { transform: none !important; animation: none !important; }
 }
+
+/* Readiness always wears its stage-of-change art (here: Action). */
+.mlabel:has(.ttm-ic) { display: inline-flex; align-items: center; gap: 6px; }
+.ttm-ic { flex: none; width: 22px; height: 22px; object-fit: contain; }
+/* The readiness art made the hero card's meta row too wide for one line:
+   the meter narrows and the row may wrap, so the stage never runs under the score. */
+.prospect .p-meta { flex-wrap: wrap; row-gap: 4px; }
+.prospect .p-meta .meter { width: 56px; }
