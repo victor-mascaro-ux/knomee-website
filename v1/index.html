@@ -94,6 +94,44 @@
           <button class="video-play" type="button" aria-label="Play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l11-6.5z"/></svg></button>
         </div>
 
+        <!-- The prospect's phone: each answer feeds Jordan's card -->
+        <div class="phone hero-phone" aria-hidden="true">
+          <div class="phone-screen">
+            <div class="ps ps-values is-current">
+              <div class="ps-head"><img src="../assets/adventures/financial-joy.svg" alt=""><span>Financial Joy</span></div>
+              <p class="ps-q">What do you want your money to do for you?</p>
+              <p class="ps-hint">Pick two</p>
+              <div class="ps-grid">
+                <div class="ps-chip" data-v="security"><img src="../assets/values/security.png" alt=""><span>Security</span></div>
+                <div class="ps-chip" data-v="family"><img src="../assets/values/family.png" alt=""><span>Family</span></div>
+                <div class="ps-chip" data-v="independence"><img src="../assets/values/independence.png" alt=""><span>Independence</span></div>
+                <div class="ps-chip" data-v="comfort"><img src="../assets/values/comfort.png" alt=""><span>Comfort</span></div>
+                <div class="ps-chip" data-v="moment"><img src="../assets/values/moment.png" alt=""><span>Moments</span></div>
+                <div class="ps-chip" data-v="choice"><img src="../assets/values/choice.png" alt=""><span>Choice</span></div>
+              </div>
+              <div class="ps-next">Next</div>
+            </div>
+            <div class="ps ps-confidence">
+              <div class="ps-head"><img src="../assets/adventures/confidence.svg" alt=""><span>Confidence</span></div>
+              <p class="ps-q">How confident do you feel about your finances today?</p>
+              <svg class="dial" viewBox="0 0 200 116">
+                <path d="M20 100 A80 80 0 0 1 60 30.7" fill="none" stroke="var(--dial-1)" stroke-width="22"/>
+                <path d="M63.5 28.8 A80 80 0 0 1 136.5 28.8" fill="none" stroke="var(--dial-2)" stroke-width="22"/>
+                <path d="M140 30.7 A80 80 0 0 1 180 100" fill="none" stroke="var(--dial-3)" stroke-width="22"/>
+                <g class="needle"><path d="M100 100 L100 34" stroke="var(--k-plum)" stroke-width="4" stroke-linecap="round"/><circle cx="100" cy="100" r="8" fill="var(--k-plum)"/></g>
+              </svg>
+              <p class="dial-word">Strong</p>
+              <div class="ps-slider"><i></i><b></b></div>
+            </div>
+            <div class="ps ps-done">
+              <div class="ps-spinner"></div>
+              <p class="ps-q">Building your Financial&nbsp;ID…</p>
+              <div class="ps-bar"><i></i></div>
+            </div>
+            <div class="ps-tap"></div>
+          </div>
+        </div>
+
         <div class="advisor-card" aria-hidden="true">
           <div class="ac-head">
             <span class="ac-avatar">JE</span>
@@ -112,6 +150,11 @@
             <p data-starter></p>
           </div>
         </div>
+
+        <button class="stage-pause" type="button" aria-label="Pause" aria-pressed="false">
+          <svg class="i-pause" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg>
+          <svg class="i-play" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 4.5v15l13-7.5z"/></svg>
+        </button>
       </div>
     </div>
 

@@ -15,14 +15,19 @@
 
 /* The site's video is the hero visual. The advisor's view of a prospect
    fills in on a card hanging off its lower edge. */
-.hero-media { position: relative; padding-bottom: 250px; }
+.hero-media { position: relative; padding-bottom: 190px; }
 .hero-media::before, .hero-media::after { content: ""; position: absolute; z-index: -1; border-radius: 50%; pointer-events: none; }
 .hero-media::before { width: 520px; height: 520px; right: -120px; top: -80px; background: radial-gradient(closest-side, var(--k-teal-light), rgba(230, 247, 245, 0)); }
 .hero-media::after { width: 420px; height: 420px; left: -120px; bottom: -40px; background: radial-gradient(closest-side, var(--k-grape-light), rgba(233, 217, 244, 0)); }
-.video--hero { border-radius: 24px; box-shadow: 0 40px 100px rgba(36, 4, 70, 0.22); }
-/* While the video plays, the card slides off it and comes back on pause. */
-.hero-media .advisor-card { transition: opacity 0.35s var(--ease-out), transform 0.5s var(--ease-pop); }
-.hero-media.is-watching .advisor-card { opacity: 0; transform: translateY(32px); pointer-events: none; }
+.video--hero {
+  z-index: 1; border-radius: 24px; box-shadow: 0 40px 100px rgba(36, 4, 70, 0.22); transform-origin: 62% 50%;
+  transition: transform 0.7s var(--ease-pop), box-shadow 0.7s var(--ease-out);
+}
+/* Play: the card slides off and the video zooms in to take the stage.
+   Pause or end: the video settles back and the card slides in again. */
+.hero-media .advisor-card { transition: opacity 0.4s var(--ease-out) 0.25s, transform 0.6s var(--ease-pop) 0.25s; }
+.hero-media.is-watching .advisor-card { opacity: 0; transform: translate(-56px, 48px) rotate(-3deg) scale(0.96); pointer-events: none; transition-delay: 0s; }
+.hero-media.is-watching .video--hero { z-index: 4; transform: scale(1.14); box-shadow: 0 60px 140px rgba(36, 4, 70, 0.34); transition-delay: 0.12s; }
 .video--hero .video-play { width: 96px; height: 96px; margin: -48px 0 0 -48px; }
 .video--hero .video-play svg { width: 34px; height: 34px; }
 
@@ -32,6 +37,67 @@
   background: var(--k-plum) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Cpath d='M2.5 6.2 5 8.5l4.5-5' fill='none' stroke='white' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/14px no-repeat;
   box-shadow: 0 0 0 3px var(--k-white); transform: scale(0); transition: transform 0.4s var(--ease-pop);
 }
+
+/* The Confidence dial (hero phone, the interactive gauge, the client mockup) */
+.dial { display: block; width: 100%; overflow: visible; }
+.dial .needle { transform-box: view-box; transform-origin: 100px 100px; }
+
+/* The prospect's phone, in front of the video's right edge. Each answer
+   feeds Jordan's card; both slide off while the video plays. */
+.hero-phone { --pw: 220px; position: absolute; right: -28px; top: 64px; z-index: 3; transition: opacity 0.4s var(--ease-out) 0.25s, transform 0.6s var(--ease-pop) 0.25s; }
+.hero-media.is-watching .hero-phone { opacity: 0; transform: translate(56px, 48px) rotate(3deg) scale(0.96); pointer-events: none; transition-delay: 0s; }
+.ps {
+  position: absolute; inset: 0; display: flex; flex-direction: column; padding: 32px 12px 12px;
+  opacity: 0; transform: translateX(24px); pointer-events: none;
+  transition: opacity 0.45s var(--ease-out), transform 0.55s var(--ease-pop);
+}
+.ps.is-current { opacity: 1; transform: none; }
+.ps.is-leaving { opacity: 0; transform: translateX(-24px); }
+.ps-head { display: flex; align-items: center; gap: 6px; }
+.ps-head img { width: 20px; height: 20px; border-radius: 50%; box-shadow: 0 0 0 1px var(--k-line); }
+.ps-head span { font-size: var(--text-xs); font-weight: var(--weight-semibold); color: var(--k-grape); }
+.ps-q { margin: 10px 0 2px; font-size: var(--text-base); font-weight: var(--weight-semibold); line-height: 1.3; color: var(--k-plum); }
+.ps-hint { font-size: var(--text-2xs); color: var(--text-muted); }
+.ps-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; margin-top: 8px; }
+.ps-chip { position: relative; padding: 4px 4px 5px; border: 1.5px solid var(--k-line); border-radius: 10px; background: var(--k-white); transition: border-color var(--dur-base), background var(--dur-base), transform 0.35s var(--ease-pop); }
+.ps-chip img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: 7px; }
+.ps-chip span { display: block; margin-top: 3px; text-align: center; font-size: var(--text-2xs); font-weight: var(--weight-semibold); color: var(--k-plum); }
+.ps-chip::after {
+  content: ""; position: absolute; top: -5px; right: -5px; width: 16px; height: 16px; border-radius: 50%;
+  background: var(--k-plum) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Cpath d='M2.5 6.2 5 8.5l4.5-5' fill='none' stroke='white' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/10px no-repeat;
+  box-shadow: 0 0 0 2px var(--k-white); transform: scale(0); transition: transform 0.35s var(--ease-pop);
+}
+.ps-chip.is-picked { border-color: var(--k-plum); background: var(--k-plum-wash); transform: scale(1.03); }
+.ps-chip.is-picked::after { transform: scale(1); }
+.ps-next { margin-top: auto; height: 34px; display: grid; place-items: center; border-radius: var(--radius-pill); background: var(--k-plum); color: var(--k-white); font-size: var(--text-sm); font-weight: var(--weight-semibold); transition: transform var(--dur-base) var(--ease-out); }
+.ps-next.is-pressed { transform: scale(0.96); }
+.hero-phone .dial { margin-top: 14px; }
+.hero-phone .dial .needle { transform: rotate(-70deg); transition: transform 1.4s var(--ease-pop); }
+.ps-confidence.is-strong .needle { transform: rotate(52deg); }
+.dial-word { text-align: center; font-size: var(--text-xl); font-weight: var(--weight-bold); color: var(--k-plum); opacity: 0; transition: opacity var(--dur-slow) var(--ease-out) 0.9s; }
+.ps-confidence.is-strong .dial-word { opacity: 1; }
+.ps-slider { --v: 18%; position: relative; height: 5px; margin: 20px 6px 0; border-radius: 3px; background: var(--bar-off); }
+.ps-slider i { position: absolute; inset: 0 auto 0 0; width: var(--v); border-radius: 3px; background: var(--k-plum); transition: width 1.4s var(--ease-pop); }
+.ps-slider b { position: absolute; top: 50%; left: var(--v); width: 18px; height: 18px; margin: -9px 0 0 -9px; border-radius: 50%; background: var(--k-white); border: 3px solid var(--k-plum); box-shadow: var(--elev-1); transition: left 1.4s var(--ease-pop); }
+.ps-confidence.is-strong .ps-slider { --v: 84%; }
+.ps-done { align-items: center; justify-content: center; text-align: center; gap: 4px; }
+.ps-spinner { width: 40px; height: 40px; margin-bottom: 8px; border-radius: 50%; border: 4px solid var(--k-teal-light); border-top-color: var(--k-teal); animation: spin 0.9s linear infinite; }
+.ps-bar { width: 70%; height: 5px; margin-top: 12px; border-radius: 3px; background: var(--k-teal-light); overflow: hidden; }
+.ps-bar i { display: block; height: 100%; width: 0; background: var(--k-teal); border-radius: 3px; transition: width 2s var(--ease-standard); }
+.ps-done.is-current .ps-bar i { width: 100%; }
+.ps-tap { position: absolute; z-index: 6; width: 32px; height: 32px; margin: -16px 0 0 -16px; border-radius: 50%; background: rgba(36, 4, 70, 0.22); border: 2px solid var(--k-white); box-shadow: 0 2px 10px rgba(36, 4, 70, 0.3); opacity: 0; pointer-events: none; }
+.ps-tap.is-tapping { animation: tap 0.6s var(--ease-out); }
+@keyframes tap { 0% { opacity: 0; transform: scale(1.5); } 30% { opacity: 1; transform: scale(0.85); } 100% { opacity: 0; transform: scale(1.25); } }
+.stage-pause {
+  position: absolute; right: 12px; top: 12px; z-index: 5; display: grid; place-items: center; width: 36px; height: 36px;
+  border: 0; border-radius: 50%; background: rgba(255, 255, 255, 0.9); color: var(--k-plum); cursor: pointer; box-shadow: var(--elev-1);
+  transition: transform var(--dur-base) var(--ease-out), opacity var(--dur-mid);
+}
+.stage-pause:hover { transform: translateY(-1px); }
+.stage-pause svg { width: 14px; height: 14px; }
+.stage-pause .i-play, .stage-pause[aria-pressed="true"] .i-pause { display: none; }
+.stage-pause[aria-pressed="true"] .i-play { display: block; }
+.hero-media.is-watching .stage-pause { opacity: 0; pointer-events: none; }
 
 /* advisor card */
 .advisor-card {
@@ -417,6 +483,7 @@
 
 /* ---------- Responsive ---------- */
 @media (max-width: 1279px) {
+  .hero-phone { --pw: 196px; top: 48px; right: -20px; }
   .advisor-card { width: 280px; padding: 15px; }
   .ac-starter p { font-size: var(--text-sm); }
 }
@@ -441,8 +508,10 @@
 /* Phones: the card sits under the video, overlapping its edge. */
 @media (max-width: 620px) {
   .hero-media { padding-bottom: 0; }
+  .hero-phone, .stage-pause { display: none; }
   .advisor-card { position: relative; left: auto; width: min(300px, 100%); margin: 16px auto 0; }
   .video--hero { border-radius: 18px; }
+  .hero-media.is-watching .video--hero { transform: none; }
   .video--hero .video-play { width: 72px; height: 72px; margin: -36px 0 0 -36px; }
   .video--hero .video-play svg { width: 26px; height: 26px; }
   .bento { grid-template-columns: 1fr; }
@@ -458,6 +527,7 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .stage-pause { display: none; }
   .link-line path, .partner-photo::before, .door-rings i { animation: none; }
   .ex-n { display: none; }
 }

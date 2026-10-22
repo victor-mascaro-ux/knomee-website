@@ -354,21 +354,28 @@
       if (!v || !btn) return;
       // Anything laid over the video (a card on its corner) steps aside while it plays.
       const scope = wrap.closest('[data-watch]') || wrap.parentElement;
-      v.addEventListener('play', () => scope.classList.add('is-watching'));
-      ['pause', 'ended'].forEach((ev) => v.addEventListener(ev, () => scope.classList.remove('is-watching')));
-      btn.addEventListener('click', async () => {
-        wrap.classList.add('is-playing');
-        if (!v.dataset.ready) {
-          const src = v.dataset.hls;
-          if (v.canPlayType('application/vnd.apple.mpegurl')) v.src = src;
-          else {
-            try { const Hls = await loadHls(); const h = new Hls(); h.loadSource(src); h.attachMedia(v); }
-            catch (err) { wrap.classList.remove('is-playing'); return; }
-          }
-          v.dataset.ready = '1';
-        }
+      const playing = (on) => { wrap.classList.toggle('is-playing', on); scope.classList.toggle('is-watching', on); };
+      v.addEventListener('play', () => playing(true));
+      ['pause', 'ended', 'error'].forEach((ev) => v.addEventListener(ev, () => playing(false)));
+
+      // hls.js first: some browsers say they can play HLS natively ("maybe")
+      // and then fail on these streams. Native playback is the fallback.
+      let ready;
+      const attach = () => ready || (ready = (async () => {
+        const src = v.dataset.hls;
+        let Hls = null;
+        if (window.MediaSource) { try { Hls = await loadHls(); } catch (e) { Hls = null; } }
+        if (Hls && Hls.isSupported()) {
+          const h = new Hls();
+          h.on(Hls.Events.ERROR, (_, d) => { if (d.fatal) { playing(false); ready = null; h.destroy(); } });
+          h.loadSource(src); h.attachMedia(v);
+        } else if (v.canPlayType('application/vnd.apple.mpegurl')) v.src = src;
+        else throw new Error('No HLS playback here');
         v.controls = true;
-        v.play().catch(() => {});
+      })());
+      btn.addEventListener('click', async () => {
+        try { await attach(); } catch (e) { ready = null; return; }
+        v.play().catch(() => playing(false));
       });
     });
   }

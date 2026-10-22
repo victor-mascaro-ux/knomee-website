@@ -1,7 +1,8 @@
 /* ============================================================
    V1 · "Both sides"
-   1. The hero card: the advisor's view of a prospect fills in on
-      the corner of the site's video.
+   1. The hero: in front of the site's video, a prospect answers on
+      their phone and Jordan's card fills in. Both slide off while the
+      video plays.
    2. Interactive discovery: three product questions; the advisor
       view beside them updates live.
    3. The feature explorer advances on its own, pausing on hover,
@@ -34,40 +35,105 @@
   function setMeter(meter, k) { $$('i', meter).forEach((bar, i) => bar.classList.toggle('on', i < k)); }
 
   /* =========================================================
-     1. HERO CARD — the advisor's view of a prospect fills in once,
-        as the hero comes into view: values, readiness, score, starter.
+     1. HERO — the prospect's phone feeds Jordan's card, on a loop
+        that pauses off screen, on the pause button, while the video
+        plays, and under reduced motion.
      ========================================================= */
-  function heroCard() {
-    const card = $('.hero .advisor-card');
-    if (!card) return;
-    const kq = $('[data-kq]', card);
-    const pill = $('[data-tier]', card);
-    const meter = $('[data-meter]', card);
-    const tags = $('[data-tags]', card);
-    const starter = $('[data-starter]', card);
+  function hero() {
+    const root = $('.hero-media');
+    if (!root) return;
+    const screen = $('.hero-phone .phone-screen', root);
+    const scr = { values: $('.ps-values', root), confidence: $('.ps-confidence', root), done: $('.ps-done', root) };
+    const chip = (v) => $(`.ps-chip[data-v="${v}"]`, root);
+    const next = $('.ps-next', root);
+    const tap = $('.ps-tap', root);
+    const kq = $('[data-kq]', root);
+    const pill = $('[data-tier]', root);
+    const meter = $('[data-meter]', root);
+    const tags = $('[data-tags]', root);
+    const starter = $('[data-starter]', root);
+    const pauseBtn = $('.stage-pause', root);
     const STARTER = '“What would retirement need to look like for you to feel secure?”';
-    let kqVal = 0;
+
+    let kqVal = 0, userPaused = false, inView = true;
+    const playing = () => !userPaused && inView && !document.hidden && !root.classList.contains('is-watching');
+
+    // A wait that only counts time while the demo is playing.
+    const wait = (ms) => new Promise((res) => {
+      let left = ms, last = performance.now();
+      const tick = (now) => {
+        if (playing()) left -= now - last;
+        last = now;
+        if (left <= 0) res(); else requestAnimationFrame(tick);
+      };
+      requestAnimationFrame(tick);
+    });
+
+    const show = (name) => {
+      Object.values(scr).forEach((el) => {
+        if (el.classList.contains('is-current') && el !== scr[name]) {
+          el.classList.remove('is-current'); el.classList.add('is-leaving');
+          setTimeout(() => el.classList.remove('is-leaving'), 500);
+        }
+      });
+      scr[name].classList.add('is-current');
+    };
+    const tapOn = (el) => {
+      const a = screen.getBoundingClientRect(), b = el.getBoundingClientRect();
+      tap.style.left = (b.left - a.left + b.width / 2) + 'px';
+      tap.style.top = (b.top - a.top + b.height / 2) + 'px';
+      tap.classList.remove('is-tapping'); void tap.offsetWidth; tap.classList.add('is-tapping');
+    };
     const setKQ = (n) => { tween(kqVal, n, 900, (v) => { kq.textContent = v; }); kqVal = n; paintTier(kq, pill, n); bump(kq); };
     const addTag = (t) => { const s = document.createElement('span'); s.textContent = t; tags.appendChild(s); };
+    const type = async (text) => {
+      starter.classList.add('typing');
+      for (let i = 1; i <= text.length; i++) { starter.textContent = text.slice(0, i); await wait(26); }
+      starter.classList.remove('typing');
+    };
+
+    const reset = () => {
+      show('values');
+      $$('.ps-chip', root).forEach((c) => c.classList.remove('is-picked'));
+      scr.confidence.classList.remove('is-strong');
+      kqVal = 0; kq.textContent = '–'; paintTier(kq, pill, 0);
+      setMeter(meter, 0); tags.innerHTML = ''; starter.textContent = '';
+    };
 
     if (reduced.matches) {
+      show('confidence'); scr.confidence.classList.add('is-strong');
+      chip('security').classList.add('is-picked'); chip('family').classList.add('is-picked');
       addTag('Security'); addTag('Family'); kq.textContent = '82'; paintTier(kq, pill, 82); setMeter(meter, 4); starter.textContent = STARTER;
       return;
     }
-    const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
-    const play = async () => {
-      await sleep(900);
-      addTag('Security'); setMeter(meter, 1); setKQ(24); await sleep(900);
-      addTag('Family'); setMeter(meter, 2); setKQ(46); await sleep(900);
-      setMeter(meter, 3); setKQ(68); await sleep(800);
-      setMeter(meter, 4); setKQ(82); await sleep(700);
-      starter.classList.add('typing');
-      await window.Knomee.typeText(starter, STARTER, 24);
-      starter.classList.remove('typing');
-    };
-    if (!('IntersectionObserver' in window)) { play(); return; }
-    const io = new IntersectionObserver(([e]) => { if (e.isIntersecting) { io.disconnect(); play(); } }, { threshold: 0.4 });
-    io.observe(card);
+
+    (async function loop() {
+      for (;;) {
+        reset();
+        await wait(1000);
+        tapOn(chip('security')); await wait(180); chip('security').classList.add('is-picked');
+        await wait(260); addTag('Security'); setMeter(meter, 1); setKQ(24);
+        await wait(1100);
+        tapOn(chip('family')); await wait(180); chip('family').classList.add('is-picked');
+        await wait(260); addTag('Family'); setMeter(meter, 2); setKQ(46);
+        await wait(1100);
+        tapOn(next); next.classList.add('is-pressed'); await wait(160); next.classList.remove('is-pressed');
+        await wait(200); show('confidence');
+        await wait(700); scr.confidence.classList.add('is-strong');
+        await wait(600); setMeter(meter, 3); setKQ(68);
+        await wait(800); setMeter(meter, 4); setKQ(82);
+        await wait(1400); show('done');
+        await wait(500); await type(STARTER);
+        await wait(3800);
+      }
+    })();
+
+    pauseBtn.addEventListener('click', () => {
+      userPaused = !userPaused;
+      pauseBtn.setAttribute('aria-pressed', String(userPaused));
+      pauseBtn.setAttribute('aria-label', userPaused ? 'Play' : 'Pause');
+    });
+    if ('IntersectionObserver' in window) new IntersectionObserver(([e]) => { inView = e.isIntersecting; }, { threshold: 0.2 }).observe(root);
   }
 
   /* =========================================================
@@ -240,6 +306,6 @@
     }));
   }
 
-  const init = () => { heroCard(); mirror(); explorer(); };
+  const init = () => { hero(); mirror(); explorer(); };
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init); else init();
 })();
