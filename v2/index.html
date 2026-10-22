@@ -135,13 +135,13 @@
               <fieldset class="adv-screen" data-screen="values" data-adventure-name="Financial Joy" data-adventure-icon="financial-joy">
                 <legend class="adv-title" tabindex="-1"><span class="adv-eyebrow">Money is a tool!</span>I want money to help me with…</legend>
                 <p class="adv-sub">Choose up to 3.</p>
-                <div class="value-grid">
-                  <label class="value-chip"><input type="checkbox" name="value" value="choice"><span class="chip-body"><img src="../assets/values/choice.png" alt="" width="150" height="150"><span class="chip-label">Choice</span><span class="tick" aria-hidden="true"><svg viewBox="0 0 12 12"><path d="M2.5 6.2 5 8.5l4.5-5"/></svg></span></span></label>
-                  <label class="value-chip"><input type="checkbox" name="value" value="comfort"><span class="chip-body"><img src="../assets/values/comfort.png" alt="" width="150" height="150"><span class="chip-label">Comfort</span><span class="tick" aria-hidden="true"><svg viewBox="0 0 12 12"><path d="M2.5 6.2 5 8.5l4.5-5"/></svg></span></span></label>
-                  <label class="value-chip"><input type="checkbox" name="value" value="independence"><span class="chip-body"><img src="../assets/values/independence.png" alt="" width="150" height="150"><span class="chip-label">Independence</span><span class="tick" aria-hidden="true"><svg viewBox="0 0 12 12"><path d="M2.5 6.2 5 8.5l4.5-5"/></svg></span></span></label>
-                  <label class="value-chip"><input type="checkbox" name="value" value="moment"><span class="chip-body"><img src="../assets/values/moment.png" alt="" width="150" height="150"><span class="chip-label">Enjoying the moment</span><span class="tick" aria-hidden="true"><svg viewBox="0 0 12 12"><path d="M2.5 6.2 5 8.5l4.5-5"/></svg></span></span></label>
-                  <label class="value-chip"><input type="checkbox" name="value" value="security"><span class="chip-body"><img src="../assets/values/security.png" alt="" width="150" height="150"><span class="chip-label">Security</span><span class="tick" aria-hidden="true"><svg viewBox="0 0 12 12"><path d="M2.5 6.2 5 8.5l4.5-5"/></svg></span></span></label>
-                  <label class="value-chip"><input type="checkbox" name="value" value="family"><span class="chip-body"><img src="../assets/values/family.png" alt="" width="150" height="150"><span class="chip-label">Supporting my family</span><span class="tick" aria-hidden="true"><svg viewBox="0 0 12 12"><path d="M2.5 6.2 5 8.5l4.5-5"/></svg></span></span></label>
+                <div class="joy-photos joy-photos--sm value-grid" role="group" aria-label="I want money to help me with…">
+                  <button class="joy-photo" type="button" aria-pressed="false" data-value="choice"><span class="joy-photo-frame"><img src="../assets/values/choice.png" alt="" width="150" height="150"><span class="joy-photo-check"><svg viewBox="0 0 16 16"><path d="M3.5 8.5l3 3 6-6.5"/></svg></span></span><span class="joy-photo-label">Choice</span></button>
+                  <button class="joy-photo" type="button" aria-pressed="false" data-value="comfort"><span class="joy-photo-frame"><img src="../assets/values/comfort.png" alt="" width="150" height="150"><span class="joy-photo-check"><svg viewBox="0 0 16 16"><path d="M3.5 8.5l3 3 6-6.5"/></svg></span></span><span class="joy-photo-label">Comfort</span></button>
+                  <button class="joy-photo" type="button" aria-pressed="false" data-value="independence"><span class="joy-photo-frame"><img src="../assets/values/independence.png" alt="" width="150" height="150"><span class="joy-photo-check"><svg viewBox="0 0 16 16"><path d="M3.5 8.5l3 3 6-6.5"/></svg></span></span><span class="joy-photo-label">Independence</span></button>
+                  <button class="joy-photo" type="button" aria-pressed="false" data-value="moment"><span class="joy-photo-frame"><img src="../assets/values/moment.png" alt="" width="150" height="150"><span class="joy-photo-check"><svg viewBox="0 0 16 16"><path d="M3.5 8.5l3 3 6-6.5"/></svg></span></span><span class="joy-photo-label">Enjoying the moment</span></button>
+                  <button class="joy-photo" type="button" aria-pressed="false" data-value="security"><span class="joy-photo-frame"><img src="../assets/values/security.png" alt="" width="150" height="150"><span class="joy-photo-check"><svg viewBox="0 0 16 16"><path d="M3.5 8.5l3 3 6-6.5"/></svg></span></span><span class="joy-photo-label">Security</span></button>
+                  <button class="joy-photo" type="button" aria-pressed="false" data-value="family"><span class="joy-photo-frame"><img src="../assets/values/family.png" alt="" width="150" height="150"><span class="joy-photo-check"><svg viewBox="0 0 16 16"><path d="M3.5 8.5l3 3 6-6.5"/></svg></span></span><span class="joy-photo-label">Supporting my family</span></button>
                 </div>
               </fieldset>
 
@@ -157,7 +157,11 @@
                   </svg>
                   <span class="dial-label" data-dial-label>Moderate</span>
                 </div>
-                <input class="conf-range" id="conf-range" type="range" min="0" max="100" step="1" value="50" aria-labelledby="conf-q">
+                <div class="sun-slider is-untouched" data-sun>
+                  <i class="sun-fill"></i>
+                  <span class="sun" aria-hidden="true"><img src="../assets/adventures/confidence.svg" alt=""></span>
+                  <input class="conf-range" id="conf-range" type="range" min="0" max="100" step="1" value="50" aria-labelledby="conf-q">
+                </div>
                 <div class="range-ends" aria-hidden="true"><span>not confident</span><span>very confident</span></div>
               </section>
 
@@ -168,7 +172,7 @@
                   <label class="event-chip"><input type="checkbox" name="event" value="retirement"><span class="chip-body"><img src="../assets/life-events/retirement.svg" alt="" width="30" height="40"><span class="chip-label">Retirement</span><span class="tick" aria-hidden="true"><svg viewBox="0 0 12 12"><path d="M2.5 6.2 5 8.5l4.5-5"/></svg></span></span></label>
                   <label class="event-chip"><input type="checkbox" name="event" value="new-business"><span class="chip-body"><img src="../assets/life-events/new-business.svg" alt="" width="31" height="44"><span class="chip-label">New business</span><span class="tick" aria-hidden="true"><svg viewBox="0 0 12 12"><path d="M2.5 6.2 5 8.5l4.5-5"/></svg></span></span></label>
                   <label class="event-chip"><input type="checkbox" name="event" value="property-purchase"><span class="chip-body"><img src="../assets/life-events/property-purchase.svg" alt="" width="33" height="26"><span class="chip-label">Property purchase</span><span class="tick" aria-hidden="true"><svg viewBox="0 0 12 12"><path d="M2.5 6.2 5 8.5l4.5-5"/></svg></span></span></label>
-                  <label class="event-chip"><input type="checkbox" name="event" value="education"><span class="chip-body"><img src="../assets/life-events/education.svg" alt="" width="40" height="27"><span class="chip-label">Education</span><span class="tick" aria-hidden="true"><svg viewBox="0 0 12 12"><path d="M2.5 6.2 5 8.5l4.5-5"/></svg></span></span></label>
+                  <label class="event-chip"><input type="checkbox" name="event" value="education"><span class="chip-body"><img src="../assets/life-events/education.svg" alt="" width="40" height="27"><span class="chip-label">Graduation</span><span class="tick" aria-hidden="true"><svg viewBox="0 0 12 12"><path d="M2.5 6.2 5 8.5l4.5-5"/></svg></span></span></label>
                   <label class="event-chip"><input type="checkbox" name="event" value="relocation"><span class="chip-body"><img src="../assets/life-events/relocation.svg" alt="" width="40" height="38"><span class="chip-label">Relocation</span><span class="tick" aria-hidden="true"><svg viewBox="0 0 12 12"><path d="M2.5 6.2 5 8.5l4.5-5"/></svg></span></span></label>
                   <label class="event-chip"><input type="checkbox" name="event" value="new-baby"><span class="chip-body"><img src="../assets/life-events/new-baby.svg" alt="" width="40" height="40"><span class="chip-label">New baby</span><span class="tick" aria-hidden="true"><svg viewBox="0 0 12 12"><path d="M2.5 6.2 5 8.5l4.5-5"/></svg></span></span></label>
                 </div>
@@ -185,9 +189,20 @@
               <section class="adv-screen adv-id" data-screen="id" data-adventure-name="Financial Joy" data-adventure-icon="financial-joy" aria-labelledby="adv-done-t">
                 <p class="adv-title adv-done-title" id="adv-done-t" tabindex="-1">You found Financial Joy</p>
                 <div class="fid">
-                  <span class="fid-kicker">Financial ID</span>
-                  <p class="fid-title">Jordan Ellis</p>
-                  <ul class="fid-chips" data-fid-chips></ul>
+                  <div class="fid-head"><span class="fid-avatar" aria-hidden="true">JE</span><p class="fid-title">Jordan Ellis’s Financial ID</p></div>
+                  <div class="fid-sec">
+                    <p class="fid-sec-t"><img src="../assets/adventures/financial-joy.svg" alt="" width="20" height="20">Financial Joy</p>
+                    <p class="fid-sub">I want money to help me with</p>
+                    <div class="fid-pills" data-fid-values></div>
+                  </div>
+                  <div class="fid-sec">
+                    <p class="fid-sec-t"><img src="../assets/adventures/confidence.svg" alt="" width="20" height="20">Confidence</p>
+                    <div class="fid-row"><span class="fid-word" data-fid-conf>Moderate</span><svg class="mini-gauge" viewBox="0 0 200 116" aria-hidden="true"><path class="w1" d="M20 100 A80 80 0 0 1 60 30.7"/><path class="w2" d="M63.4 28.8 A80 80 0 0 1 136.6 28.8"/><path class="w3" d="M140 30.7 A80 80 0 0 1 180 100"/><g class="needle"><line x1="100" y1="100" x2="100" y2="38"/><circle cx="100" cy="100" r="8"/></g></svg></div>
+                  </div>
+                  <div class="fid-sec" data-fid-events-sec>
+                    <p class="fid-sec-t"><img src="../assets/adventures/life-events.svg" alt="" width="20" height="20">Life Events</p>
+                    <div data-fid-events></div>
+                  </div>
                 </div>
               </section>
             </form>
@@ -211,15 +226,14 @@
         <aside class="advisor" data-state="waiting" aria-label="Prospect profile" data-reveal="right">
           <div class="advisor-person">
             <span class="avatar-you" aria-hidden="true">JE</span>
-            <div class="who"><b>Jordan Ellis</b><span class="tier-pill tier-pill--nurture" data-tier>Prospect</span></div>
-            <span class="new-tag" data-new hidden>New</span>
+            <div class="who"><span class="name-line"><b>Jordan Ellis</b><span class="new-tag" data-new hidden>New</span></span><span class="tier-pill tier-pill--nurture" data-tier>Prospect</span></div>
             <span class="kq kq-empty" data-kq>–</span>
           </div>
 
           <dl class="advisor-rows">
-            <div class="arow" data-row="values"><dt><img src="../assets/adventures/financial-joy.svg" alt="" width="18" height="18">Financial Joy</dt><dd><span class="skel"></span><span class="skel skel--short"></span></dd></div>
-            <div class="arow" data-row="confidence"><dt><img src="../assets/adventures/confidence.svg" alt="" width="18" height="18">Confidence</dt><dd><span class="skel"></span></dd></div>
-            <div class="arow" data-row="events"><dt><img src="../assets/adventures/life-events.svg" alt="" width="18" height="18">Life Events</dt><dd><span class="skel"></span><span class="skel skel--short"></span></dd></div>
+            <div class="arow" data-row="values"><dt><img src="../assets/adventures/financial-joy.svg" alt="" width="18" height="18">Financial Joy</dt><dd><p class="pp-waiting">Complete the Financial Joy adventure</p></dd></div>
+            <div class="arow" data-row="confidence"><dt><img src="../assets/adventures/confidence.svg" alt="" width="18" height="18">Confidence</dt><dd><p class="pp-waiting">Complete the Confidence adventure</p></dd></div>
+            <div class="arow" data-row="events"><dt><img src="../assets/adventures/life-events.svg" alt="" width="18" height="18">Life Events</dt><dd><p class="pp-waiting">Complete the Life Events adventure</p></dd></div>
           </dl>
 
           <div class="advisor-done" data-done hidden>
@@ -300,12 +314,7 @@
             <div class="mp-top"><img src="../assets/adventures/financial-joy.svg" alt="" width="18" height="18">Financial Joy</div>
             <p class="mp-eyebrow">Money is a tool!</p>
             <p class="mp-q">I want money to help me with…</p>
-            <div class="mp-grid">
-              <span class="mp-chip is-on"><img src="../assets/values/family.png" alt="" width="150" height="150"><b>Supporting my family</b></span>
-              <span class="mp-chip"><img src="../assets/values/security.png" alt="" width="150" height="150"><b>Security</b></span>
-              <span class="mp-chip is-on"><img src="../assets/values/moment.png" alt="" width="150" height="150"><b>Enjoying the moment</b></span>
-              <span class="mp-chip"><img src="../assets/values/choice.png" alt="" width="150" height="150"><b>Choice</b></span>
-            </div>
+            <div class="joy-photos joy-photos--sm mp-joy"><span class="joy-photo is-on"><span class="joy-photo-frame"><img src="../assets/values/family.png" alt="" width="150" height="150"><span class="joy-photo-check"><svg viewBox="0 0 16 16"><path d="M3.5 8.5l3 3 6-6.5"/></svg></span></span><span class="joy-photo-label">Supporting my family</span></span><span class="joy-photo"><span class="joy-photo-frame"><img src="../assets/values/security.png" alt="" width="150" height="150"><span class="joy-photo-check"><svg viewBox="0 0 16 16"><path d="M3.5 8.5l3 3 6-6.5"/></svg></span></span><span class="joy-photo-label">Security</span></span><span class="joy-photo is-on"><span class="joy-photo-frame"><img src="../assets/values/moment.png" alt="" width="150" height="150"><span class="joy-photo-check"><svg viewBox="0 0 16 16"><path d="M3.5 8.5l3 3 6-6.5"/></svg></span></span><span class="joy-photo-label">Enjoying the moment</span></span><span class="joy-photo"><span class="joy-photo-frame"><img src="../assets/values/choice.png" alt="" width="150" height="150"><span class="joy-photo-check"><svg viewBox="0 0 16 16"><path d="M3.5 8.5l3 3 6-6.5"/></svg></span></span><span class="joy-photo-label">Choice</span></span></div>
             <span class="mp-next"><svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg></span>
           </div>
           <span class="float-chip fc-1"><img src="../assets/adventures/confidence.svg" alt="" width="40" height="40"></span>
@@ -317,21 +326,20 @@
           <div class="mock mock-list">
             <div class="mock-bar"><b>My Prospects</b></div>
             <div class="band band-1">Tier 1 — Ready Now</div>
-            <div class="mrow"><span class="av">DR</span><span class="nm"><b>Dana R.</b><small>Retirement</small></span><span class="kq">92</span></div>
+            <div class="mrow"><span class="av">DR</span><span class="nm"><b>Dana R. <span class="new-tag">New</span></b><small>Retirement</small></span><span class="kq">92</span></div>
             <div class="mrow"><span class="av">CP</span><span class="nm"><b>Chris P.</b><small>Sale of business</small></span><span class="kq">87</span></div>
             <div class="band band-2">Tier 2 — Considering</div>
             <div class="mrow"><span class="av">AM</span><span class="nm"><b>Alex M.</b><small>New baby</small></span><span class="kq tier-2">64</span></div>
             <div class="band band-3">Tier 3 — Nurture</div>
-            <div class="mrow"><span class="av">JL</span><span class="nm"><b>Jordan L.</b><small>Education</small></span><span class="kq tier-3">31</span></div>
+            <div class="mrow"><span class="av">JL</span><span class="nm"><b>Jordan L.</b><small>Graduation</small></span><span class="kq tier-3">31</span></div>
           </div>
-          <span class="float-chip fc-4"><span class="new-tag">New</span></span>
         </div>
         <!-- Convert -->
         <div class="stage-screen" data-i="2">
           <div class="starters">
             <div class="st-card"><span class="bolt"><svg viewBox="0 0 24 24"><path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"/></svg></span><p><b>Dana R.</b>Ask what a great first year of retirement looks like for her family.</p></div>
-            <div class="st-card"><span class="bolt"><svg viewBox="0 0 24 24"><path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"/></svg></span><p><b>Chris P.</b>The business sale came up twice. Start with what he wants life to look like after it.</p></div>
-            <div class="st-card"><span class="bolt"><svg viewBox="0 0 24 24"><path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"/></svg></span><p><b>Alex M.</b>Security matters most right now. Talk about the cushion before the growth.</p></div>
+            <div class="st-card"><span class="bolt"><svg viewBox="0 0 24 24"><path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"/></svg></span><p><b>Chris P.</b>Ask what he wants life to look like after the sale.</p></div>
+            <div class="st-card"><span class="bolt"><svg viewBox="0 0 24 24"><path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"/></svg></span><p><b>Alex M.</b>Ask what “enough” looks like before you talk numbers.</p></div>
           </div>
         </div>
       </div>
@@ -374,20 +382,48 @@
   </div>
 </section>
 
-<!-- ================= FEATURES · four blocks as tabs ================= -->
+<!-- ================= FEATURES · four blocks, scroll-driven ================= -->
 <section class="section features" aria-label="Features">
-  <div class="container feat" data-feat>
-    <div class="feat-tabs" role="tablist" aria-orientation="vertical" data-reveal="left">
-      <button role="tab" id="ft-1" aria-controls="fp-1" aria-selected="true"><span>Delight clients with interactive discovery</span><i class="feat-bar" aria-hidden="true"></i></button>
-      <button role="tab" id="ft-2" aria-controls="fp-2" aria-selected="false" tabindex="-1"><span>Uncover insights they’ve never known how to explain</span><i class="feat-bar" aria-hidden="true"></i></button>
-      <button role="tab" id="ft-3" aria-controls="fp-3" aria-selected="false" tabindex="-1"><span>Go deep with meaningful conversations every time</span><i class="feat-bar" aria-hidden="true"></i></button>
-      <button role="tab" id="ft-4" aria-controls="fp-4" aria-selected="false" tabindex="-1"><span>Scale behavioral discovery across your business</span><i class="feat-bar" aria-hidden="true"></i></button>
+  <div class="container feat-grid">
+    <div class="feat-track">
+      <article class="feat-step is-active" id="feat-1" data-i="0">
+        <h3>Delight clients with interactive discovery</h3>
+        <p>Finally, an alternative to homework-like questionnaires. With Knomee, prospects &amp; clients get a guided experience that feels as engaging as their favorite wellness app and keeps advisors on top of every life change.</p>
+          <p class="feat-proof">100% of Knomee users report that it’s easy to use.</p>
+        <div class="step-media" aria-hidden="true"></div>
+      </article>
+      <article class="feat-step" id="feat-2" data-i="1">
+        <h3>Uncover insights they’ve never known how to explain</h3>
+        <p>Knomee uses behavioral finance to surface values, emotions, and decision readiness, and gives even meeting-averse clients the language to share them.</p>
+          <figure class="feat-quote">
+            <blockquote>“Knomee’s structured revelation and smart sequencing turn the unspoken drivers into clear, actionable advisor insights.”</blockquote>
+            <figcaption>Director of Advisor Experience, $40B Registered Investment Advisor</figcaption>
+          </figure>
+        <div class="step-media" aria-hidden="true"></div>
+      </article>
+      <article class="feat-step" id="feat-3" data-i="2">
+        <h3>Go deep with meaningful conversations every time</h3>
+        <p>Connect beyond products and market insights. Knomee reveals what matters most and what may be holding clients back, giving advisors the right conversation starters to build trust and inspire action.</p>
+          <figure class="feat-quote">
+            <blockquote>“Every advisor can review the markets. Few uncover what truly drives a client. Knomee makes that the easiest part of my job.”</blockquote>
+            <figcaption>CFP, Managing Partner &amp; Wealth Advisor, Nexa Wealth Management</figcaption>
+          </figure>
+        <div class="step-media" aria-hidden="true"></div>
+      </article>
+      <article class="feat-step" id="feat-4" data-i="3">
+        <h3>Scale behavioral discovery across your business</h3>
+        <p>Knomee is built to scale and SOC2 compliant. Every advisory team can deliver best-in-class experiences that build trust, help you stay connected through life changes, and create continuity across generations.</p>
+          <figure class="feat-quote">
+            <blockquote>“Before Knomee, behavioral finance lived in theory. Now it’s built into every client conversation - firmwide.”</blockquote>
+            <figcaption>Head of Financial Planning, top 5 Enterprise Wealth Firm</figcaption>
+          </figure>
+        <div class="step-media" aria-hidden="true"></div>
+      </article>
     </div>
-
-    <div class="feat-panels" data-reveal="right">
-      <div class="feat-panel" role="tabpanel" id="fp-1" aria-labelledby="ft-1" tabindex="0">
-        <h3 class="feat-title">Delight clients with interactive discovery</h3>
-        <div class="feat-visual" aria-hidden="true">
+    <div class="feat-side">
+      <div class="feat-sticky">
+        <div class="feat-stage" aria-hidden="true">
+        <div class="stage-screen is-active" data-i="0">
           <div class="mini-phone mini-phone--events">
             <div class="mp-top"><img src="../assets/adventures/life-events.svg" alt="" width="18" height="18">Life Events</div>
             <p class="mp-q">Add a Life Event</p>
@@ -399,15 +435,7 @@
             </div>
           </div>
         </div>
-        <div class="feat-copy">
-          <p>Finally, an alternative to homework-like questionnaires. With Knomee, prospects &amp; clients get a guided experience that feels as engaging as their favorite wellness app and keeps advisors on top of every life change.</p>
-          <p class="feat-proof">100% of Knomee users report that it’s easy to use.</p>
-        </div>
-      </div>
-
-      <div class="feat-panel" role="tabpanel" id="fp-2" aria-labelledby="ft-2" tabindex="0" hidden>
-        <h3 class="feat-title">Uncover insights they’ve never known how to explain</h3>
-        <div class="feat-visual" aria-hidden="true">
+        <div class="stage-screen" data-i="1">
           <div class="mock mock-client">
             <div class="mock-bar"><b>Morgan Household</b><span class="mock-pill mock-pill--client">Client</span></div>
             <div class="cl-grid">
@@ -421,62 +449,40 @@
                 <b class="cl-stage">Action</b>
               </div>
               <div class="cl-card cl-wide" style="--i:2">
-                <span class="cl-label">Life Events <span class="new-tag">New</span></span>
+                <span class="cl-label">Life Events</span>
                 <div class="cl-events">
-                  <span><img src="../assets/life-events/retirement.svg" alt="" width="30" height="40">Retirement</span>
-                  <span><img src="../assets/life-events/property-purchase.svg" alt="" width="33" height="26">Property purchase</span>
+                  <p class="fid-event"><img src="../assets/life-events/retirement.svg" alt="" width="30" height="40">Retirement</p>
+                  <p class="fid-event"><img src="../assets/life-events/property-purchase.svg" alt="" width="33" height="26">Property purchase</p>
                 </div>
               </div>
             </div>
           </div>
         </div>
-        <div class="feat-copy">
-          <p>Knomee uses behavioral finance to surface values, emotions, and decision readiness, and gives even meeting-averse clients the language to share them.</p>
-          <figure class="feat-quote">
-            <blockquote>“Knomee’s structured revelation and smart sequencing turn the unspoken drivers into clear, actionable advisor insights.”</blockquote>
-            <figcaption>Director of Advisor Experience, $40B Registered Investment Advisor</figcaption>
-          </figure>
-        </div>
-      </div>
-
-      <div class="feat-panel" role="tabpanel" id="fp-3" aria-labelledby="ft-3" tabindex="0" hidden>
-        <h3 class="feat-title">Go deep with meaningful conversations every time</h3>
-        <div class="feat-visual" aria-hidden="true">
+        <div class="stage-screen" data-i="2">
           <div class="starters starters--panel">
-            <div class="st-card"><span class="bolt"><svg viewBox="0 0 24 24"><path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"/></svg></span><p><b>Positive Talk</b>Retirement moved up a year. Ask what they want the first twelve months to feel like.</p></div>
-            <div class="st-card"><span class="bolt"><svg viewBox="0 0 24 24"><path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"/></svg></span><p><b>Positive Talk</b>Supporting family came first. Ask who they are planning for.</p></div>
+            <div class="st-card"><span class="bolt"><svg viewBox="0 0 24 24"><path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"/></svg></span><p><b>Positive Talk</b>Ask what they want the first twelve months of retirement to feel like.</p></div>
+            <div class="st-card"><span class="bolt"><svg viewBox="0 0 24 24"><path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"/></svg></span><p><b>Positive Talk</b>Ask who they’re planning for, and what they want those people to feel.</p></div>
           </div>
         </div>
-        <div class="feat-copy">
-          <p>Connect beyond products and market insights. Knomee reveals what matters most and what may be holding clients back, giving advisors the right conversation starters to build trust and inspire action.</p>
-          <figure class="feat-quote">
-            <blockquote>“Every advisor can review the markets. Few uncover what truly drives a client. Knomee makes that the easiest part of my job.”</blockquote>
-            <figcaption>CFP, Managing Partner &amp; Wealth Advisor, Nexa Wealth Management</figcaption>
-          </figure>
-        </div>
-      </div>
-
-      <div class="feat-panel" role="tabpanel" id="fp-4" aria-labelledby="ft-4" tabindex="0" hidden>
-        <h3 class="feat-title">Scale behavioral discovery across your business</h3>
-        <div class="feat-visual" aria-hidden="true">
+        <div class="stage-screen" data-i="3">
           <div class="mock mock-table">
             <div class="mock-bar"><b>My Prospects</b></div>
             <div class="band band-1">Tier 1 — Ready Now</div>
-            <div class="trow" style="--i:0"><span class="av">DR</span><span class="nm"><b>Dana R.</b><small>Retirement</small></span><span class="kq" data-count="92">92</span></div>
+            <div class="trow" style="--i:0"><span class="av">DR</span><span class="nm"><b>Dana R. <span class="new-tag">New</span></b><small>Retirement</small></span><span class="kq" data-count="92">92</span></div>
             <div class="trow" style="--i:1"><span class="av">CP</span><span class="nm"><b>Chris P.</b><small>Sale of business</small></span><span class="kq" data-count="87">87</span></div>
             <div class="band band-2">Tier 2 — Considering</div>
             <div class="trow" style="--i:2"><span class="av">AM</span><span class="nm"><b>Alex M.</b><small>New baby</small></span><span class="kq tier-2" data-count="64">64</span></div>
             <div class="band band-3">Tier 3 — Nurture</div>
-            <div class="trow" style="--i:3"><span class="av">JL</span><span class="nm"><b>Jordan L.</b><small>Education</small></span><span class="kq tier-3" data-count="31">31</span></div>
+            <div class="trow" style="--i:3"><span class="av">JL</span><span class="nm"><b>Jordan L.</b><small>Graduation</small></span><span class="kq tier-3" data-count="31">31</span></div>
           </div>
         </div>
-        <div class="feat-copy">
-          <p>Knomee is built to scale and SOC2 compliant. Every advisory team can deliver best-in-class experiences that build trust, help you stay connected through life changes, and create continuity across generations.</p>
-          <figure class="feat-quote">
-            <blockquote>“Before Knomee, behavioral finance lived in theory. Now it’s built into every client conversation - firmwide.”</blockquote>
-            <figcaption>Head of Financial Planning, top 5 Enterprise Wealth Firm</figcaption>
-          </figure>
         </div>
+        <nav class="feat-dots" aria-label="Features">
+          <a href="#feat-1" aria-label="Delight clients with interactive discovery" aria-current="step"><i></i></a>
+          <a href="#feat-2" aria-label="Uncover insights they’ve never known how to explain"><i></i></a>
+          <a href="#feat-3" aria-label="Go deep with meaningful conversations every time"><i></i></a>
+          <a href="#feat-4" aria-label="Scale behavioral discovery across your business"><i></i></a>
+        </nav>
       </div>
     </div>
   </div>

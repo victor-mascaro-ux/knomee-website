@@ -1,7 +1,7 @@
 /* ============================================================
    KNOMEE · HOMEPAGE V3 — "Proof first"
-   Page-only behaviour: the hero highlighter. Everything else is
-   CSS keyed to the shared reveal (.is-in). Leans on window.Knomee
+   Page-only behaviour: the hero highlighter and the Financial Joy
+   picks. Everything else is CSS keyed to the shared reveal (.is-in). Leans on window.Knomee
    from shared/site.js.
    ============================================================ */
 (function () {
@@ -59,5 +59,23 @@
     });
   }
 
+  /* ---------- Financial Joy: three chosen, the fourth fades at the limit ---------- */
+  function joyPicks() {
+    const grid = $('[data-joy]');
+    if (!grid) return;
+    const tile = grid.closest('[data-reveal]');
+    const opts = Array.from(grid.querySelectorAll('.joy-photo'));
+    const chosen = [0, 1, 3];
+    whenRevealed(tile, async () => {
+      for (const n of chosen) {
+        await K.sleep(n === 0 ? 500 : 380);
+        opts[n].classList.add('is-on');
+      }
+      await K.sleep(240);
+      opts.forEach((o, n) => { if (!chosen.includes(n)) o.classList.add('is-full'); });
+    });
+  }
+
   marker();
+  joyPicks();
 })();

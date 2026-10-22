@@ -115,12 +115,12 @@
         <!-- Product UI: an invented prospect -->
         <div class="hm-card" data-reveal="right" style="--i:4" aria-hidden="true">
           <div class="pc prospect">
-            <span class="avatar-i">DR</span>
+            <span class="avatar-i">D</span>
             <div class="p-main">
               <div class="p-name">Dana Reyes <span class="new-tag">New</span></div>
-              <div class="p-meta"><span class="tier-pill">Ready Now</span><span class="meter" data-fill><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i></span></div>
+              <div class="p-meta"><span class="mlabel">Prospect Readiness</span><span class="meter" data-fill><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i></span><b class="stage">Action</b></div>
             </div>
-            <span class="kq" data-count="86">86</span>
+            <div class="kq-box"><span class="mlabel">KQ</span><span class="kq" data-count="86">86</span></div>
           </div>
         </div>
       </div>
@@ -134,26 +134,22 @@
         <li class="stat s-cap" data-reveal>
           <span class="stat-num" data-count="20" data-suffix="%">20%</span>
           <span class="stat-label">More Advisor Capacity</span>
-          <span class="cap-bar" aria-hidden="true"><i></i><b></b></span>
+          <span class="sc sc-cap" aria-hidden="true"><i class="sc-base"></i><i class="sc-add"></i></span>
         </li>
         <li class="stat s-conv" data-reveal>
           <span class="stat-num" data-count="30" data-suffix="%">30%</span>
           <span class="stat-label">Faster Conversion</span>
-          <svg class="spark" viewBox="0 0 240 48" preserveAspectRatio="none" aria-hidden="true">
-            <path class="spark-area" d="M0 44 C 36 42, 52 37, 76 34 S 120 28, 144 22 S 196 10, 232 6 L 232 48 L 0 48 Z"/>
-            <path class="spark-line" pathLength="1" d="M0 44 C 36 42, 52 37, 76 34 S 120 28, 144 22 S 196 10, 232 6"/>
-            <circle class="spark-dot" cx="232" cy="6" r="4.5"/>
-          </svg>
+          <span class="sc sc-conv" aria-hidden="true"><i class="sc-before"></i><i class="sc-after"></i></span>
         </li>
         <li class="stat s-done" data-reveal>
           <span class="stat-num" data-count="90" data-suffix="%">90%</span>
           <span class="stat-label">User Completion Rate</span>
-          <svg class="ring" viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="19"/><circle class="ring-fill" cx="24" cy="24" r="19" pathLength="1"/></svg>
+          <span class="sc sc-done" aria-hidden="true"><svg class="ring" viewBox="0 0 48 48"><circle class="ring-track" cx="24" cy="24" r="19"/><circle class="ring-fill" cx="24" cy="24" r="19"/></svg></span>
         </li>
         <li class="stat s-cac" data-reveal>
           <span class="stat-num" data-count="50" data-suffix="%">50%</span>
           <span class="stat-label">Reduced CAC</span>
-          <span class="cac-bars" aria-hidden="true"><i style="--h:1"></i><i style="--h:.86"></i><i style="--h:.72"></i><i style="--h:.6"></i><i class="now" style="--h:.5"></i></span>
+          <span class="sc sc-cac" aria-hidden="true"><i class="sc-before"></i><i class="sc-after"></i></span>
         </li>
       </ul>
     </div>
@@ -243,11 +239,11 @@
 
         <article class="card card--bar feature f-discovery" data-reveal>
           <div class="f-visual" aria-hidden="true">
-            <div class="photo-grid">
-              <span class="ph"><img src="../assets/values/security.png" alt=""></span>
-              <span class="ph"><img src="../assets/values/family.png" alt=""></span>
-              <span class="ph"><img src="../assets/values/independence.png" alt=""></span>
-              <span class="ph"><img src="../assets/values/moment.png" alt=""></span>
+            <div class="joy-photos joy-photos--sm" data-joy>
+              <span class="joy-photo"><span class="joy-photo-frame"><img src="../assets/values/security.png" alt=""><span class="joy-photo-check"><svg viewBox="0 0 16 16"><path d="M3.5 8.5l3 3 6-6.5"/></svg></span></span><span class="joy-photo-label">Security</span></span>
+              <span class="joy-photo"><span class="joy-photo-frame"><img src="../assets/values/family.png" alt=""><span class="joy-photo-check"><svg viewBox="0 0 16 16"><path d="M3.5 8.5l3 3 6-6.5"/></svg></span></span><span class="joy-photo-label">Supporting my family</span></span>
+              <span class="joy-photo"><span class="joy-photo-frame"><img src="../assets/values/independence.png" alt=""><span class="joy-photo-check"><svg viewBox="0 0 16 16"><path d="M3.5 8.5l3 3 6-6.5"/></svg></span></span><span class="joy-photo-label">Independence</span></span>
+              <span class="joy-photo"><span class="joy-photo-frame"><img src="../assets/values/moment.png" alt=""><span class="joy-photo-check"><svg viewBox="0 0 16 16"><path d="M3.5 8.5l3 3 6-6.5"/></svg></span></span><span class="joy-photo-label">Enjoying the moment</span></span>
             </div>
             <div class="adv-row">
               <img src="../assets/adventures/financial-joy.svg" alt="">
@@ -266,10 +262,15 @@
         <article class="card card--bar feature f-insight" data-reveal>
           <div class="f-visual" aria-hidden="true">
             <div class="insight-card">
+              <span class="mlabel">Knomee Quotient</span>
               <div class="ic-top"><span class="kq" data-count="86">86</span><span class="tier-pill">Ready Now</span></div>
-              <span class="meter" data-fill><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i></span>
+              <div class="ic-ready">
+                <div class="ic-ready-top"><span class="mlabel">Prospect Readiness</span><b class="stage">Action</b></div>
+                <span class="meter" data-fill><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i></span>
+              </div>
             </div>
             <div class="dial-wrap">
+              <div class="dial-head"><img src="../assets/adventures/confidence.svg" alt=""><span>Confidence</span></div>
               <svg class="dial" viewBox="0 0 200 116">
                 <path class="dial-w1" pathLength="1" d="M20 100 A80 80 0 0 1 60 30.7"/>
                 <path class="dial-w2" pathLength="1" d="M63.5 28.8 A80 80 0 0 1 136.5 28.8"/>
@@ -418,6 +419,7 @@
     <div class="container research-grid">
       <div class="r-photo" data-reveal="scale">
         <svg class="r-orbit" viewBox="0 0 200 200" aria-hidden="true"><circle cx="100" cy="100" r="96"/></svg>
+        <span class="r-disc" aria-hidden="true"></span>
         <img src="https://images.squarespace-cdn.com/content/v1/66d9b67dc340d3744c681338/a92f0d07-c528-4548-875a-3867bc26aeb6/Meg.png" alt="Meghaan Lurtz, PhD" width="320" height="320">
       </div>
       <div class="r-copy" data-stagger>

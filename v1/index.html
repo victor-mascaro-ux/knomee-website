@@ -106,15 +106,14 @@
           <div class="phone-screen">
             <div class="ps ps-values is-current">
               <div class="ps-head"><img src="../assets/adventures/financial-joy.svg" alt=""><span>Financial Joy</span></div>
-              <p class="ps-q">What do you want your money to do for you?</p>
-              <p class="ps-hint">Pick two</p>
-              <div class="ps-grid">
-                <div class="ps-chip" data-v="security"><img src="../assets/values/security.png" alt=""><span>Security</span></div>
-                <div class="ps-chip" data-v="family"><img src="../assets/values/family.png" alt=""><span>Family</span></div>
-                <div class="ps-chip" data-v="independence"><img src="../assets/values/independence.png" alt=""><span>Independence</span></div>
-                <div class="ps-chip" data-v="comfort"><img src="../assets/values/comfort.png" alt=""><span>Comfort</span></div>
-                <div class="ps-chip" data-v="moment"><img src="../assets/values/moment.png" alt=""><span>Moments</span></div>
-                <div class="ps-chip" data-v="choice"><img src="../assets/values/choice.png" alt=""><span>Choice</span></div>
+              <p class="ps-kicker">Money is a tool!</p>
+              <p class="ps-q">I want money to help me with…</p>
+              <p class="ps-hint">Choose up to 3.</p>
+              <div class="joy-photos joy-photos--sm">
+                <div class="joy-photo" data-v="security"><span class="joy-photo-frame"><img src="../assets/values/security.png" alt=""><span class="joy-photo-check"><svg viewBox="0 0 16 16"><path d="M3.5 8.5l3 3 6-6.5"/></svg></span></span><span class="joy-photo-label">Security</span></div>
+                <div class="joy-photo" data-v="family"><span class="joy-photo-frame"><img src="../assets/values/family.png" alt=""><span class="joy-photo-check"><svg viewBox="0 0 16 16"><path d="M3.5 8.5l3 3 6-6.5"/></svg></span></span><span class="joy-photo-label">Supporting my family</span></div>
+                <div class="joy-photo" data-v="independence"><span class="joy-photo-frame"><img src="../assets/values/independence.png" alt=""><span class="joy-photo-check"><svg viewBox="0 0 16 16"><path d="M3.5 8.5l3 3 6-6.5"/></svg></span></span><span class="joy-photo-label">Independence</span></div>
+                <div class="joy-photo" data-v="moment"><span class="joy-photo-frame"><img src="../assets/values/moment.png" alt=""><span class="joy-photo-check"><svg viewBox="0 0 16 16"><path d="M3.5 8.5l3 3 6-6.5"/></svg></span></span><span class="joy-photo-label">Enjoying the moment</span></div>
               </div>
               <div class="ps-next">Next</div>
             </div>
@@ -128,12 +127,34 @@
                 <g class="needle"><path d="M100 100 L100 34" stroke="var(--k-plum)" stroke-width="4" stroke-linecap="round"/><circle cx="100" cy="100" r="8" fill="var(--k-plum)"/></g>
               </svg>
               <p class="dial-word">Strong</p>
-              <div class="ps-slider"><i></i><b></b></div>
+              <div class="sun-slider sun-slider--still sun-slider--sm"><i class="sun-fill"></i><span class="sun"><img src="../assets/adventures/confidence.svg" alt=""></span></div>
             </div>
             <div class="ps ps-done">
               <div class="ps-spinner"></div>
               <p class="ps-q">Building your Financial&nbsp;ID…</p>
               <div class="ps-bar"><i></i></div>
+            </div>
+            <div class="ps ps-fid">
+              <div class="fid fid--phone">
+                <div class="fid-head"><span class="fid-avatar">J</span><p class="fid-title">Jordan Ellis’s Financial ID</p></div>
+                <div class="fid-sec">
+                  <p class="fid-sec-t"><img src="../assets/adventures/financial-joy.svg" alt="">Financial Joy</p>
+                  <p class="fid-sub">I want money to help me with</p>
+                  <div class="fid-pills"><span class="fid-pill">Security</span><span class="fid-pill">Supporting my family</span></div>
+                </div>
+                <div class="fid-sec">
+                  <p class="fid-sec-t"><img src="../assets/adventures/confidence.svg" alt="">Confidence</p>
+                  <div class="fid-row">
+                    <span class="fid-word">Strong</span>
+                    <svg class="dial fid-dial" viewBox="0 0 200 116">
+                      <path d="M20 100 A80 80 0 0 1 60 30.7" fill="none" stroke="var(--dial-1)" stroke-width="22"/>
+                      <path d="M63.5 28.8 A80 80 0 0 1 136.5 28.8" fill="none" stroke="var(--dial-2)" stroke-width="22"/>
+                      <path d="M140 30.7 A80 80 0 0 1 180 100" fill="none" stroke="var(--dial-3)" stroke-width="22"/>
+                      <g class="needle"><path d="M100 100 L100 34" stroke="var(--k-plum)" stroke-width="5" stroke-linecap="round"/><circle cx="100" cy="100" r="9" fill="var(--k-plum)"/></g>
+                    </svg>
+                  </div>
+                </div>
+              </div>
             </div>
             <div class="ps-tap"></div>
           </div>
@@ -141,19 +162,19 @@
 
         <div class="advisor-card" aria-hidden="true">
           <div class="ac-head">
-            <span class="ac-avatar">JE</span>
-            <div><b>Jordan Ellis</b><small>Prospect</small></div>
-            <span class="kq tier-3" data-kq>–</span>
+            <span class="ac-avatar">J</span>
+            <div class="ac-who"><b>Jordan Ellis <span class="new-tag">New</span></b><span class="tier-pill tier-pill--nurture" data-tier>Nurture</span></div>
+            <div class="kq-stack"><small>KQ Score</small><span class="kq tier-3" data-kq>–</span></div>
           </div>
           <div class="ac-row">
-            <span class="ac-label">Readiness</span>
-            <span class="tier-pill tier-pill--nurture" data-tier>Nurture</span>
+            <span class="ac-label">Prospect Readiness</span>
+            <b class="ac-stage" data-stage>—</b>
           </div>
           <div class="meter" data-meter><i></i><i></i><i></i><i></i><i></i></div>
           <div class="ac-label ac-mt">Values</div>
           <div class="ac-tags" data-tags></div>
           <div class="ac-starter">
-            <div class="ac-label"><span class="new-tag">New</span> Conversation starter</div>
+            <div class="ac-label">Conversation starter</div>
             <p data-starter></p>
           </div>
         </div>
@@ -225,6 +246,7 @@
         </li>
         <li class="step" data-reveal>
           <div class="step-art step-art--see" aria-hidden="true">
+            <div class="mini-head"><span>My Prospects</span><span>KQ Score</span></div>
             <div class="mini-row"><span class="ac-avatar">PN</span><b>Priya Nair</b><span class="kq">84</span></div>
             <div class="mini-row"><span class="ac-avatar">SO</span><b>Sam Okafor</b><span class="kq tier-2">61</span></div>
             <div class="mini-row"><span class="ac-avatar">DW</span><b>Dana Whitfield</b><span class="kq tier-3">32</span></div>
@@ -265,22 +287,22 @@
       <div class="mirror" data-reveal="scale">
         <div class="mirror-you">
           <div class="mirror-top">
-            <span class="adv-chip" data-adv><img src="../assets/adventures/financial-joy.svg" alt=""><span>Financial Joy</span></span>
+            <span class="adv-chip" data-adv><img src="../assets/adventures/goals.svg" alt=""><span>Goals</span></span>
             <span class="mini-live" aria-hidden="true"><b class="kq tier-3" data-mini-kq>–</b></span>
             <ol class="dots" aria-hidden="true"><li class="on"></li><li></li><li></li></ol>
           </div>
 
           <div class="q-steps">
             <div class="q-step" data-q="0">
-              <p class="q-title" id="q0">What do you want your money to do for you?</p>
-              <p class="q-hint">Pick two</p>
-              <div class="q-chips" role="group" aria-labelledby="q0">
-                <button type="button" class="q-chip" aria-pressed="false" data-value="Security"><img src="../assets/values/security.png" alt=""><span>Security</span></button>
-                <button type="button" class="q-chip" aria-pressed="false" data-value="Family"><img src="../assets/values/family.png" alt=""><span>Family</span></button>
-                <button type="button" class="q-chip" aria-pressed="false" data-value="Independence"><img src="../assets/values/independence.png" alt=""><span>Independence</span></button>
-                <button type="button" class="q-chip" aria-pressed="false" data-value="Comfort"><img src="../assets/values/comfort.png" alt=""><span>Comfort</span></button>
-                <button type="button" class="q-chip" aria-pressed="false" data-value="Moments"><img src="../assets/values/moment.png" alt=""><span>Moments</span></button>
-                <button type="button" class="q-chip" aria-pressed="false" data-value="Choice"><img src="../assets/values/choice.png" alt=""><span>Choice</span></button>
+              <p class="q-title" id="q0">Add a Goal</p>
+              <p class="q-hint">Select a goal</p>
+              <div class="goal-cards" role="radiogroup" aria-labelledby="q0">
+                <button type="button" role="radio" aria-checked="false" class="goal-card" data-goal="Family and relationships"><img src="../assets/goals/family.png" alt="Family and relationships"><span class="joy-photo-check"><svg viewBox="0 0 16 16"><path d="M3.5 8.5l3 3 6-6.5"/></svg></span></button>
+                <button type="button" role="radio" aria-checked="false" class="goal-card" data-goal="Health and wellness"><img src="../assets/goals/health.png" alt="Health and wellness"><span class="joy-photo-check"><svg viewBox="0 0 16 16"><path d="M3.5 8.5l3 3 6-6.5"/></svg></span></button>
+                <button type="button" role="radio" aria-checked="false" class="goal-card" data-goal="Hobbies and interests"><img src="../assets/goals/hobbies.png" alt="Hobbies and interests"><span class="joy-photo-check"><svg viewBox="0 0 16 16"><path d="M3.5 8.5l3 3 6-6.5"/></svg></span></button>
+                <button type="button" role="radio" aria-checked="false" class="goal-card" data-goal="Home life"><img src="../assets/goals/home.png" alt="Home life"><span class="joy-photo-check"><svg viewBox="0 0 16 16"><path d="M3.5 8.5l3 3 6-6.5"/></svg></span></button>
+                <button type="button" role="radio" aria-checked="false" class="goal-card" data-goal="Financial planning and management"><img src="../assets/goals/planning.png" alt="Financial planning and management"><span class="joy-photo-check"><svg viewBox="0 0 16 16"><path d="M3.5 8.5l3 3 6-6.5"/></svg></span></button>
+                <button type="button" role="radio" aria-checked="false" class="goal-card" data-goal="Work and career"><img src="../assets/goals/work.png" alt="Work and career"><span class="joy-photo-check"><svg viewBox="0 0 16 16"><path d="M3.5 8.5l3 3 6-6.5"/></svg></span></button>
               </div>
             </div>
             <div class="q-step" data-q="1" hidden>
@@ -295,16 +317,20 @@
                 <p class="q-gauge-word" data-gauge-word>Moderate</p>
               </div>
               <div class="q-range">
-                <input id="q-conf" type="range" min="0" max="100" step="1" value="50">
+                <div class="sun-slider is-untouched" data-sun>
+                  <i class="sun-fill"></i>
+                  <span class="sun" aria-hidden="true"><img src="../assets/adventures/confidence.svg" alt=""></span>
+                  <input id="q-conf" type="range" min="0" max="100" step="1" value="50">
+                </div>
               </div>
             </div>
             <div class="q-step" data-q="2" hidden>
-              <p class="q-title" id="q2">Add a life event</p>
+              <p class="q-title" id="q2">Add a Life Event</p>
               <div class="q-events" role="radiogroup" aria-labelledby="q2">
                 <button type="button" role="radio" aria-checked="false" class="q-event" data-event="Retirement"><img src="../assets/life-events/retirement.svg" alt=""><span>Retirement</span></button>
                 <button type="button" role="radio" aria-checked="false" class="q-event" data-event="New Business"><img src="../assets/life-events/new-business.svg" alt=""><span>New Business</span></button>
                 <button type="button" role="radio" aria-checked="false" class="q-event" data-event="Property Purchase"><img src="../assets/life-events/property-purchase.svg" alt=""><span>Property Purchase</span></button>
-                <button type="button" role="radio" aria-checked="false" class="q-event" data-event="Education"><img src="../assets/life-events/education.svg" alt=""><span>Education</span></button>
+                <button type="button" role="radio" aria-checked="false" class="q-event" data-event="Graduation"><img src="../assets/life-events/education.svg" alt=""><span>Graduation</span></button>
                 <button type="button" role="radio" aria-checked="false" class="q-event" data-event="New Baby"><img src="../assets/life-events/new-baby.svg" alt=""><span>New Baby</span></button>
                 <button type="button" role="radio" aria-checked="false" class="q-event" data-event="Relocation"><img src="../assets/life-events/relocation.svg" alt=""><span>Relocation</span></button>
               </div>
@@ -333,14 +359,15 @@
               <span class="tier-pill tier-pill--nurture" data-m-tier>Nurture</span>
             </div>
           </div>
+          <div class="ma-row"><span class="ma-k">Prospect Readiness</span><b data-m-stage>—</b></div>
           <div class="meter meter--dark" data-m-meter><i></i><i></i><i></i><i></i><i></i></div>
           <dl class="ma-list">
-            <div><dt>Values</dt><dd data-m-values><span class="ma-empty">—</span></dd></div>
+            <div><dt>Goal</dt><dd data-m-goal><span class="ma-empty">—</span></dd></div>
             <div><dt>Confidence</dt><dd><span data-m-conf class="ma-empty">—</span></dd></div>
             <div><dt>Life Events</dt><dd data-m-event><span class="ma-empty">—</span></dd></div>
           </dl>
           <div class="ma-starter">
-            <span class="ma-k"><span class="new-tag">New</span> Conversation starter</span>
+            <span class="ma-k">Conversation starter</span>
             <p data-m-starter><span class="ma-empty">—</span></p>
           </div>
         </div>
@@ -350,25 +377,27 @@
 
   <!-- ======================= THREE MORE FEATURES ======================= -->
   <section class="section explorer">
-    <div class="container" data-tabs>
+    <div class="container">
       <div class="ex-grid">
-        <div class="ex-list" role="tablist" aria-orientation="vertical" aria-label="Knomee" data-stagger>
-          <button role="tab" id="t-uncover" aria-controls="p-uncover" aria-selected="true" data-reveal><span class="ex-n" aria-hidden="true"></span>Uncover insights they’ve never known how to explain</button>
-          <button role="tab" id="t-deep" aria-controls="p-deep" aria-selected="false" data-reveal><span class="ex-n" aria-hidden="true"></span>Go deep with meaningful conversations every time</button>
-          <button role="tab" id="t-scale" aria-controls="p-scale" aria-selected="false" data-reveal><span class="ex-n" aria-hidden="true"></span>Scale behavioral discovery across your business</button>
-        </div>
+        <nav class="ex-list" aria-label="Knomee features">
+          <a class="ex-item is-active" href="#p-uncover"><span class="ex-n" aria-hidden="true"></span>Uncover insights they’ve never known how to explain</a>
+          <a class="ex-item" href="#p-deep"><span class="ex-n" aria-hidden="true"></span>Go deep with meaningful conversations every time</a>
+          <a class="ex-item" href="#p-scale"><span class="ex-n" aria-hidden="true"></span>Scale behavioral discovery across your business</a>
+        </nav>
 
         <div class="ex-panels">
-          <div class="panel" role="tabpanel" id="p-uncover" aria-labelledby="t-uncover">
+          <div class="panel" id="p-uncover" data-reveal="fade">
+            <h3 class="ex-h">Uncover insights they’ve never known how to explain</h3>
             <div class="panel-ui ui-table" aria-hidden="true">
               <div class="ui-bar"><b>My Prospects</b><span class="ui-search"></span></div>
+              <div class="ui-cols"><span>Name</span><span>KQ Score</span></div>
               <div class="ui-group g1">Tier 1 — Ready Now</div>
-              <div class="ui-row"><span class="ac-avatar">PN</span><span class="ui-name">Priya Nair<small>Security · Family</small></span><span class="kq">84</span></div>
-              <div class="ui-row"><span class="ac-avatar">JE</span><span class="ui-name">Jordan Ellis<small>Family · Moments</small> <span class="new-tag">New</span></span><span class="kq">78</span></div>
+              <div class="ui-row"><span class="ac-avatar">P</span><span class="ui-name"><span class="ui-nm">Priya Nair</span><small>Security · Supporting my family</small></span><span class="kq">84</span></div>
+              <div class="ui-row"><span class="ac-avatar">J</span><span class="ui-name"><span class="ui-nm">Jordan Ellis <span class="new-tag">New</span></span><small>Supporting my family · Enjoying the moment</small></span><span class="kq">78</span></div>
               <div class="ui-group g2">Tier 2 — Considering</div>
-              <div class="ui-row"><span class="ac-avatar">SO</span><span class="ui-name">Sam Okafor<small>Independence · Choice</small></span><span class="kq tier-2">61</span></div>
+              <div class="ui-row"><span class="ac-avatar">S</span><span class="ui-name"><span class="ui-nm">Sam Okafor</span><small>Independence · Choice</small></span><span class="kq tier-2">61</span></div>
               <div class="ui-group g3">Tier 3 — Nurture</div>
-              <div class="ui-row"><span class="ac-avatar">DW</span><span class="ui-name">Dana Whitfield<small>Comfort</small></span><span class="kq tier-3">32</span></div>
+              <div class="ui-row"><span class="ac-avatar">D</span><span class="ui-name"><span class="ui-nm">Dana Whitfield</span><small>Comfort</small></span><span class="kq tier-3">32</span></div>
             </div>
             <div class="panel-copy">
               <p>Knomee uses behavioral finance to surface values, emotions, and decision readiness, and gives even meeting-averse clients the language to share them.</p>
@@ -379,11 +408,12 @@
             </div>
           </div>
 
-          <div class="panel" role="tabpanel" id="p-deep" aria-labelledby="t-deep" hidden>
+          <div class="panel" id="p-deep" data-reveal="fade">
+            <h3 class="ex-h">Go deep with meaningful conversations every time</h3>
             <div class="panel-ui ui-starters" aria-hidden="true">
-              <div class="ui-bar"><b>Priya Nair</b><span class="kq">84</span></div>
-              <div class="us-values"><span><img src="../assets/values/security.png" alt="">Security</span><span><img src="../assets/values/family.png" alt="">Family</span></div>
-              <div class="us-q"><span class="new-tag">New</span><p>“What would feeling secure look like for your family?”</p></div>
+              <div class="ui-bar"><b>Priya Nair</b><span class="kq-stack kq-stack--row"><small>KQ Score</small><span class="kq">84</span></span></div>
+              <div class="us-values"><span><img src="../assets/values/security.png" alt="">Security</span><span><img src="../assets/values/family.png" alt="">Supporting my family</span></div>
+              <div class="us-q"><p>“What would feeling secure look like for your family?”</p></div>
               <div class="us-q"><p>“Who do you most want to spend more time with?”</p></div>
               <div class="us-q"><p>“What’s one decision you keep putting off?”</p></div>
             </div>
@@ -396,7 +426,8 @@
             </div>
           </div>
 
-          <div class="panel" role="tabpanel" id="p-scale" aria-labelledby="t-scale" hidden>
+          <div class="panel" id="p-scale" data-reveal="fade">
+            <h3 class="ex-h">Scale behavioral discovery across your business</h3>
             <div class="panel-ui ui-client" aria-hidden="true">
               <div class="ui-bar ui-bar--client"><b>The Ellis Household</b><span class="tier-pill">Engaged</span></div>
               <div class="uc-grid">
@@ -406,14 +437,15 @@
                   <b class="uc-big">Strong</b>
                 </div>
                 <div class="uc-card">
-                  <span class="ac-label">Engagement</span>
+                  <span class="ac-label">Goal Readiness</span>
+                  <p class="uc-goal">Family beach vacation</p>
                   <div class="meter meter--client"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i></div>
                   <b class="uc-big">Action</b>
                 </div>
                 <div class="uc-card uc-wide">
                   <span class="ac-label">Life Events</span>
                   <div class="uc-events">
-                    <span><img src="../assets/life-events/empty-nester.svg" alt="">Empty Nester <span class="new-tag">New</span></span>
+                    <span><img src="../assets/life-events/empty-nester.svg" alt="">Empty Nester</span>
                     <span><img src="../assets/life-events/vacation.svg" alt="">Vacation</span>
                     <span><img src="../assets/life-events/retirement.svg" alt="">Retirement</span>
                   </div>
@@ -512,6 +544,7 @@
   <section class="section partner">
     <div class="container partner-grid">
       <div class="partner-photo" data-reveal="scale">
+        <span class="partner-disc" aria-hidden="true"></span>
         <img src="https://images.squarespace-cdn.com/content/v1/66d9b67dc340d3744c681338/a92f0d07-c528-4548-875a-3867bc26aeb6/Meg.png" alt="Meghaan Lurtz, PhD" width="320" height="320">
       </div>
       <div class="partner-copy" data-stagger>

@@ -380,6 +380,21 @@
     });
   }
 
+  /* ---------- Sun slider: the track follows the input ----------
+     <div class="sun-slider is-untouched" data-sun> … <input type="range"> */
+  function sunSliders() {
+    $$('[data-sun]').forEach((wrap) => {
+      const input = $('input[type="range"]', wrap);
+      if (!input) return;
+      const paint = () => wrap.style.setProperty('--v', input.value);
+      input.addEventListener('input', () => { wrap.classList.remove('is-untouched'); paint(); });
+      input.addEventListener('pointerdown', () => wrap.classList.add('is-held'));
+      ['pointerup', 'pointercancel', 'blur'].forEach((ev) => input.addEventListener(ev, () => wrap.classList.remove('is-held')));
+      wrap._paint = paint;
+      paint();
+    });
+  }
+
   /* ---------- Newsletter: the button settles into a check ---------- */
   function newsletter() {
     $$('form[data-newsletter]').forEach((f) => f.addEventListener('submit', (e) => {
@@ -403,6 +418,6 @@
 
   window.Knomee = { reduced, confetti, toast, countTo, reveal, sleep, typeText, $, $$ };
 
-  const init = () => { header(); navMenus(); marquee(); reveal(); counters(); tabs(); accordion(); qualify(); mobileCta(); videos(); newsletter(); };
+  const init = () => { header(); navMenus(); marquee(); reveal(); counters(); tabs(); accordion(); qualify(); mobileCta(); videos(); sunSliders(); newsletter(); };
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init); else init();
 })();

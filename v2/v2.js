@@ -23,12 +23,14 @@
     retirement:          { label: 'Retirement' },
     'new-business':      { label: 'New business' },
     'property-purchase': { label: 'Property purchase' },
-    education:           { label: 'Education' },
+    education:           { label: 'Graduation' },
     relocation:          { label: 'Relocation' },
     'new-baby':          { label: 'New baby' },
   };
   const STAGES = ['Pre-Contemplation', 'Contemplation', 'Preparation', 'Action', 'Maintenance'];
-  const TIERS = { 1: 'Ready Now', 2: 'Considering', 3: 'Nurture' };
+  const TIERS = { 1: 'Tier 1 · Ready Now', 2: 'Tier 2 · Considering', 3: 'Tier 3 · Nurture' };
+  const GAUGE = '<svg class="mini-gauge" viewBox="0 0 200 116" aria-hidden="true"><path class="w1" d="M20 100 A80 80 0 0 1 60 30.7"/><path class="w2" d="M63.4 28.8 A80 80 0 0 1 136.6 28.8"/><path class="w3" d="M140 30.7 A80 80 0 0 1 180 100"/><g class="needle"><line x1="100" y1="100" x2="100" y2="38"/><circle cx="100" cy="100" r="8"/></g></svg>';
+  const turn = (v) => `rotate(${(v - 50) * 1.8}deg)`;
   const confWord = (v) => (v < 34 ? 'Weak' : v < 67 ? 'Moderate' : 'Strong');
   const joinAnd = (a) => (a.length < 2 ? a.join('') : a.slice(0, -1).join(', ') + ' and ' + a[a.length - 1]);
 
@@ -49,6 +51,8 @@
     const needle = $('.needle', root);
     const dialLabel = $('[data-dial-label]', root);
     const valueGrid = $('.value-grid', root);
+    const joys = $$('.joy-photo', valueGrid);
+    let chosen = [];   // in the order they were picked, so the first pick leads
     const advisor = $('.advisor', root);
     const kq = $('[data-kq]', advisor);
     const tierPill = $('[data-tier]', advisor);
@@ -60,7 +64,9 @@
     let touched = { confidence: false, events: false };
     let busy = false;
 
-    const picked = (name) => $$(`input[name="${name}"]:checked`, form).map((i) => i.value);
+    const picked = (name) => (name === 'value'
+      ? chosen.slice()
+      : $$(`input[name="${name}"]:checked`, form).map((i) => i.value));
     const bump = (el) => { el.classList.remove('shake'); void el.offsetWidth; el.classList.add('shake'); };
 
     function setBrand(screen) {
@@ -112,29 +118,38 @@
     }
     function paintValues() {
       const v = picked('value');
-      valueGrid.classList.toggle('is-full', v.length >= MAX);
-      rows.values.innerHTML = v.length ? v.map((k) => `<span class="apill">${VALUES[k].label}</span>`).join('') : skeleton.values;
+      const full = v.length >= MAX;
+      joys.forEach((b) => b.classList.toggle('is-full', full && b.getAttribute('aria-pressed') !== 'true'));
+      rows.values.innerHTML = v.length
+        ? `<p class="pp-prompt">I want money to help me with</p><div class="fid-pills">${v.map((k) => `<span class="fid-pill">${VALUES[k].label}</span>`).join('')}</div>`
+        : skeleton.values;
       flash(rows.values);
     }
     function paintConfidence() {
       const v = +range.value;
       const w = confWord(v);
-      range.style.setProperty('--v', v + '%');
       range.setAttribute('aria-valuetext', w);
-      needle.style.transform = `rotate(${(v - 50) * 1.8}deg)`;
+      needle.style.transform = turn(v);
       dialLabel.textContent = w;
-      if (touched.confidence) rows.confidence.innerHTML = `<span class="apill apill--teal">${w}</span>`;
+      if (!touched.confidence) return;
+      if (!$('.mini-gauge', rows.confidence)) rows.confidence.innerHTML = `<div class="fid-row"><span class="fid-word"></span>${GAUGE}</div>`;
+      $('.fid-word', rows.confidence).textContent = w;
+      $('.needle', rows.confidence).style.transform = turn(v);
     }
     function paintEvents() {
       const e = picked('event');
       rows.events.innerHTML = e.length
-        ? e.map((k) => `<span class="apill apill--teal"><img src="../assets/life-events/${k}.svg" alt="">${EVENTS[k].label}</span>`).join('')
-        : '<span class="apill apill--muted" aria-label="None">–</span>';
+        ? e.map((k) => `<p class="fid-event"><img src="../assets/life-events/${k}.svg" alt="">${EVENTS[k].label}</p>`).join('')
+        : '<p class="fid-word no-answer">–</p>';
       flash(rows.events);
     }
 
-    $$('input[name="value"]', form).forEach((inp) => inp.addEventListener('change', () => {
-      if (picked('value').length > MAX) { inp.checked = false; bump(inp.nextElementSibling); return; }
+    joys.forEach((b) => b.addEventListener('click', () => {
+      const on = b.getAttribute('aria-pressed') === 'true';
+      if (!on && picked('value').length >= MAX) { bump(b); return; }
+      chosen = on ? chosen.filter((k) => k !== b.dataset.value) : [...chosen, b.dataset.value];
+      b.setAttribute('aria-pressed', String(!on));
+      b.classList.toggle('is-on', !on);
       paintValues();
     }));
     range.addEventListener('input', () => {
@@ -151,8 +166,8 @@
       const kqv = Math.min(97, 38 + Math.round(c * 0.3) + v.length * 5 + Math.min(e.length, 2) * 9);
       const tier = kqv >= 70 ? 1 : kqv >= 45 ? 2 : 3;
       const stage = tier === 1 ? (e.length ? 3 : 2) : tier === 2 ? 1 : 0;
-      const starter = `${joinAnd(v.map((k) => VALUES[k].label))}` +
-        (e.length ? ` · ${EVENTS[e[0]].label}. ` : '. ') + VALUES[v[0]].ask;
+      // The values and the event are on the card already; the starter is just the ask.
+      const starter = VALUES[v[0]].ask;
       return { v, e, c, kqv, tier, stage, starter };
     }
 
@@ -164,10 +179,14 @@
       await sleep(1300);
       const r = score();
 
-      $('[data-fid-chips]', root).innerHTML =
-        [...r.v.map((k) => VALUES[k].label), confWord(r.c), ...r.e.map((k) => EVENTS[k].label)]
-          .map((t) => `<li>${t}</li>`).join('');
+      $('[data-fid-values]', root).innerHTML = r.v.map((k, n) => `<span class="fid-pill" style="animation-delay:${0.45 + n * 0.08}s">${VALUES[k].label}</span>`).join('');
+      $('[data-fid-conf]', root).textContent = confWord(r.c);
+      const fidNeedle = $('.fid .needle', root);
+      fidNeedle.style.transform = turn(50);
+      $('[data-fid-events-sec]', root).hidden = !r.e.length;
+      $('[data-fid-events]', root).innerHTML = r.e.map((k) => `<p class="fid-event"><img src="../assets/life-events/${k}.svg" alt="">${EVENTS[k].label}</p>`).join('');
       go(order.indexOf('id'));
+      setTimeout(() => { fidNeedle.style.transform = turn(r.c); }, reduced.matches ? 0 : 420);
       const ph = $('.adv-phone', root).getBoundingClientRect();
       confetti(ph.left + ph.width / 2, ph.top + ph.height * 0.35, 70);
 
@@ -176,6 +195,7 @@
       $('[data-new]', advisor).hidden = false;
       tierPill.textContent = TIERS[r.tier];
       tierPill.className = 'tier-pill ' + (r.tier === 1 ? 'tier-pill--ready' : r.tier === 2 ? 'tier-pill--consider' : 'tier-pill--nurture');
+      kq.setAttribute('aria-label', `Knomee Quotient ${r.kqv}`);
       kq.classList.remove('kq-empty', 'tier-2', 'tier-3');
       if (r.tier > 1) kq.classList.add(`tier-${r.tier}`);
       kq.classList.add('is-scored');
@@ -197,8 +217,11 @@
 
     function reset() {
       form.reset();
+      chosen = [];
+      joys.forEach((b) => { b.setAttribute('aria-pressed', 'false'); b.classList.remove('is-on', 'is-full'); });
+      const sun = range.closest('[data-sun]');
+      sun.classList.add('is-untouched'); sun.style.setProperty('--v', range.value);
       touched = { confidence: false, events: false };
-      valueGrid.classList.remove('is-full');
       Object.keys(rows).forEach((k) => { rows[k].innerHTML = skeleton[k]; });
       advisor.dataset.state = 'waiting';
       $('[data-new]', advisor).hidden = true;
@@ -207,6 +230,7 @@
       tierPill.textContent = 'Prospect';
       tierPill.className = 'tier-pill tier-pill--nurture';
       kq.className = 'kq kq-empty';
+      kq.removeAttribute('aria-label');
       kq.textContent = '–';
       paintConfidence();
       go(order.indexOf('values'));
@@ -227,11 +251,12 @@
     go(0, { focus: false });
   }
 
-  /* ---------- Story: steps drive the sticky stage ---------- */
-  function story() {
-    const steps = $$('.story-step');
-    const screens = $$('.story-stage .stage-screen');
-    const track = $('.story-progress i');
+  /* ---------- Scroll stories: text steps drive a sticky stage ----------
+     Used twice: Engage / Prioritize / Convert, and the four feature
+     blocks. No scroll-jacking: the step crossing the middle of the
+     viewport picks the screen. On phones each step gets its own copy
+     of its screen instead of the sticky stage. */
+  function scrollStory({ steps, screens, onSet }) {
     if (!steps.length) return;
     steps.forEach((s, i) => {
       const slot = $('.step-media', s);
@@ -244,7 +269,7 @@
     const set = (i) => {
       steps.forEach((s, n) => s.classList.toggle('is-active', n === i));
       screens.forEach((s, n) => s.classList.toggle('is-active', n === i));
-      if (track) track.style.setProperty('--p', (i + 1) / steps.length);
+      if (onSet) onSet(i);
     };
     if (!('IntersectionObserver' in window)) return;
     const io = new IntersectionObserver((entries) => {
@@ -253,41 +278,23 @@
     steps.forEach((s) => io.observe(s));
   }
 
-  /* ---------- Feature tabs: vertical, auto-advancing until touched ---------- */
-  function features() {
-    const wrap = $('[data-feat]');
-    if (!wrap) return;
-    const tabs = $$('[role="tab"]', wrap);
-    let i = 0;
-    let auto = !reduced.matches;
-    wrap.classList.toggle('is-auto', auto);
-    const select = (n, { focus = false, user = false } = {}) => {
-      i = (n + tabs.length) % tabs.length;
-      tabs.forEach((t, k) => {
-        const on = k === i;
-        t.setAttribute('aria-selected', String(on));
-        t.tabIndex = on ? 0 : -1;
-        document.getElementById(t.getAttribute('aria-controls')).hidden = !on;
-      });
-      if (user && auto) { auto = false; wrap.classList.remove('is-auto'); }
-      if (focus) tabs[i].focus();
-    };
-    tabs.forEach((t, k) => {
-      t.addEventListener('click', () => select(k, { user: true }));
-      t.addEventListener('keydown', (e) => {
-        const keys = { ArrowDown: k + 1, ArrowRight: k + 1, ArrowUp: k - 1, ArrowLeft: k - 1, Home: 0, End: tabs.length - 1 };
-        if (e.key in keys) { e.preventDefault(); select(keys[e.key], { focus: true, user: true }); }
-      });
-      $('.feat-bar', t).addEventListener('animationend', () => { if (auto) select(i + 1); });
+  function story() {
+    const track = $('.story-progress i');
+    const steps = $$('.story-step');
+    scrollStory({
+      steps,
+      screens: $$('.story-stage .stage-screen'),
+      onSet: (i) => { if (track) track.style.setProperty('--p', (i + 1) / steps.length); },
     });
-    wrap.addEventListener('mouseenter', () => wrap.classList.add('is-holding'));
-    wrap.addEventListener('mouseleave', () => wrap.classList.remove('is-holding'));
-    wrap.addEventListener('focusin', () => wrap.classList.add('is-holding'));
-    wrap.addEventListener('focusout', (e) => { if (!wrap.contains(e.relatedTarget)) wrap.classList.remove('is-holding'); });
-    if ('IntersectionObserver' in window) {
-      new IntersectionObserver(([e]) => wrap.classList.toggle('in-view', e.isIntersecting), { threshold: 0.35 }).observe(wrap);
-    } else wrap.classList.add('in-view');
-    select(0);
+  }
+
+  function features() {
+    const dots = $$('.feat-dots a');
+    scrollStory({
+      steps: $$('.feat-step'),
+      screens: $$('.feat-stage .stage-screen'),
+      onSet: (i) => dots.forEach((d, n) => (n === i ? d.setAttribute('aria-current', 'step') : d.removeAttribute('aria-current'))),
+    });
   }
 
   adventure();
