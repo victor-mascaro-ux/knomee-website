@@ -1,8 +1,7 @@
 /* ============================================================
    V1 · "Both sides"
-   1. The hero: in front of the site's video, a prospect answers on
-      their phone and Jordan's card fills in. Both slide off while the
-      video plays.
+   1. Under the hero: a prospect answers on their phone and Jordan's
+      card beside it fills in.
    2. Interactive discovery: three product questions; the advisor
       view beside them updates live.
    3. The feature explorer advances on its own, pausing on hover,
@@ -35,14 +34,14 @@
   function setMeter(meter, k) { $$('i', meter).forEach((bar, i) => bar.classList.toggle('on', i < k)); }
 
   /* =========================================================
-     1. HERO — the prospect's phone feeds Jordan's card, on a loop
-        that pauses off screen, on the pause button, while the video
-        plays, and under reduced motion.
+     1. PROOF — the prospect's phone feeds Jordan's card, on a loop
+        that pauses off screen, on the pause button and under reduced
+        motion.
      ========================================================= */
-  function hero() {
-    const root = $('.hero-media');
+  function stage() {
+    const root = $('.stage');
     if (!root) return;
-    const screen = $('.hero-phone .phone-screen', root);
+    const screen = $('.stage-phone .phone-screen', root);
     const scr = { values: $('.ps-values', root), confidence: $('.ps-confidence', root), done: $('.ps-done', root) };
     const chip = (v) => $(`.ps-chip[data-v="${v}"]`, root);
     const next = $('.ps-next', root);
@@ -53,10 +52,10 @@
     const tags = $('[data-tags]', root);
     const starter = $('[data-starter]', root);
     const pauseBtn = $('.stage-pause', root);
-    const STARTER = '“What would retirement need to look like for you to feel secure?”';
+    const STARTER = '“What would feeling secure look like for your family?”';
 
     let kqVal = 0, userPaused = false, inView = true;
-    const playing = () => !userPaused && inView && !document.hidden && !root.classList.contains('is-watching');
+    const playing = () => !userPaused && inView && !document.hidden;
 
     // A wait that only counts time while the demo is playing.
     const wait = (ms) => new Promise((res) => {
@@ -306,6 +305,6 @@
     }));
   }
 
-  const init = () => { hero(); mirror(); explorer(); };
+  const init = () => { stage(); mirror(); explorer(); };
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init); else init();
 })();

@@ -15,19 +15,16 @@
 
 /* The site's video is the hero visual. The advisor's view of a prospect
    fills in on a card hanging off its lower edge. */
-.hero-media { position: relative; padding-bottom: 190px; }
+.hero-media { position: relative; }
 .hero-media::before, .hero-media::after { content: ""; position: absolute; z-index: -1; border-radius: 50%; pointer-events: none; }
 .hero-media::before { width: 520px; height: 520px; right: -120px; top: -80px; background: radial-gradient(closest-side, var(--k-teal-light), rgba(230, 247, 245, 0)); }
 .hero-media::after { width: 420px; height: 420px; left: -120px; bottom: -40px; background: radial-gradient(closest-side, var(--k-grape-light), rgba(233, 217, 244, 0)); }
 .video--hero {
-  z-index: 1; border-radius: 24px; box-shadow: 0 40px 100px rgba(36, 4, 70, 0.22); transform-origin: 62% 50%;
+  z-index: 1; border-radius: 24px; box-shadow: 0 40px 100px rgba(36, 4, 70, 0.22);
   transition: transform 0.7s var(--ease-pop), box-shadow 0.7s var(--ease-out);
 }
-/* Play: the card slides off and the video zooms in to take the stage.
-   Pause or end: the video settles back and the card slides in again. */
-.hero-media .advisor-card { transition: opacity 0.4s var(--ease-out) 0.25s, transform 0.6s var(--ease-pop) 0.25s; }
-.hero-media.is-watching .advisor-card { opacity: 0; transform: translate(56px, 48px) rotate(3deg) scale(0.96); pointer-events: none; transition-delay: 0s; }
-.hero-media.is-watching .video--hero { z-index: 4; transform: scale(1.14); box-shadow: 0 60px 140px rgba(36, 4, 70, 0.34); transition-delay: 0.12s; }
+/* Play: the video zooms in a touch. Pause or end: it settles back. */
+.hero-media.is-watching .video--hero { transform: scale(1.06); box-shadow: 0 60px 140px rgba(36, 4, 70, 0.34); }
 .video--hero .video-play { width: 96px; height: 96px; margin: -48px 0 0 -48px; }
 .video--hero .video-play svg { width: 34px; height: 34px; }
 
@@ -38,15 +35,23 @@
   box-shadow: 0 0 0 3px var(--k-white); transform: scale(0); transition: transform 0.4s var(--ease-pop);
 }
 
-/* The Confidence dial (hero phone, the interactive gauge, the client mockup) */
+/* The Confidence dial (the phone, the interactive gauge, the client mockup) */
 .dial { display: block; width: 100%; overflow: visible; }
 .dial .needle { transform-box: view-box; transform-origin: 100px 100px; }
 
-/* The prospect's phone comes first, in front of the video's left edge.
-   Each answer feeds Jordan's card on the right; both slide off while the
-   video plays. */
-.hero-phone { --pw: 220px; position: absolute; left: -28px; top: 64px; z-index: 3; transition: opacity 0.4s var(--ease-out) 0.25s, transform 0.6s var(--ease-pop) 0.25s; }
-.hero-media.is-watching .hero-phone { opacity: 0; transform: translate(-56px, 48px) rotate(-3deg) scale(0.96); pointer-events: none; transition-delay: 0s; }
+/* ---------- Proof: the phone feeds Jordan's card, beside the numbers ---------- */
+.proof { padding: clamp(48px, 6vw, 96px) 0 clamp(24px, 4vw, 48px); }
+.proof-grid { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr); gap: clamp(32px, 5vw, 72px); align-items: center; }
+.stage { --pw: 240px; position: relative; height: 540px; }
+.stage::before, .stage::after { content: ""; position: absolute; z-index: -1; border-radius: 50%; pointer-events: none; }
+.stage::before { width: 460px; height: 460px; left: -100px; top: -40px; background: radial-gradient(closest-side, var(--k-grape-light), rgba(233, 217, 244, 0)); }
+.stage::after { width: 420px; height: 420px; right: -60px; bottom: -60px; background: radial-gradient(closest-side, var(--k-teal-light), rgba(230, 247, 245, 0)); }
+/* The phone comes first; its answers feed the card beside it, which meets it at the bezel. */
+.stage-phone { --pw: inherit; position: absolute; left: 0; top: 0; z-index: 2; }
+.proof-stats { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(28px, 3vw, 44px) clamp(24px, 3vw, 40px); }
+.proof-stats .hs { padding-top: var(--space-20); border-top: 1px solid var(--k-line); }
+.proof-stats .stat-num { font-size: clamp(44px, 5vw, 64px); }
+.proof-stats .stat-label { font-size: var(--text-lg); font-weight: var(--weight-medium); }
 .ps {
   position: absolute; inset: 0; display: flex; flex-direction: column; padding: 32px 12px 12px;
   opacity: 0; transform: translateX(24px); pointer-events: none;
@@ -72,8 +77,8 @@
 .ps-chip.is-picked::after { transform: scale(1); }
 .ps-next { margin-top: auto; height: 34px; display: grid; place-items: center; border-radius: var(--radius-pill); background: var(--k-plum); color: var(--k-white); font-size: var(--text-sm); font-weight: var(--weight-semibold); transition: transform var(--dur-base) var(--ease-out); }
 .ps-next.is-pressed { transform: scale(0.96); }
-.hero-phone .dial { margin-top: 14px; }
-.hero-phone .dial .needle { transform: rotate(-70deg); transition: transform 1.4s var(--ease-pop); }
+.stage-phone .dial { margin-top: 14px; }
+.stage-phone .dial .needle { transform: rotate(-70deg); transition: transform 1.4s var(--ease-pop); }
 .ps-confidence.is-strong .needle { transform: rotate(52deg); }
 .dial-word { text-align: center; font-size: var(--text-xl); font-weight: var(--weight-bold); color: var(--k-plum); opacity: 0; transition: opacity var(--dur-slow) var(--ease-out) 0.9s; }
 .ps-confidence.is-strong .dial-word { opacity: 1; }
@@ -90,7 +95,7 @@
 .ps-tap.is-tapping { animation: tap 0.6s var(--ease-out); }
 @keyframes tap { 0% { opacity: 0; transform: scale(1.5); } 30% { opacity: 1; transform: scale(0.85); } 100% { opacity: 0; transform: scale(1.25); } }
 .stage-pause {
-  position: absolute; right: 12px; top: 12px; z-index: 5; display: grid; place-items: center; width: 36px; height: 36px;
+  position: absolute; right: 0; top: 0; z-index: 5; display: grid; place-items: center; width: 36px; height: 36px;
   border: 0; border-radius: 50%; background: rgba(255, 255, 255, 0.9); color: var(--k-plum); cursor: pointer; box-shadow: var(--elev-1);
   transition: transform var(--dur-base) var(--ease-out), opacity var(--dur-mid);
 }
@@ -98,11 +103,10 @@
 .stage-pause svg { width: 14px; height: 14px; }
 .stage-pause .i-play, .stage-pause[aria-pressed="true"] .i-pause { display: none; }
 .stage-pause[aria-pressed="true"] .i-play { display: block; }
-.hero-media.is-watching .stage-pause { opacity: 0; pointer-events: none; }
 
 /* advisor card */
 .advisor-card {
-  position: absolute; right: -36px; bottom: 0; z-index: 3; width: 300px; padding: 18px;
+  position: absolute; left: calc(var(--pw) - 16px); bottom: 36px; z-index: 3; width: 300px; padding: 18px;
   background: var(--k-white); border: 1px solid var(--k-line); border-radius: var(--radius-card);
   box-shadow: 0 24px 60px rgba(36, 4, 70, 0.16);
 }
@@ -129,10 +133,6 @@
 .typing::after { content: ""; display: inline-block; width: 2px; height: 1em; margin-left: 2px; vertical-align: -2px; background: var(--k-grape); animation: caret 0.9s steps(1) infinite; }
 @keyframes caret { 50% { opacity: 0; } }
 
-/* hero stats: the site's four numbers, as the proof right under the fold */
-.hero-stats { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--space-24); margin-top: clamp(40px, 5vw, 64px); padding-top: var(--space-24); border-top: 1px solid var(--k-line); }
-.hs .stat-num { font-size: clamp(36px, 4vw, 52px); }
-.hs .stat-label { font-size: var(--text-lg); font-weight: var(--weight-medium); }
 
 /* ---------- Labels the site already uses ("The Problem:", "Until now") ---------- */
 .tag-label {
@@ -483,14 +483,15 @@
 
 /* ---------- Responsive ---------- */
 @media (max-width: 1279px) {
-  .hero-phone { --pw: 196px; top: 48px; left: -20px; }
+  .stage { --pw: 220px; height: 500px; }
   .advisor-card { width: 280px; padding: 15px; }
   .ac-starter p { font-size: var(--text-sm); }
 }
 @media (max-width: 1080px) {
   .hero-grid { grid-template-columns: 1fr; }
   .hero-media { width: 100%; max-width: 760px; margin: 8px auto 0; }
-  .advisor-card { right: 24px; }
+  .proof-grid { grid-template-columns: 1fr; }
+  .stage { width: calc(var(--pw) + 300px); max-width: 100%; margin: 0 auto; }
 }
 @media (max-width: 900px) {
   .problem-grid, .try-head, .mirror, .ex-grid, .case, .partner-grid { grid-template-columns: 1fr; }
@@ -500,16 +501,15 @@
   .ex-list { position: static; }
   .mini-live { display: inline-flex; margin-left: auto; }
   .dots { margin-left: 12px; }
-  .hero-stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .bento { grid-template-columns: 1fr 1fr; }
   .rb, .rb-succession { grid-column: span 1; }
   .rb-succession { grid-column: 1 / -1; }
 }
 /* Phones: the card sits under the video, overlapping its edge. */
 @media (max-width: 620px) {
-  .hero-media { padding-bottom: 0; }
-  .hero-phone, .stage-pause { display: none; }
-  .advisor-card { position: relative; right: auto; width: min(300px, 100%); margin: 16px auto 0; }
+  .stage { --pw: 220px; width: 100%; height: auto; display: grid; justify-items: center; }
+  .stage-phone { position: relative; }
+  .advisor-card { position: relative; left: auto; bottom: auto; width: min(300px, 100%); margin-top: -96px; }
   .video--hero { border-radius: 18px; }
   .hero-media.is-watching .video--hero { transform: none; }
   .video--hero .video-play { width: 72px; height: 72px; margin: -36px 0 0 -36px; }
