@@ -166,7 +166,7 @@
 }
 .ttm-opt[aria-checked="true"] { border-color: var(--k-plum); background: var(--k-plum-wash); }
 .ttm-opt[aria-checked="true"]::after { transform: scale(1); }
-.ma-ttm { width: 26px; height: 26px; object-fit: contain; border-radius: 6px; background: var(--k-white); }
+.ma-list dd .ma-ttm { border-radius: 8px; }
 .ma-row { display: flex; align-items: center; justify-content: space-between; margin-top: var(--space-20); }
 .ma-row .ma-k { margin: 0; }
 .ma-row b { font-size: var(--text-md); color: var(--k-white); }
@@ -378,7 +378,8 @@
 @keyframes flash { 0% { background: rgba(175, 252, 65, 0.16); } 100% { background: rgba(175, 252, 65, 0); } }
 .ma-list dt { font-size: var(--text-md); color: rgba(255, 255, 255, 0.66); }
 .ma-list dd { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin: 0; font-size: var(--text-md); font-weight: var(--weight-semibold); }
-.ma-list dd img { width: 22px; height: auto; filter: brightness(0) invert(1); }
+/* Icons keep their own colours on the plum panel, each on a small white disc. */
+.ma-list dd img { flex: none; width: 28px; height: 28px; padding: 4px; object-fit: contain; border-radius: 50%; background: var(--k-white); box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25); }
 .ma-pill { display: inline-flex; align-items: center; height: 26px; padding: 0 10px; border-radius: var(--radius-pill); background: rgba(255, 255, 255, 0.14); animation: popIn 0.4s var(--ease-pop) both; }
 .ma-empty { color: rgba(255, 255, 255, 0.4); font-weight: var(--weight-regular); }
 .ma-starter { padding: 16px; border-radius: 14px; background: rgba(255, 255, 255, 0.08); border: 1px solid rgba(255, 255, 255, 0.14); }
