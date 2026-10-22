@@ -1,0 +1,309 @@
+/* ============================================================
+   KNOMEE · DESIGN TOKENS
+   Copied verbatim from the Knomee design system (knomee-ds/tokens:
+   colors.css, typography.css, layout.css). Only change: the font
+   request loads the Poppins weights the site uses, not Sedan/Roboto,
+   which the system reserves for the product nav and Google sign-in.
+   ============================================================ */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap');
+
+/* ============================================================
+   KNOMEE · COLOR TOKENS  (canonical)
+   ------------------------------------------------------------
+   Reconciled from two divergent sources in knomee-demo:
+     A. wireframes/tokens/colors.css  — curated, semantic, but stale
+     B. src/index.css :root           — smaller, but what actually ships
+   Where they disagree, the SHIPPED value (B) wins and the
+   conflict is marked  ⚠ CONFLICT  with both values recorded.
+   ============================================================ */
+:root {
+  /* ---- Brand purple (the spine of the brand) ---- */
+  --k-plum:          #240446;  /* primary brand — nav bars, headlines, primary buttons */
+  --k-plum-ink:      #1a0433;  /* darkest text tint of the plum family */
+  --k-plum-hover:    #34105e;  /* primary button hover (shipped) */
+  --k-grape:         #7639a1;  /* interactive purple — links, prospect tier 2 */
+  --k-grape-bar:     #7538b2;  /* 6px accent bar on feature cards */
+  --k-grape-light:   #e9d9f4;  /* light purple surface / soft badge fill */
+  --k-grape-vivid:   #9b19fb;  /* vivid grape accent */
+  --k-orchid:        #a56ccc;  /* modal button hover (shipped) */
+  --k-plum-050:      rgba(36, 4, 70, 0.05);  /* faint plum card-tray wash */
+  --k-plum-wash:     #f7f2fc;  /* download button hover wash (shipped) */
+
+  /* ---- Teal / "joy" greens (consumer-facing warmth) ---- */
+  --k-teal:          #3dbdaa;  /* consumer accent — save CTA, question numbers */
+  --k-teal-deep:     #2fa896;  /* teal hover */
+  --k-teal-light:    #e6f7f5;  /* teal wash surface */
+  --k-mint:          #c0ffe7;  /* pale mint highlight */
+  --k-ocean:         #086375;  /* deep teal — KQ tier 1, bar-chart icon */
+  --k-steel:         #6ba1ac;  /* muted teal — KQ tier 2 */
+  --k-aqua:          #6bd6c4;  /* aqua tint (brand vector family) */
+  --k-forest:        #0f4a3a;  /* deepest green — client tier 1 (shipped) */
+
+  /* ---- Lilac / violet accents ---- */
+  --k-lilac:         #b98ddc;  /* KQ tier 3 badge */
+  --k-lilac-soft:    #c9a8dd;  /* prospect tier 3 group header (shipped)
+                                  ⚠ CONFLICT — token file said #d4b3eb */
+  --k-bolt:          #9b51e0;  /* "convert" action / lightning violet */
+  --k-bolt-deep:     #7c3aed;  /* bolt hover */
+
+  /* ---- Signal / status ---- */
+  --k-tangerine:     #ff9525;  /* energy accent — lightning icon, timers */
+  --k-lime:          #affc41;  /* "new" tag, sparkle accent */
+  --k-amber:         #f59e0b;  /* warning triangle */
+  --k-amber-ink:     #b45309;  /* warning text */
+  --k-amber-light:   #fef3c7;  /* amber wash surface — attention pills (knomee-demo) */
+
+  /* ---- Profile ramps (knomee-demo) ----
+     The five-step readiness meter and the three wedges of the Confidence dial,
+     as tokens rather than literals, so a page can restate them. The prospect
+     profile runs the purples; the client profile restates the same names in the
+     teal family, which is what turns that whole page over. */
+  --bar-1:           #240446;  /* readiness step 1 — Pre-Contemplation */
+  --bar-2:           #4c1d95;
+  --bar-3:           #7038c8;
+  --bar-4:           #9b51e0;
+  --bar-5:           #b57ceb;  /* readiness step 5 — Maintenance */
+  --bar-off:         #e2def0;  /* steps not yet reached */
+  --dial-1:          #e9d9f4;  /* Confidence dial — Weak wedge */
+  --dial-2:          #b98ddc;  /* Moderate */
+  --dial-3:          #7639a1;  /* Strong */
+
+  /* The client side of the same ramps. */
+  --bar-1-client:    #0f4a3a;
+  --bar-2-client:    #12695a;
+  --bar-3-client:    #16897a;
+  --bar-4-client:    #2fb39c;
+  --bar-5-client:    #6fd8c2;
+  --bar-off-client:  #dbeeea;
+  --dial-1-client:   #d9f2ed;
+  --dial-2-client:   #6fd0bf;
+  --dial-3-client:   #086375;
+
+  /* Initials standing in for a face, tinted per side of the product. */
+  --avatar-bg:        #e9d9f4;  /* prospect */
+  --avatar-ink:       #7639a1;
+  --avatar-bg-client: #e6f7f5;  /* client */
+  --avatar-ink-client: #086375;
+  --k-green:         #009966;  /* success / sparkle */
+  --k-green-lime:    #84cc16;  /* toast confirmation dot */
+  --k-green-bright:  #22c55e;  /* inline success check */
+
+  /* ---- Neutrals (warm-cool gray ramp) ---- */
+  --k-ink:           #1a1a1a;  /* primary body text on light */
+  --k-ink-soft:      #333333;  /* table body copy, tab hover (shipped) */
+  --k-body:          #364153;  /* long-form body copy */
+  --k-muted:         #6a7282;  /* secondary text */
+  --k-slate:         #757575;  /* tertiary text, table headers, inactive tabs */
+  --k-ash:           #afafaf;  /* placeholder / disabled */
+  --k-stone:         #cccccc;  /* control borders, unchecked, switch off */
+  --k-pearl:         #eeeeee;  /* disabled fills, empty score badge */
+  --k-line:          #e8e8e8;  /* THE workhorse hairline — cards, tables, dividers
+                                  ⚠ CONFLICT — token file's --k-border was #e0e0e0;
+                                  shipped code uses #e8e8e8 everywhere */
+  --k-cloud:         #fafafa;  /* zebra / hover wash / disabled field */
+  --k-cloud-cool:    #f8fafa;  /* table row hover (shipped) */
+  --k-cloud-warm:    #fbfbfc;  /* de-emphasised "thin" row (shipped) */
+  --k-white:         #ffffff;
+  --k-black:         #000000;
+
+  /* ============================================================
+     SEMANTIC ALIASES — reach for these in product code
+     ============================================================ */
+  --text-strong:     var(--k-plum);
+  --text-body:       var(--k-ink);
+  --text-table:      var(--k-ink-soft);
+  --text-secondary:  var(--k-slate);
+  --text-muted:      var(--k-muted);
+  --text-placeholder: var(--k-ash);
+  --text-disabled:   var(--k-ash);
+  --text-inverse:    var(--k-white);
+  --text-link:       var(--k-plum);
+  --text-link-hover: var(--k-grape);
+
+  --surface-page:    var(--k-white);   /* ⚠ CONFLICT — token file said #f5f5f7;
+                                          the shipped app paints the page white */
+  --surface-card:    var(--k-white);
+  --surface-sunken:  var(--k-cloud);
+  --surface-hover:   var(--k-cloud-cool);
+  --surface-tray:    var(--k-plum-050);
+  --surface-brand:   var(--k-plum);
+  --surface-accent:  var(--k-teal-light);
+
+  --border-default:  var(--k-line);
+  --border-hairline: var(--k-pearl);
+  --border-strong:   var(--k-plum);
+  --border-control:  var(--k-stone);
+  --border-hover:    var(--k-stone);
+
+  --action-primary:        var(--k-plum);
+  --action-primary-hover:  var(--k-plum-hover);
+  --action-accent:         var(--k-teal);
+  --action-accent-hover:   var(--k-teal-deep);
+  --action-bolt:           var(--k-bolt);
+  --action-bolt-hover:     var(--k-bolt-deep);
+
+  --status-success:  var(--k-green-lime);
+  --status-warning:  var(--k-amber);
+  --status-info:     var(--k-ocean);
+  --status-new:      var(--k-lime);
+
+  /* ---- Ramp 1: KQ score tiers (advisor lead scoring, per-prospect) ---- */
+  --kq-1:            var(--k-ocean);   /* ready now */
+  --kq-2:            var(--k-steel);   /* considering */
+  --kq-3:            var(--k-lilac);   /* nurture */
+
+  /* ---- Ramp 2: Prospect group headers (plum family) ---- */
+  --prospect-1:      var(--k-plum);
+  --prospect-2:      var(--k-grape);
+  --prospect-3:      var(--k-lilac-soft);
+
+  /* ---- Ramp 3: Client engagement tiers (green→teal family) ----
+     ⚠ CONFLICT — the token file had these in the purple family
+     (#5b21b6 / #8b5cf6 / #6ba1ac). The shipped app uses green→teal,
+     which is what keeps Clients visually distinct from Prospects. */
+  --client-1:        var(--k-forest);
+  --client-2:        var(--k-ocean);
+  --client-3:        var(--k-steel);
+}
+
+/* ============================================================
+   KNOMEE · TYPOGRAPHY TOKENS
+   ------------------------------------------------------------
+   The shipped app uses 30 distinct font sizes, including nine
+   half-pixel values (7.5, 9.5, 10.5, 11.5, 12.5, 13.5, 14.5).
+   This is a 14-step scale that every one of those snaps onto.
+   Migration rule: round to the NEAREST step; if exactly between
+   two steps, take the LARGER (dense tables read better up).
+   ============================================================ */
+
+:root {
+  /* ---- Families ---- */
+  --font-ui:     'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-serif:  'Sedan', Georgia, 'Times New Roman', serif;  /* advisory firm name in nav */
+  --font-google: 'Roboto', -apple-system, sans-serif;         /* ONLY inside "Continue with Google" */
+
+  /* ---- Size scale ---- */
+  --text-micro: 8px;    /* "POWERED BY" eyebrow (was 7.5/8/9) */
+  --text-2xs:   10px;   /* dense chart labels (was 9.5/10/10.5) */
+  --text-xs:    11px;   /* "new" tag, legends (was 11/11.5) */
+  --text-sm:    12px;   /* group headers, meta (was 12/12.5) — most common size */
+  --text-base:  13px;   /* table body (was 13/13.5) */
+  --text-md:    14px;   /* table headers, inputs (was 14/14.5) */
+  --text-lg:    15px;   /* button label */
+  --text-xl:    16px;   /* tabs, modal buttons */
+  --text-2xl:   18px;   /* card title (was 17/18/19) */
+  --text-3xl:   20px;   /* brand name, section head */
+  --text-4xl:   24px;   /* page title (was 22/24/26) */
+  --text-5xl:   32px;   /* metric figure (was 30/34) */
+  --text-6xl:   40px;   /* hero metric (was 36/37/38/40) */
+  --text-7xl:   56px;   /* display (was 58) */
+
+  /* ---- Weights ----
+     Poppins 300 is loaded but unused in shipped code; 400 and 900
+     appear twice each. 600/700/800 carry the whole interface. */
+  --weight-regular:  400;
+  --weight-medium:   500;  /* "new" tag, switch labels */
+  --weight-semibold: 600;  /* DEFAULT for headings, buttons, table th */
+  --weight-bold:     700;  /* score badges, metric figures */
+  --weight-heavy:    800;  /* display numerals */
+
+  /* ---- Line heights ---- */
+  --leading-tight:  1.2;   /* display + metric figures */
+  --leading-snug:   1.35;  /* headings */
+  --leading-normal: 1.45;  /* table cells (shipped value) */
+  --leading-relaxed: 1.6;  /* long-form body copy */
+
+  /* ---- Tracking ---- */
+  --tracking-eyebrow: 0.13em;  /* uppercase "POWERED BY" */
+  --tracking-group:   0.6px;   /* uppercase tier group headers */
+  --tracking-tag:     0.3px;   /* "new" tag */
+  --tracking-brand:   0.2px;   /* brand wordmark */
+  --tracking-normal:  0;
+}
+
+/* ============================================================
+   KNOMEE · SPACE, RADIUS, ELEVATION & MOTION TOKENS
+   ============================================================ */
+:root {
+  /* ---- Spacing ramp (4px base, with the 2px half-step the
+          dense advisor tables actually need) ---- */
+  --space-0:   0;
+  --space-px:  1px;
+  --space-2:   2px;
+  --space-4:   4px;
+  --space-6:   6px;
+  --space-8:   8px;
+  --space-10:  10px;   /* default flex gap */
+  --space-12:  12px;   /* table cell padding */
+  --space-14:  14px;
+  --space-16:  16px;   /* card padding */
+  --space-20:  20px;
+  --space-24:  24px;
+  --space-32:  32px;
+  --space-40:  40px;
+
+  /* Single source of truth for the page inset. The top bar and the
+     content share it so logo, tabs and title always line up, and the
+     top padding tracks the side padding. Shipped in src/index.css. */
+  --page-pad: 40px;
+  --content-max: 1520px;
+
+  /* ---- Radius ramp (snaps the shipped 4/5/6/7/8/9/10/12/14) ---- */
+  --radius-xs:     4px;
+  --radius-sm:     6px;   /* absorbs 5 and 7 */
+  --radius-md:     8px;   /* score badge, insight row */
+  --radius-lg:     10px;  /* buttons, search box, "new" tag */
+  --radius-xl:     12px;  /* metric tile, talk card, tier row */
+  --radius-2xl:    14px;  /* analytics card head */
+  --radius-pill:   999px; /* switch, modal buttons */
+  --radius-circle: 50%;   /* avatar, card-title icon */
+
+  /* ---- Elevation ---- */
+  --elev-0: none;
+  --elev-1: 0 4px 12px rgba(16, 24, 40, 0.10);   /* outline button hover */
+  --elev-2: 0 6px 18px rgba(16, 24, 40, 0.08);   /* card hover — most common */
+  --elev-3: 0 8px 22px rgba(16, 24, 40, 0.09);   /* raised card hover */
+  --elev-4: 0 4px 24px rgba(0, 0, 0, 0.25);      /* modal */
+  --elev-5: 0 8px 40px rgba(0, 0, 0, 0.35);      /* overlay / phone frame */
+
+  /* Coloured glows — a brand-tinted shadow, not a neutral one */
+  --glow-brand: 0 6px 18px rgba(36, 4, 70, 0.28);    /* primary button hover */
+  --glow-bolt:  0 4px 12px rgba(155, 81, 224, 0.40); /* convert button hover */
+  --glow-ocean: 0 8px 20px rgba(8, 99, 117, 0.30);
+  --ring-focus: 0 0 0 3px rgba(36, 4, 70, 0.12);     /* search box focus ring */
+  --ring-punch: 0 0 0 2px #ffffff;                   /* tag punched out of a row */
+
+  /* ---- Border widths ---- */
+  --border-thin: 1px;   /* everything structural */
+  --border-thick: 2px;  /* modal buttons, checked control */
+
+  /* ---- Motion ---- */
+  --dur-fast:  0.14s;   /* tab / chip state */
+  --dur-base:  0.16s;   /* the default — hover, background */
+  --dur-mid:   0.18s;   /* transform + shadow together */
+  --dur-slow:  0.20s;   /* colour cross-fade */
+  --dur-enter: 0.40s;   /* riseIn / fadeUp on mount */
+  --dur-bar:   0.70s;   /* bar + funnel draw */
+
+  --ease-standard: cubic-bezier(0.4, 0, 0.2, 1);        /* bars, funnels */
+  --ease-out:      ease;                                 /* the shipped default */
+  --ease-pop:      cubic-bezier(0.22, 0.81, 0.28, 1.05); /* modal entrance overshoot */
+
+  /* Stagger step for list entrances (talk cards, seg rows, analytics cards) */
+  --stagger: 0.06s;
+
+  /* ---- Fixed component metrics that behave as tokens ---- */
+  --topbar-h:      64px;
+  --brand-logo-h:  19.5px;  /* knomee lockup AND any white-label client logo
+                               render at this height so a co-branded bar
+                               keeps both marks visually equal */
+  --client-logo-h: 34px;    /* client logo when it leads the bar */
+  --avatar-size:   38px;
+  --bolt-size:     38px;
+  --badge-w:       52px;
+  --badge-h:       40px;
+  --switch-w:      40px;
+  --switch-h:      22px;
+  --phone-w:       390px;   /* iPhone frame for the client experience demo */
+  --phone-h:       844px;
+}

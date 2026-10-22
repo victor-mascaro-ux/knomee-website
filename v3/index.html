@@ -1,0 +1,500 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Knomee</title>
+  <link rel="stylesheet" href="../shared/tokens.css">
+  <link rel="stylesheet" href="../shared/site.css">
+  <link rel="stylesheet" href="v3.css">
+  <script>document.documentElement.classList.add('js')</script>
+  <script src="../shared/site.js" defer></script>
+  <script src="v3.js" defer></script>
+</head>
+<body id="top">
+
+<!-- Icon sprite: Lucide geometry, 24 grid, 2px round stroke -->
+<svg class="sprite" aria-hidden="true" focusable="false">
+  <symbol id="i-signal" viewBox="0 0 24 24"><path d="M2 20h.01"/><path d="M7 20v-4"/><path d="M12 20v-8" class="weak"/><path d="M17 20V8" class="weak"/><path d="M22 4v16" class="weak"/></symbol>
+  <symbol id="i-clipboard" viewBox="0 0 24 24"><rect width="8" height="4" x="8" y="2" rx="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><path d="M12 11h4"/><path d="M12 16h4"/><path d="M8 11h.01"/><path d="M8 16h.01"/></symbol>
+  <symbol id="i-funnel" viewBox="0 0 24 24"><path d="M22 3H2l8 9.46V19l4 2v-8.54z"/></symbol>
+  <symbol id="i-message" viewBox="0 0 24 24"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></symbol>
+  <symbol id="i-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></symbol>
+  <symbol id="i-zap" viewBox="0 0 24 24"><path d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z"/></symbol>
+  <symbol id="i-compass" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="m16.24 7.76-2.12 6.36-6.36 2.12 2.12-6.36z"/></symbol>
+  <symbol id="i-bulb" viewBox="0 0 24 24"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5"/><path d="M9 18h6"/><path d="M10 22h4"/></symbol>
+  <symbol id="i-users" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></symbol>
+  <symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M5 21a7 7 0 0 1 14 0"/></symbol>
+  <symbol id="i-book" viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></symbol>
+  <symbol id="i-repeat" viewBox="0 0 24 24"><path d="m17 2 4 4-4 4"/><path d="M3 11v-1a4 4 0 0 1 4-4h14"/><path d="m7 22-4-4 4-4"/><path d="M21 13v1a4 4 0 0 1-4 4H3"/></symbol>
+  <symbol id="i-plug" viewBox="0 0 24 24"><path d="M12 22v-5"/><path d="M9 8V2"/><path d="M15 8V2"/><path d="M18 8v5a4 4 0 0 1-4 4h-4a4 4 0 0 1-4-4V8Z"/></symbol>
+  <symbol id="i-sparkles" viewBox="0 0 24 24"><path d="M9.94 15.5A2 2 0 0 0 8.5 14.06l-6.14-1.58a.5.5 0 0 1 0-.96L8.5 9.94A2 2 0 0 0 9.94 8.5l1.58-6.14a.5.5 0 0 1 .96 0l1.58 6.14a2 2 0 0 0 1.44 1.44l6.14 1.58a.5.5 0 0 1 0 .96l-6.14 1.58a2 2 0 0 0-1.44 1.44l-1.58 6.14a.5.5 0 0 1-.96 0z"/></symbol>
+</svg>
+
+<!-- ============ HEADER ============ -->
+<a class="skip-link" href="#main">Skip to Content</a>
+<header class="site-header">
+  <div class="container">
+    <a class="logo" href="#top" aria-label="Knomee home">
+      <img class="logo-dark" src="../assets/logo-plum.svg" alt="" width="142" height="24">
+      <img class="logo-light" src="../assets/logo-white.svg" alt="" width="142" height="24">
+    </a>
+    <nav class="site-nav" aria-label="Primary">
+      <div class="nav-item">
+        <button class="nav-trigger" type="button" aria-expanded="false" aria-controls="nav-company">Company<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></button>
+        <div class="nav-menu" id="nav-company">
+          <a href="https://www.knomee.com/company/about">About</a>
+          <a href="https://www.knomee.com/careers">Careers</a>
+        </div>
+      </div>
+      <div class="nav-item">
+        <button class="nav-trigger" type="button" aria-expanded="false" aria-controls="nav-platform">Platform<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></button>
+        <div class="nav-menu" id="nav-platform">
+          <a href="https://www.knomee.com/integrations">Integrations</a>
+        </div>
+      </div>
+      <div class="nav-item">
+        <button class="nav-trigger" type="button" aria-expanded="false" aria-controls="nav-resources">Resources<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></button>
+        <div class="nav-menu" id="nav-resources">
+          <a href="https://www.knomee.com/blog">Blog</a>
+          <a href="https://www.knomee.com/case-studies">Case Studies</a>
+          <a href="https://www.knomee.com/podcast">Podcast</a>
+          <a href="https://www.knomee.com/webinars">Webinars</a>
+        </div>
+      </div>
+    </nav>
+    <div class="header-ctas">
+      <a class="signin" href="https://app.knomee.com/profile">Member Sign In</a>
+      <a class="btn btn-secondary btn-sm" href="https://www.knomee.com/demo">Talk to Sales</a>
+      <a class="btn btn-primary btn-sm" href="https://www.knomee.com/demo">Book a Demo</a>
+    </div>
+    <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-menu" aria-label="Open Menu"><span></span><span></span><span></span></button>
+  </div>
+</header>
+<div class="mobile-menu" id="mobile-menu">
+  <p class="mm-group">Company</p>
+  <a href="https://www.knomee.com/company/about">About</a>
+  <a href="https://www.knomee.com/careers">Careers</a>
+  <p class="mm-group">Platform</p>
+  <a href="https://www.knomee.com/integrations">Integrations</a>
+  <p class="mm-group">Resources</p>
+  <a href="https://www.knomee.com/blog">Blog</a>
+  <a href="https://www.knomee.com/case-studies">Case Studies</a>
+  <a href="https://www.knomee.com/podcast">Podcast</a>
+  <a href="https://www.knomee.com/webinars">Webinars</a>
+  <a class="mm-signin" href="https://app.knomee.com/profile">Member Sign In</a>
+  <div class="cta-row">
+    <a class="btn btn-secondary" href="https://www.knomee.com/demo">Talk to Sales</a>
+    <a class="btn btn-primary" href="https://www.knomee.com/demo">Book a Demo</a>
+  </div>
+</div>
+
+<main id="main">
+
+  <!-- ============ HERO ============ -->
+  <section class="hero" data-hero aria-labelledby="hero-title">
+    <div class="container hero-grid">
+      <div class="hero-copy" data-stagger>
+        <h1 class="hero-title" id="hero-title" data-reveal>Differentiate to <span class="marker">Grow Organically</span></h1>
+        <p class="lead" data-reveal>Knomee helps you give prospects value before every conversation, and know who’s ready to act, why now, and where to focus to convert more business.</p>
+        <div class="cta-row" data-reveal>
+          <a class="btn btn-primary btn-lg" href="https://www.knomee.com/demo">Book a Demo, Improve Your Close Rate <span class="arrow" aria-hidden="true">→</span></a>
+          <a class="btn btn-secondary btn-lg" href="https://www.knomee.com/demo">Talk to Sales</a>
+        </div>
+      </div>
+
+      <div class="hero-media" data-watch>
+        <div class="hm-video" data-reveal="scale" style="--i:2">
+          <div class="video" data-video>
+            <video playsinline preload="none"
+                   poster="https://images.squarespace-cdn.com/content/v1/66d9b67dc340d3744c681338/9f2f543a-801f-4537-b3b3-55dc3468ece9/video+thumbnail.png"
+                   data-hls="https://video.squarespace-cdn.com/content/v1/66d9b67dc340d3744c681338/22dbc11c-2f09-401b-9c77-c84f63613c49/playlist.m3u8"></video>
+            <button class="video-play" type="button" aria-label="Play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l11-6.5z"/></svg></button>
+          </div>
+        </div>
+        <!-- Product UI: an invented prospect -->
+        <div class="hm-card" data-reveal="right" style="--i:4" aria-hidden="true">
+          <div class="pc prospect">
+            <span class="avatar-i">DR</span>
+            <div class="p-main">
+              <div class="p-name">Dana Reyes <span class="new-tag">New</span></div>
+              <div class="p-meta"><span class="tier-pill">Ready Now</span><span class="meter" data-fill><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i></span></div>
+            </div>
+            <span class="kq" data-count="86">86</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ STATS ============ -->
+  <section class="stats" aria-label="Results">
+    <div class="container">
+      <ul class="stat-row" data-stagger>
+        <li class="stat s-cap" data-reveal>
+          <span class="stat-num" data-count="20" data-suffix="%">20%</span>
+          <span class="stat-label">More Advisor Capacity</span>
+          <span class="cap-bar" aria-hidden="true"><i></i><b></b></span>
+        </li>
+        <li class="stat s-conv" data-reveal>
+          <span class="stat-num" data-count="30" data-suffix="%">30%</span>
+          <span class="stat-label">Faster Conversion</span>
+          <svg class="spark" viewBox="0 0 240 48" preserveAspectRatio="none" aria-hidden="true">
+            <path class="spark-area" d="M0 44 C 36 42, 52 37, 76 34 S 120 28, 144 22 S 196 10, 232 6 L 232 48 L 0 48 Z"/>
+            <path class="spark-line" pathLength="1" d="M0 44 C 36 42, 52 37, 76 34 S 120 28, 144 22 S 196 10, 232 6"/>
+            <circle class="spark-dot" cx="232" cy="6" r="4.5"/>
+          </svg>
+        </li>
+        <li class="stat s-done" data-reveal>
+          <span class="stat-num" data-count="90" data-suffix="%">90%</span>
+          <span class="stat-label">User Completion Rate</span>
+          <svg class="ring" viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="19"/><circle class="ring-fill" cx="24" cy="24" r="19" pathLength="1"/></svg>
+        </li>
+        <li class="stat s-cac" data-reveal>
+          <span class="stat-num" data-count="50" data-suffix="%">50%</span>
+          <span class="stat-label">Reduced CAC</span>
+          <span class="cac-bars" aria-hidden="true"><i style="--h:1"></i><i style="--h:.86"></i><i style="--h:.72"></i><i style="--h:.6"></i><i class="now" style="--h:.5"></i></span>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ============ THE PROBLEM ============ -->
+  <section class="problem" aria-labelledby="problem-title">
+    <div class="container problem-grid">
+      <div class="problem-head" data-stagger>
+        <p class="label" data-reveal>The Problem:</p>
+        <h2 id="problem-title" data-reveal>You’re spending millions to acquire clients—without knowing who will actually convert.</h2>
+        <figure class="pull" data-reveal>
+          <blockquote>“Knomee helps advisors move the conversation beyond money to the choices and priorities that truly shape a client’s life.”</blockquote>
+          <figcaption>— Mark Tibergien, Former CEO, Pershing Advisor Solutions | Industry Expert | Author</figcaption>
+        </figure>
+      </div>
+      <ul class="pains" data-stagger>
+        <li class="pain p-signal" data-reveal>
+          <span class="pain-icon"><svg fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-signal"/></svg></span>
+          <div><h3>Poor Intent Signals</h3><p>Scraping the same sites as everyone else does not generate quality leads that will convert.</p></div>
+        </li>
+        <li class="pain p-form" data-reveal>
+          <span class="pain-icon"><svg fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-clipboard"/></svg></span>
+          <div><h3>Static Intake Forms</h3><p>Generic forms capture surface-level data—missing the real motivations behind client decisions.</p></div>
+        </li>
+        <li class="pain p-funnel" data-reveal>
+          <span class="pain-icon"><svg fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-funnel"/></svg></span>
+          <div><h3>Sub-par Conversion</h3><p>You’re driving pipeline, but too few prospects actually convert which wastes spend, increases CAC and masks what’s working.</p></div>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ============ THE SOLUTION ============ -->
+  <section class="section solution" aria-labelledby="solution-title">
+    <div class="container">
+      <div class="solution-head" data-stagger>
+        <p class="until" data-reveal>Until now</p>
+        <h2 id="solution-title" data-reveal><span class="quiet">The solution is Knomee:</span> Behavioral intelligence built into every prospect conversation</h2>
+      </div>
+      <figure class="pull pull--center" data-reveal>
+        <blockquote>“Knomee is a tool that binds the client and advisor. It helps the client feel that this person cares, knows, and understands me. It powers the difference between a service provider and someone I trust.”</blockquote>
+        <figcaption>— Meir Statman Ph.D., Professor of Finance, Santa Clara University &amp; Author</figcaption>
+      </figure>
+      <div class="pillars" data-stagger>
+        <svg class="pillar-line" viewBox="0 0 1000 8" preserveAspectRatio="none" aria-hidden="true"><path pathLength="1" d="M0 4 H1000"/></svg>
+        <article class="card card--bar card--hover pillar" data-reveal>
+          <span class="pillar-icon"><svg fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-message"/></svg></span>
+          <h3>Engage</h3>
+          <p>Understand what drives prospect decisions and tailor messaging to values &amp; motivations, not generic demographics.</p>
+        </article>
+        <article class="card card--bar card--hover pillar" data-reveal>
+          <span class="pillar-icon"><svg fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-target"/></svg></span>
+          <h3>Prioritize</h3>
+          <p>Find the right prospects for your business, and know who is ready to convert, so you can prioritize those prospects sooner.</p>
+        </article>
+        <article class="card card--bar card--hover pillar" data-reveal>
+          <span class="pillar-icon pillar-icon--bolt"><svg fill="currentColor" aria-hidden="true"><use href="#i-zap"/></svg></span>
+          <h3>Convert</h3>
+          <p>Say exactly what each prospect needs to hear, in their own words, to move decisions forward and close.</p>
+        </article>
+      </div>
+      <div class="center-cta" data-reveal>
+        <a class="btn btn-secondary btn-lg" href="https://www.knomee.com/demo">Talk to Sales</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ VIDEO TESTIMONIAL ============ -->
+  <section class="section vt" aria-labelledby="vt-title">
+    <div class="container vt-grid">
+      <h2 id="vt-title" data-reveal>But don’t take our word for it…</h2>
+      <div class="vt-video" data-reveal="scale">
+        <div class="video" data-video>
+          <video playsinline preload="none"
+                 data-hls="https://video.squarespace-cdn.com/content/v1/66d9b67dc340d3744c681338/5654dfce-a27e-4605-a119-773045b76951/playlist.m3u8"></video>
+          <button class="video-play" type="button" aria-label="Play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l11-6.5z"/></svg></button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FEATURES ============ -->
+  <section class="section features" aria-label="Features">
+    <div class="container">
+      <div class="feature-grid" data-stagger>
+
+        <article class="card card--bar feature f-discovery" data-reveal>
+          <div class="f-visual" aria-hidden="true">
+            <div class="photo-grid">
+              <span class="ph"><img src="../assets/values/security.png" alt=""></span>
+              <span class="ph"><img src="../assets/values/family.png" alt=""></span>
+              <span class="ph"><img src="../assets/values/independence.png" alt=""></span>
+              <span class="ph"><img src="../assets/values/moment.png" alt=""></span>
+            </div>
+            <div class="adv-row">
+              <img src="../assets/adventures/financial-joy.svg" alt="">
+              <img src="../assets/adventures/confidence.svg" alt="">
+              <img src="../assets/adventures/outlook.svg" alt="">
+              <img src="../assets/adventures/future-you.svg" alt="">
+              <img src="../assets/adventures/goals.svg" alt="">
+            </div>
+          </div>
+          <span class="icon-chip"><svg fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-compass"/></svg></span>
+          <h3>Delight clients with interactive discovery</h3>
+          <p>Finally, an alternative to homework-like questionnaires. With Knomee, prospects &amp; clients get a guided experience that feels as engaging as their favorite wellness app and keeps advisors on top of every life change.</p>
+          <p class="f-proof easy"><span class="easy-num" data-count="100" data-suffix="%">100%</span> of Knomee users report that it’s easy to use.</p>
+        </article>
+
+        <article class="card card--bar feature f-insight" data-reveal>
+          <div class="f-visual" aria-hidden="true">
+            <div class="insight-card">
+              <div class="ic-top"><span class="kq" data-count="86">86</span><span class="tier-pill">Ready Now</span></div>
+              <span class="meter" data-fill><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i></span>
+            </div>
+            <svg class="dial" viewBox="0 0 200 116">
+              <path class="dial-w1" pathLength="1" d="M20 100 A80 80 0 0 1 60 30.7"/>
+              <path class="dial-w2" pathLength="1" d="M63.5 28.8 A80 80 0 0 1 136.5 28.8"/>
+              <path class="dial-w3" pathLength="1" d="M140 30.7 A80 80 0 0 1 180 100"/>
+              <g class="dial-needle"><path d="M100 100 L100 34"/><circle cx="100" cy="100" r="8"/></g>
+            </svg>
+          </div>
+          <span class="icon-chip"><svg fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-bulb"/></svg></span>
+          <h3>Uncover insights they’ve never known how to explain</h3>
+          <p>Knomee uses behavioral finance to surface values, emotions, and decision readiness, and gives even meeting-averse clients the language to share them.</p>
+          <figure class="f-proof">
+            <blockquote>“Knomee’s structured revelation and smart sequencing turn the unspoken drivers into clear, actionable advisor insights.”</blockquote>
+            <figcaption>Director of Advisor Experience, $40B Registered Investment Advisor</figcaption>
+          </figure>
+        </article>
+
+        <article class="card card--bar feature f-convo" data-reveal>
+          <div class="f-visual" aria-hidden="true">
+            <div class="chat">
+              <span class="bub b1"><i></i><i></i></span>
+              <span class="bub b2 me"><i></i></span>
+              <span class="bub b3"><i></i><i></i><i></i></span>
+              <span class="bub typing"><b></b><b></b><b></b></span>
+            </div>
+          </div>
+          <span class="icon-chip"><svg fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-message"/></svg></span>
+          <h3>Go deep with meaningful conversations every time</h3>
+          <p>Connect beyond products and market insights. Knomee reveals what matters most and what may be holding clients back, giving advisors the right conversation starters to build trust and inspire action.</p>
+          <figure class="f-proof">
+            <blockquote>“Every advisor can review the markets. Few uncover what truly drives a client. Knomee makes that the easiest part of my job.”</blockquote>
+            <figcaption>CFP, Managing Partner &amp; Wealth Advisor, Nexa Wealth Management</figcaption>
+          </figure>
+        </article>
+
+        <article class="card card--bar feature f-scale" data-reveal>
+          <div class="f-visual" aria-hidden="true">
+            <div class="team">
+              <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+            </div>
+          </div>
+          <span class="icon-chip"><svg fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-users"/></svg></span>
+          <h3>Scale behavioral discovery across your business</h3>
+          <p>Knomee is built to scale and SOC2 compliant. Every advisory team can deliver best-in-class experiences that build trust, help you stay connected through life changes, and create continuity across generations.</p>
+          <figure class="f-proof">
+            <blockquote>“Before Knomee, behavioral finance lived in theory. Now it’s built into every client conversation - firmwide.”</blockquote>
+            <figcaption>Head of Financial Planning, top 5 Enterprise Wealth Firm</figcaption>
+          </figure>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CASE STUDY ============ -->
+  <section class="section customers" aria-labelledby="outcomes-title">
+    <div class="container">
+      <h2 class="outcomes-title" id="outcomes-title" data-reveal>Better behavioral intelligence means better business outcomes</h2>
+      <article class="case" data-reveal>
+        <div class="case-copy">
+          <span class="case-logo"><img src="https://images.squarespace-cdn.com/content/v1/66d9b67dc340d3744c681338/8e92bd62-a1b9-44be-b5ab-4dcd64a607d4/download.jpeg" alt="Archer Investment Management" width="160" height="60"></span>
+          <h3>How Archer deepened client trust with Knomee</h3>
+          <p class="lead">Archer replaced manual forms and inconsistent discovery with Knomee’s gamified client adventures. This streamlined onboarding, boosted referrals, and created deeper, more consistent advisor-client connections.</p>
+          <figure class="case-quote">
+            <blockquote>“Clients never completed other questionnaires. We were looking for systemitized BeFi. Knomee’s process is polished, and lets clients get deeper. Our team saves time and shows up aligned, focused on what matters.”</blockquote>
+            <figcaption>— CFP, Partner, Archer Investment Management</figcaption>
+          </figure>
+        </div>
+        <div class="case-stats" data-stagger>
+          <div class="cs" data-reveal><span class="stat-num" data-count="4" data-suffix="x">4x</span><span class="stat-label">faster prep for meetings</span></div>
+          <div class="cs" data-reveal><span class="stat-num" data-count="3" data-suffix="x">3x</span><span class="stat-label">increase in 5-star reviews</span></div>
+          <div class="cs" data-reveal><span class="stat-num" data-count="5" data-suffix="x">5x</span><span class="stat-label">more quality referrals</span></div>
+          <div class="cs" data-reveal><span class="stat-num" data-count="20" data-suffix="%">20%</span><span class="stat-label">increase in efficiency</span></div>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- ============ MORE REASONS ============ -->
+  <section class="section platform" aria-labelledby="reasons-title">
+    <div class="container">
+      <h2 class="reasons-title" id="reasons-title" data-reveal>More reasons advisors love Knomee</h2>
+      <div class="bento" data-stagger>
+        <article class="card card--bar card--hover bt tile-c" data-reveal>
+          <span class="icon-chip icon-chip--teal"><svg fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-book"/></svg></span>
+          <h3>Prospecting Playbook</h3>
+          <p>Knomee gives you the tools to convert leads faster.</p>
+          <div class="pbars" aria-hidden="true"><i style="--h:.38"></i><i style="--h:.52"></i><i style="--h:.47"></i><i style="--h:.7"></i><i style="--h:.86"></i></div>
+        </article>
+
+        <article class="card card--bar card--hover bt tile-e" data-reveal>
+          <span class="icon-chip"><svg fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-repeat"/></svg></span>
+          <h3>Succession &amp; Continuity Support</h3>
+          <p>Knomee creates and keeps a record of each client’s goals, values, and behaviors. With this, new advisors have a deep understanding of the client’s holistic financial identity from day one.</p>
+          <div class="shuffle" aria-hidden="true">
+            <img src="../assets/life-events/retirement.svg" alt="">
+            <img src="../assets/life-events/new-baby.svg" alt="">
+            <img src="../assets/life-events/relocation.svg" alt="">
+          </div>
+        </article>
+
+        <article class="card card--bar card--hover bt tile-g" data-reveal>
+          <span class="icon-chip icon-chip--teal"><svg fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-sparkles"/></svg></span>
+          <h3>AI-Ready Data</h3>
+          <p>Knomee structures every client response to be immediately effective with LLMs.</p>
+          <div class="rows" aria-hidden="true"><span><i></i><b></b><b></b></span><span><i></i><b></b></span><span><i></i><b></b><b></b><b></b></span></div>
+        </article>
+
+        <article class="card card--bar card--hover bt tile-f" data-reveal>
+          <div class="tile-f-copy">
+            <span class="icon-chip"><svg fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-plug"/></svg></span>
+            <h3>Integrations</h3>
+            <p>Knomee offers APIs to connect to your financial planning tools, CRMs, portfolios management systems, and marketing platforms.</p>
+          </div>
+          <div class="net-wrap">
+            <svg class="net" viewBox="0 0 320 180" aria-hidden="true">
+              <path class="net-line" pathLength="1" d="M160 90 C 120 90, 110 46, 70 46"/>
+              <path class="net-line" pathLength="1" d="M160 90 C 200 90, 210 46, 250 46"/>
+              <path class="net-line" pathLength="1" d="M160 90 C 120 90, 110 140, 70 140"/>
+              <path class="net-line" pathLength="1" d="M160 90 C 200 90, 210 140, 250 140"/>
+              <circle class="net-hub" cx="160" cy="90" r="22"/>
+              <path class="net-mark" d="M151 90 a9 9 0 1 0 18 0 a9 9 0 1 0 -18 0 M156 90 a4 4 0 1 0 8 0 a4 4 0 1 0 -8 0"/>
+            </svg>
+            <span class="logo-node n-redtail"><img src="https://images.squarespace-cdn.com/content/v1/66d9b67dc340d3744c681338/b76bf138-4df5-4a59-ad2a-1c7dd1a5f3e1/Redtail_Logo_2025_4C.png" alt="Redtail"></span>
+            <span class="logo-node n-hubspot"><img src="https://images.squarespace-cdn.com/content/v1/66d9b67dc340d3744c681338/a5cbca31-dc56-437d-8a7a-ac82b9a9e446/HubSpot_Logo.svg.png" alt="HubSpot"></span>
+            <span class="dot-node n-3" aria-hidden="true"></span>
+            <span class="dot-node n-4" aria-hidden="true"></span>
+          </div>
+        </article>
+
+        <article class="card card--bar card--hover bt tile-h" data-reveal>
+          <span class="icon-chip lock-chip">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path class="shackle" d="M7 11V7a5 5 0 0 1 10 0v4"/><rect width="18" height="11" x="3" y="11" rx="2"/></svg>
+          </span>
+          <h3>Safety + Compliance</h3>
+          <p>Built on trust, Knomee gives clients complete agency over their data. Knomee is SOC2 and ISO27001 compliant.</p>
+          <div class="shield" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path class="shield-check" pathLength="1" d="m9 12 2 2 4-4"/></svg></div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ RESEARCH PARTNER ============ -->
+  <section class="section research" aria-labelledby="research-title">
+    <div class="container research-grid">
+      <div class="r-photo" data-reveal="scale">
+        <svg class="r-orbit" viewBox="0 0 200 200" aria-hidden="true"><circle cx="100" cy="100" r="96"/></svg>
+        <img src="https://images.squarespace-cdn.com/content/v1/66d9b67dc340d3744c681338/a92f0d07-c528-4548-875a-3867bc26aeb6/Meg.png" alt="Meghaan Lurtz, PhD" width="320" height="320">
+      </div>
+      <div class="r-copy" data-stagger>
+        <h2 id="research-title" data-reveal>Developed by the best in behavioral finance</h2>
+        <p class="lead" data-reveal>Knomee partnered with Dr. Meghaan Lurtz, PhD to embed leading behavioral finance research into every experience. Each feature is grounded in psychology and designed to generate real engagement, helping advisors deliver more personalized, insight-driven advice.</p>
+        <div class="r-person" data-reveal>
+          <b>Meghaan Lurtz, PhD</b>
+          <span>BEHAVIORAL PSYCHOLOGY PHD, PROFESSOR, ADVISOR</span>
+        </div>
+        <a class="btn-link" href="https://www.knomee.com/demo" data-reveal>Learn more <span class="arrow" aria-hidden="true">→</span></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CLOSING ============ -->
+  <section class="section closing" id="demo" data-cta-end>
+    <div class="container">
+      <h2>Make discovery more human with Knomee</h2>
+      <a class="btn btn-primary btn-lg" href="https://www.knomee.com/demo">Book a Demo <span class="arrow" aria-hidden="true">→</span></a>
+    </div>
+  </section>
+
+  <!-- ============ FAQ ============ -->
+  <section class="section faq-sec" aria-label="FAQ">
+    <div class="container">
+      <div class="faq" data-reveal>
+        <details><summary>1. What is Knomee?<span class="plus" aria-hidden="true"></span></summary><div class="answer"><p>Knomee turns behavioral intelligence into organic growth, helping advisors identify opportunities, convert prospects, and deepen client relationships.</p></div></details>
+        <details><summary>2. How is Knomee different from traditional growth and discovery tools?<span class="plus" aria-hidden="true"></span></summary><div class="answer"><p>Traditional growth tools help you find more leads. Traditional discovery tools help advisors see what prospects already know. Knomee does both differently, creating valuable digital experiences that reveal who’s ready to act, what matters, and how to engage them to drive growth.</p></div></details>
+        <details><summary>3. What does Knomee help me understand about clients and prospects?<span class="plus" aria-hidden="true"></span></summary><div class="answer"><p>Knomee reveals what matters most, what’s changing, what’s driving decisions, what may be holding someone back, and how ready they are to act, including insights that often don’t surface in traditional financial conversations.</p></div></details>
+        <details><summary>4. How does Knomee help me grow my practice?<span class="plus" aria-hidden="true"></span></summary><div class="answer"><p>Knomee helps you increase close rates, close prospects faster, grow wallet share, and retain relationships through transitions by revealing who’s ready to act, what matters, and what’s changing, then surfacing conversation starters in their own words so they feel understood and motivated to act.</p></div></details>
+        <details><summary>5. Is Knomee complicated or time-consuming to use?<span class="plus" aria-hidden="true"></span></summary><div class="answer"><p>Not at all. Knomee fits into your existing workflow and takes minutes to get started. Clients and prospects complete an engaging experience in under 10 minutes, while advisors receive actionable insights and conversation starters without adding more work to their day.</p></div></details>
+        <details><summary>6. How do I use Knomee in my workflow?<span class="plus" aria-hidden="true"></span></summary><div class="answer"><p>Knomee adapts to how you already go to market, whether engagement is driven by a centralized marketing, business development or growth team, or directly by advisors. Our Activation Toolkit provides proven workflows, templates and guidance for prospecting, onboarding, client reviews, household engagement and transitions, making it easy to launch quickly, drive adoption and start seeing value immediately.</p></div></details>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <img class="logo" src="../assets/logo-white.svg" alt="Knomee" width="154" height="26">
+        <ul class="footer-links">
+          <li><a href="https://www.knomee.com/company">About Us</a></li>
+          <li><a href="https://www.knomee.com/contact">Contact</a></li>
+          <li><a href="https://www.knomee.com/demo">Book a Demo</a></li>
+          <li><a href="https://help.knomee.com">Help Center</a></li>
+        </ul>
+      </div>
+      <div class="footer-news">
+        <p class="footer-news-title">Insights and ideas to know your clients better and grow smarter</p>
+        <form class="newsletter" data-newsletter>
+          <input type="email" placeholder="Enter your email address" aria-label="Enter your email address" required>
+          <button class="btn btn-light btn-sm" type="submit"><span class="nl-label">Subscribe</span><svg class="nl-check" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></button>
+        </form>
+      </div>
+    </div>
+    <div class="footer-base">
+      <span>© 2026 Knomee. All rights reserved. <a href="https://app.knomee.com/legal/Knomee_Privacy_Policy.pdf">Privacy Policy</a></span>
+      <span class="socials">
+        <a href="https://www.linkedin.com/company/knomeeapp/" aria-label="LinkedIn"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg></a>
+        <a href="https://www.instagram.com/knomeeapp/" aria-label="Instagram"><svg viewBox="0 0 24 24" aria-hidden="true"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><path d="M17.5 6.5h.01"/></svg></a>
+        <a href="https://www.facebook.com/KnomeeID" aria-label="Facebook"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
+        <a href="https://www.youtube.com/@KnomeeApp" aria-label="YouTube"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2.5 17a24.12 24.12 0 0 1 0-10 2 2 0 0 1 1.4-1.4 49.56 49.56 0 0 1 16.2 0A2 2 0 0 1 21.5 7a24.12 24.12 0 0 1 0 10 2 2 0 0 1-1.4 1.4 49.55 49.55 0 0 1-16.2 0A2 2 0 0 1 2.5 17"/><path d="m10 15 5-3-5-3z"/></svg></a>
+      </span>
+    </div>
+  </div>
+</footer>
+
+<!-- ============ MOBILE STICKY CTA ============ -->
+<div class="mobile-cta">
+  <a class="btn btn-secondary" href="https://www.knomee.com/demo">Talk to Sales</a>
+  <a class="btn btn-primary" href="https://www.knomee.com/demo">Book a Demo</a>
+</div>
+
+<!-- ============ PROTOTYPE VERSION SWITCHER ============ -->
+<nav class="proto-switch" aria-label="Prototype versions">
+  <a href="../v1/">V1</a><a href="../v2/">V2</a><a href="../v3/" aria-current="page">V3</a>
+</nav>
+
+</body>
+</html>
