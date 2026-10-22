@@ -102,7 +102,8 @@
 .fid--phone { flex: 1; display: flex; flex-direction: column; padding: 4px 4px 0; border: 0; }
 .fid--phone .fid-sec { flex: 1; display: flex; flex-direction: column; justify-content: center; }
 .fid--phone .fid-head { gap: 8px; padding-bottom: 8px; }
-.fid--phone .fid-avatar { width: 26px; height: 26px; font-size: var(--text-sm); }
+/* The avatar stands as tall as the two-line title beside it (2 × 15px × 1.2). */
+.fid--phone .fid-avatar { width: 36px; height: 36px; font-size: var(--text-xl); }
 .fid--phone .fid-title { font-size: var(--text-lg); }
 .fid--phone .fid-sec { padding: 9px 0; }
 .fid--phone .fid-sec-t { font-size: var(--text-sm); gap: 6px; }
