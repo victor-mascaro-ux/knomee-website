@@ -26,7 +26,7 @@
 /* Play: the card slides off and the video zooms in to take the stage.
    Pause or end: the video settles back and the card slides in again. */
 .hero-media .advisor-card { transition: opacity 0.4s var(--ease-out) 0.25s, transform 0.6s var(--ease-pop) 0.25s; }
-.hero-media.is-watching .advisor-card { opacity: 0; transform: translate(-56px, 48px) rotate(-3deg) scale(0.96); pointer-events: none; transition-delay: 0s; }
+.hero-media.is-watching .advisor-card { opacity: 0; transform: translate(56px, 48px) rotate(3deg) scale(0.96); pointer-events: none; transition-delay: 0s; }
 .hero-media.is-watching .video--hero { z-index: 4; transform: scale(1.14); box-shadow: 0 60px 140px rgba(36, 4, 70, 0.34); transition-delay: 0.12s; }
 .video--hero .video-play { width: 96px; height: 96px; margin: -48px 0 0 -48px; }
 .video--hero .video-play svg { width: 34px; height: 34px; }
@@ -42,10 +42,11 @@
 .dial { display: block; width: 100%; overflow: visible; }
 .dial .needle { transform-box: view-box; transform-origin: 100px 100px; }
 
-/* The prospect's phone, in front of the video's right edge. Each answer
-   feeds Jordan's card; both slide off while the video plays. */
-.hero-phone { --pw: 220px; position: absolute; right: -28px; top: 64px; z-index: 3; transition: opacity 0.4s var(--ease-out) 0.25s, transform 0.6s var(--ease-pop) 0.25s; }
-.hero-media.is-watching .hero-phone { opacity: 0; transform: translate(56px, 48px) rotate(3deg) scale(0.96); pointer-events: none; transition-delay: 0s; }
+/* The prospect's phone comes first, in front of the video's left edge.
+   Each answer feeds Jordan's card on the right; both slide off while the
+   video plays. */
+.hero-phone { --pw: 220px; position: absolute; left: -28px; top: 64px; z-index: 3; transition: opacity 0.4s var(--ease-out) 0.25s, transform 0.6s var(--ease-pop) 0.25s; }
+.hero-media.is-watching .hero-phone { opacity: 0; transform: translate(-56px, 48px) rotate(-3deg) scale(0.96); pointer-events: none; transition-delay: 0s; }
 .ps {
   position: absolute; inset: 0; display: flex; flex-direction: column; padding: 32px 12px 12px;
   opacity: 0; transform: translateX(24px); pointer-events: none;
@@ -101,7 +102,7 @@
 
 /* advisor card */
 .advisor-card {
-  position: absolute; left: -36px; bottom: 0; z-index: 3; width: 300px; padding: 18px;
+  position: absolute; right: -36px; bottom: 0; z-index: 3; width: 300px; padding: 18px;
   background: var(--k-white); border: 1px solid var(--k-line); border-radius: var(--radius-card);
   box-shadow: 0 24px 60px rgba(36, 4, 70, 0.16);
 }
@@ -263,9 +264,7 @@
 .q-gauge { max-width: 300px; margin: var(--space-16) auto 0; text-align: center; }
 .dial--try { margin-top: 8px; }
 .dial--try .needle { transform: rotate(var(--a, 0deg)); transition: transform 0.55s var(--ease-pop); }
-.dial--try path[data-w] { transition: opacity var(--dur-slow) var(--ease-out); }
-.dial--try path[data-w]:not(.on) { opacity: 0.4; }
-.q-gauge-word { margin-top: 6px; font-size: var(--text-3xl); font-weight: var(--weight-bold); color: var(--k-plum); }
+.q-gauge-word { margin-top: 6px; font-size: var(--text-2xl); font-weight: var(--weight-bold); color: var(--k-plum); }
 .q-gauge-word.swap { animation: wordIn 0.35s var(--ease-pop); }
 @keyframes wordIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
 .adv-chip.swap { animation: wordIn 0.4s var(--ease-pop); }
@@ -372,6 +371,7 @@
 .dial--sm { width: 150px; margin: 8px auto 0; }
 .uc-card .dial .needle { transition: none; }
 .uc-big { display: block; margin-top: 6px; font-size: var(--text-2xl); font-weight: var(--weight-bold); color: var(--k-forest); text-align: center; }
+.uc-card .dial + .uc-big { color: var(--k-plum); }
 .uc-card .meter { margin: 28px 0 20px; }
 .meter--client i { background: var(--bar-off-client); }
 .meter--client i.on:nth-child(1) { background: var(--bar-1-client); }
@@ -483,14 +483,14 @@
 
 /* ---------- Responsive ---------- */
 @media (max-width: 1279px) {
-  .hero-phone { --pw: 196px; top: 48px; right: -20px; }
+  .hero-phone { --pw: 196px; top: 48px; left: -20px; }
   .advisor-card { width: 280px; padding: 15px; }
   .ac-starter p { font-size: var(--text-sm); }
 }
 @media (max-width: 1080px) {
   .hero-grid { grid-template-columns: 1fr; }
   .hero-media { width: 100%; max-width: 760px; margin: 8px auto 0; }
-  .advisor-card { left: 24px; }
+  .advisor-card { right: 24px; }
 }
 @media (max-width: 900px) {
   .problem-grid, .try-head, .mirror, .ex-grid, .case, .partner-grid { grid-template-columns: 1fr; }
@@ -509,7 +509,7 @@
 @media (max-width: 620px) {
   .hero-media { padding-bottom: 0; }
   .hero-phone, .stage-pause { display: none; }
-  .advisor-card { position: relative; left: auto; width: min(300px, 100%); margin: 16px auto 0; }
+  .advisor-card { position: relative; right: auto; width: min(300px, 100%); margin: 16px auto 0; }
   .video--hero { border-radius: 18px; }
   .hero-media.is-watching .video--hero { transform: none; }
   .video--hero .video-play { width: 72px; height: 72px; margin: -36px 0 0 -36px; }

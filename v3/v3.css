@@ -234,7 +234,10 @@ svg use { pointer-events: none; }
 .ic-top { display: flex; align-items: center; gap: 12px; }
 /* The Confidence dial, as in the product: three wedges on a white card
    (the lightest wedge disappears on the lavender tile otherwise). */
-.dial { width: 170px; padding: 14px 16px 10px; overflow: visible; background: var(--k-white); border-radius: 16px; box-shadow: 0 10px 24px rgba(36, 4, 70, 0.10); }
+.dial-wrap { width: 170px; padding: 14px 16px 10px; text-align: center; background: var(--k-white); border-radius: 16px; box-shadow: 0 10px 24px rgba(36, 4, 70, 0.10); }
+.dial { display: block; width: 100%; overflow: visible; }
+.dial-word { display: block; margin-top: 4px; font-size: var(--text-xl); font-weight: var(--weight-bold); color: var(--k-plum); opacity: 0; transition: opacity var(--dur-slow) var(--ease-out) 1.2s; }
+.f-insight.is-in .dial-word { opacity: 1; }
 .dial path { fill: none; stroke-width: 22; stroke-dasharray: 1; stroke-dashoffset: 1; transition: stroke-dashoffset 0.5s var(--ease-standard); }
 .dial-w1 { stroke: var(--dial-1); } .dial-w2 { stroke: var(--dial-2); transition-delay: .2s !important; } .dial-w3 { stroke: var(--dial-3); transition-delay: .4s !important; }
 .f-insight.is-in .dial path { stroke-dashoffset: 0; }
@@ -442,7 +445,7 @@ svg use { pointer-events: none; }
   .f-visual { margin: 0 -20px; height: 200px; }
   .photo-grid { grid-template-columns: repeat(4, 62px); gap: 8px; }
   .f-insight .f-visual { grid-template-columns: auto; gap: 8px; height: 240px; }
-  .dial { width: 140px; }
+  .dial-wrap { width: 140px; }
   .insight-card { width: 200px; }
   .team { grid-template-columns: repeat(7, 30px); gap: 8px; }
   .team i { width: 30px; height: 30px; }

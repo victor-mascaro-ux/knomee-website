@@ -118,14 +118,14 @@ input:focus-visible + .chip-body { box-shadow: var(--ring); border-radius: 12px;
 [data-screen="confidence"] .range-ends { margin-bottom: auto; padding-bottom: 24px; }
 .dial { position: relative; width: 210px; margin: 22px auto 6px; text-align: center; }
 .dial svg { width: 100%; overflow: visible; }
-.dial path { fill: none; stroke-width: 18; }
+.dial path { fill: none; stroke-width: 22; }
 .dial .w1 { stroke: var(--dial-1); }
 .dial .w2 { stroke: var(--dial-2); }
 .dial .w3 { stroke: var(--dial-3); }
-.dial .needle { transform-origin: 100px 100px; transform: rotate(0deg); transition: transform 0.6s var(--ease-pop); }
+.dial .needle { transform-box: view-box; transform-origin: 100px 100px; transform: rotate(0deg); transition: transform 0.6s var(--ease-pop); }
 .dial .needle line { stroke: var(--k-plum); stroke-width: 4; stroke-linecap: round; }
 .dial .needle circle { fill: var(--k-plum); }
-.dial-label { display: block; margin-top: 6px; font-size: var(--text-2xl); font-weight: var(--weight-semibold); color: var(--k-plum); }
+.dial-label { display: block; margin-top: 6px; font-size: var(--text-2xl); font-weight: var(--weight-bold); color: var(--k-plum); }
 .conf-range { --v: 50%; -webkit-appearance: none; appearance: none; width: 100%; height: 44px; margin: 14px 0 0; background: transparent; cursor: pointer; }
 .conf-range::-webkit-slider-runnable-track { height: 8px; border-radius: 4px; background: linear-gradient(90deg, var(--k-grape) var(--v), var(--k-pearl) var(--v)); }
 .conf-range::-moz-range-track { height: 8px; border-radius: 4px; background: var(--k-pearl); }
@@ -491,17 +491,19 @@ html:not(.js) .pi-icon path, html:not(.js) .pi-icon rect { stroke-dashoffset: 0;
 .cl-card { padding: 14px; border: 1px solid var(--k-line); border-radius: 14px; animation: rowIn 0.5s var(--ease-pop) both; animation-delay: calc(0.1s + var(--i, 0) * var(--stagger)); }
 .cl-wide { grid-column: span 2; }
 .cl-label { display: flex; align-items: center; gap: 8px; font-size: var(--text-sm); font-weight: var(--weight-semibold); color: var(--k-ocean); }
-.cl-dial { display: flex; align-items: flex-end; gap: 10px; margin-top: 8px; }
-.cl-dial svg { width: 110px; overflow: visible; }
-.cl-dial path { fill: none; stroke-width: 12; }
-.cl-dial .c1 { stroke: var(--dial-1-client); }
-.cl-dial .c2 { stroke: var(--dial-2-client); }
-.cl-dial .c3 { stroke: var(--dial-3-client); }
-.cl-needle { transform-origin: 60px 62px; transform: rotate(52deg); animation: needleIn 1s var(--ease-pop) 0.2s both; }
-.cl-needle line { stroke: var(--k-ocean); stroke-width: 3.5; stroke-linecap: round; }
-.cl-needle circle { fill: var(--k-ocean); }
-@keyframes needleIn { from { transform: rotate(-90deg); } to { transform: rotate(52deg); } }
-.cl-dial b, .cl-stage { font-size: var(--text-md); font-weight: var(--weight-semibold); color: var(--k-ocean); }
+/* The client mockup's gauge is the product's dial, like every other gauge. */
+.cl-dial { display: block; width: 150px; margin: 8px auto 0; text-align: center; }
+.cl-dial svg { display: block; width: 100%; overflow: visible; }
+.cl-dial path { fill: none; stroke-width: 22; }
+.cl-dial .c1 { stroke: var(--dial-1); }
+.cl-dial .c2 { stroke: var(--dial-2); }
+.cl-dial .c3 { stroke: var(--dial-3); }
+.cl-needle { transform-box: view-box; transform-origin: 100px 100px; transform: rotate(52deg); animation: needleIn 1s var(--ease-pop) 0.2s both; }
+.cl-needle path { stroke: var(--k-plum); stroke-width: 4; stroke-linecap: round; }
+.cl-needle circle { fill: var(--k-plum); }
+@keyframes needleIn { from { transform: rotate(-88deg); } to { transform: rotate(52deg); } }
+.cl-dial b { display: block; margin-top: 6px; font-size: var(--text-xl); font-weight: var(--weight-bold); color: var(--k-plum); }
+.cl-stage { font-size: var(--text-md); font-weight: var(--weight-semibold); color: var(--k-ocean); }
 .cl-stage { display: block; margin-top: 8px; }
 .meter--client { margin-top: 14px; }
 .meter--client i { background: var(--bar-off-client); }
