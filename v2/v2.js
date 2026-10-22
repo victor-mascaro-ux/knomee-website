@@ -1,6 +1,6 @@
 /* ============================================================
    V2 · "TRY IT FIRST" — page behaviour
-   The playable hero, the scroll story and the feature tabs. Leans
+   The playable hero and the two pinned stories. Leans
    on window.Knomee (shared/site.js). Text written here is product
    UI only (what the prospect profile shows); no marketing copy.
    ============================================================ */
@@ -12,12 +12,12 @@
 
   /* ---------- What the answers read as, in the product ---------- */
   const VALUES = {
-    choice:       { label: 'Choice',               ask: 'Ask which decision they want to keep open the longest.' },
-    comfort:      { label: 'Comfort',              ask: 'Ask which parts of today’s life they never want to give up.' },
-    independence: { label: 'Independence',         ask: 'Ask what they’d do with a year where work was optional.' },
-    moment:       { label: 'Enjoying the moment',  ask: 'Ask about the last thing they spent on that felt completely worth it.' },
-    security:     { label: 'Security',             ask: 'Ask what “enough” looks like before you talk numbers.' },
-    family:       { label: 'Supporting my family', ask: 'Ask who they’re planning for, and what they want those people to feel.' },
+    choice:       { label: 'Choice',               ask: '“Which decision do you most want to keep open?”' },
+    comfort:      { label: 'Comfort',              ask: '“Which parts of today’s life would you never want to give up?”' },
+    independence: { label: 'Independence',         ask: '“What would you do with a year where work was optional?”' },
+    moment:       { label: 'Enjoying the moment',  ask: '“What’s the last thing you spent on that felt completely worth it?”' },
+    security:     { label: 'Security',             ask: '“What does enough look like for you?”' },
+    family:       { label: 'Supporting my family', ask: '“Who are you planning for, and what do you want them to feel?”' },
   };
   const EVENTS = {
     retirement:          { label: 'Retirement' },
@@ -29,7 +29,7 @@
   };
   const STAGES = ['Pre-Contemplation', 'Contemplation', 'Preparation', 'Action', 'Maintenance'];
   const TIERS = { 1: 'Tier 1 · Ready Now', 2: 'Tier 2 · Considering', 3: 'Tier 3 · Nurture' };
-  const GAUGE = '<svg class="mini-gauge" viewBox="0 0 200 116" aria-hidden="true"><path class="w1" d="M20 100 A80 80 0 0 1 60 30.7"/><path class="w2" d="M63.4 28.8 A80 80 0 0 1 136.6 28.8"/><path class="w3" d="M140 30.7 A80 80 0 0 1 180 100"/><g class="needle"><line x1="100" y1="100" x2="100" y2="38"/><circle cx="100" cy="100" r="8"/></g></svg>';
+  const GAUGE = '<svg class="mini-gauge" viewBox="0 0 200 116" aria-hidden="true"><path class="w1" d="M20 100 A80 80 0 0 1 60 30.7"/><path class="w2" d="M63.4 28.8 A80 80 0 0 1 136.6 28.8"/><path class="w3" d="M140 30.7 A80 80 0 0 1 180 100"/><g class="needle"><g transform="translate(100 100) rotate(-62.7) scale(3.4) translate(-4.605 -6.894)"><path style="fill:#747378;stroke:none;stroke-dasharray:none" d="M16.0757 0.961386C16.226 0.785021 16.2577 0.536341 16.1563 0.327944C16.0432 0.0956357 15.7907 -0.0345688 15.5359 0.00800544L4.04027 1.92858C0.717702 2.48369 -1.0318 6.18253 0.646823 9.10312C2.31222 12.0007 6.34562 12.3735 8.51395 9.83036L16.0757 0.961386Z"/><path style="fill:#fff;stroke:none;stroke-dasharray:none" d="M4.29615 4.46698C2.9558 4.63811 2.00795 5.8634 2.17908 7.20375C2.3502 8.54411 3.5755 9.49196 4.91585 9.32083C6.2562 9.14971 7.20405 7.92441 7.03293 6.58406C6.8618 5.2437 5.63651 4.29586 4.29615 4.46698Z"/></g></g></svg>';
   const turn = (v) => `rotate(${(v - 50) * 1.8}deg)`;
   const confWord = (v) => (v < 34 ? 'Weak' : v < 67 ? 'Moderate' : 'Strong');
   const joinAnd = (a) => (a.length < 2 ? a.join('') : a.slice(0, -1).join(', ') + ' and ' + a[a.length - 1]);
@@ -205,6 +205,9 @@
       const done = $('[data-done]', advisor);
       done.hidden = false;
       $('[data-stage]', advisor).textContent = STAGES[r.stage];
+      const ttm = $('[data-ttm]', advisor);
+      ttm.classList.add('is-swapping');
+      setTimeout(() => { ttm.src = `../assets/ttm/TTM-${r.stage + 1}.svg`; ttm.classList.remove('is-swapping'); }, reduced.matches ? 0 : 160);
       const bars = $$('[data-meter] i', advisor);
       bars.forEach((b) => b.classList.remove('on'));
       for (let n = 0; n <= r.stage; n++) { await sleep(130); bars[n].classList.add('on'); }
@@ -251,50 +254,88 @@
     go(0, { focus: false });
   }
 
-  /* ---------- Scroll stories: text steps drive a sticky stage ----------
+  /* ---------- Pinned stories ----------
      Used twice: Engage / Prioritize / Convert, and the four feature
-     blocks. No scroll-jacking: the step crossing the middle of the
-     viewport picks the screen. On phones each step gets its own copy
-     of its screen instead of the sticky stage. */
-  function scrollStory({ steps, screens, onSet }) {
-    if (!steps.length) return;
-    steps.forEach((s, i) => {
-      const slot = $('.step-media', s);
+     blocks. The section pins (a sticky stage inside a taller track) and
+     scroll progress through the track picks the step; text and mock rise
+     in, the outgoing pair leaves upward. The page carries on only after
+     the last step. Phones get every step stacked, each with its own copy
+     of its mock. */
+  function pin(track, onSet) {
+    if (!track) return null;
+    const sticky = $('.pin-sticky', track);
+    const panels = $$('.pin-panel', track);
+    const screens = $$('.pin-stage .stage-screen', track);
+    const n = panels.length;
+    panels.forEach((p, i) => {
+      const slot = $('.step-media', p);
       if (slot && screens[i]) {
         const c = screens[i].cloneNode(true);
         c.classList.add('is-active');
         slot.appendChild(c);
       }
     });
+    const pinned = window.matchMedia('(min-width: 901px)');
+    const headerH = () => parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--header-h')) || 72;
+    const span = () => Math.max(1, track.offsetHeight - sticky.offsetHeight);
+    let at = -1;
     const set = (i) => {
-      steps.forEach((s, n) => s.classList.toggle('is-active', n === i));
-      screens.forEach((s, n) => s.classList.toggle('is-active', n === i));
+      if (i === at) return;
+      at = i;
+      [panels, screens].forEach((list) => list.forEach((el, k) => {
+        el.classList.toggle('is-active', k === i);
+        el.classList.toggle('is-before', k < i);
+      }));
       if (onSet) onSet(i);
     };
-    if (!('IntersectionObserver' in window)) return;
-    const io = new IntersectionObserver((entries) => {
-      entries.forEach((e) => { if (e.isIntersecting) set(steps.indexOf(e.target)); });
-    }, { rootMargin: '-45% 0px -45% 0px' });
-    steps.forEach((s) => io.observe(s));
+    // One rect read per scroll event: cheap enough to do directly, and it
+    // keeps the step right even where frames are throttled.
+    const update = () => {
+      if (!pinned.matches) { set(0); return; }
+      const p = Math.min(0.999, Math.max(0, (headerH() - track.getBoundingClientRect().top) / span()));
+      set(Math.floor(p * n));
+    };
+    window.addEventListener('scroll', update, { passive: true });
+    window.addEventListener('resize', update);
+    update();
+    // Scroll the page to step i's slice of the track, so the stage never leaves.
+    const goTo = (i) => {
+      const k = Math.max(0, Math.min(n - 1, i));
+      const top = window.scrollY + track.getBoundingClientRect().top - headerH() + span() * (k + 0.5) / n;
+      window.scrollTo({ top, behavior: reduced.matches ? 'auto' : 'smooth' });
+    };
+    return { goTo, get at() { return at; }, n, pinned };
   }
 
   function story() {
-    const track = $('.story-progress i');
-    const steps = $$('.story-step');
-    scrollStory({
-      steps,
-      screens: $$('.story-stage .stage-screen'),
-      onSet: (i) => { if (track) track.style.setProperty('--p', (i + 1) / steps.length); },
+    const rail = $('.pin-rail');
+    const stops = rail ? $$('i', rail) : [];
+    pin($('[data-pin="story"]'), (i) => {
+      if (!rail) return;
+      rail.style.setProperty('--p', stops.length > 1 ? i / (stops.length - 1) : 1);
+      stops.forEach((d, k) => { d.classList.toggle('on', k <= i); d.classList.toggle('now', k === i); });
     });
   }
 
   function features() {
-    const dots = $$('.feat-dots a');
-    scrollStory({
-      steps: $$('.feat-step'),
-      screens: $$('.feat-stage .stage-screen'),
-      onSet: (i) => dots.forEach((d, n) => (n === i ? d.setAttribute('aria-current', 'step') : d.removeAttribute('aria-current'))),
+    const track = $('[data-pin="features"]');
+    if (!track) return;
+    const dots = $$('.feat-dots a', track);
+    const prev = $('[data-prev]', track);
+    const next = $('[data-next]', track);
+    const ctl = pin(track, (i) => {
+      dots.forEach((d, k) => (k === i ? d.setAttribute('aria-current', 'step') : d.removeAttribute('aria-current')));
+      prev.classList.toggle('is-end', i === 0);
+      next.classList.toggle('is-end', i === dots.length - 1);
     });
+    const nudge = (btn) => { btn.classList.remove('shake'); void btn.offsetWidth; btn.classList.add('shake'); };
+    prev.addEventListener('click', () => (ctl.at <= 0 ? nudge(prev) : ctl.goTo(ctl.at - 1)));
+    next.addEventListener('click', () => (ctl.at >= ctl.n - 1 ? nudge(next) : ctl.goTo(ctl.at + 1)));
+    dots.forEach((d, k) => d.addEventListener('click', (e) => {
+      if (!ctl.pinned.matches) return;
+      e.preventDefault();
+      ctl.goTo(k);
+    }));
   }
 
   adventure();

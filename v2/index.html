@@ -156,7 +156,7 @@
                     <path class="w1" d="M20 100 A80 80 0 0 1 60 30.7"/>
                     <path class="w2" d="M63.4 28.8 A80 80 0 0 1 136.6 28.8"/>
                     <path class="w3" d="M140 30.7 A80 80 0 0 1 180 100"/>
-                    <g class="needle"><line x1="100" y1="100" x2="100" y2="38"/><circle cx="100" cy="100" r="8"/></g>
+                    <g class="needle"><g transform="translate(100 100) rotate(-62.7) scale(3.4) translate(-4.605 -6.894)"><path style="fill:#747378;stroke:none;stroke-dasharray:none" d="M16.0757 0.961386C16.226 0.785021 16.2577 0.536341 16.1563 0.327944C16.0432 0.0956357 15.7907 -0.0345688 15.5359 0.00800544L4.04027 1.92858C0.717702 2.48369 -1.0318 6.18253 0.646823 9.10312C2.31222 12.0007 6.34562 12.3735 8.51395 9.83036L16.0757 0.961386Z"/><path style="fill:#fff;stroke:none;stroke-dasharray:none" d="M4.29615 4.46698C2.9558 4.63811 2.00795 5.8634 2.17908 7.20375C2.3502 8.54411 3.5755 9.49196 4.91585 9.32083C6.2562 9.14971 7.20405 7.92441 7.03293 6.58406C6.8618 5.2437 5.63651 4.29586 4.29615 4.46698Z"/></g></g>
                   </svg>
                   <span class="dial-label" data-dial-label>Moderate</span>
                 </div>
@@ -200,7 +200,7 @@
                   </div>
                   <div class="fid-sec">
                     <p class="fid-sec-t"><img src="../assets/adventures/confidence.svg" alt="" width="20" height="20">Confidence</p>
-                    <div class="fid-row"><span class="fid-word" data-fid-conf>Moderate</span><svg class="mini-gauge" viewBox="0 0 200 116" aria-hidden="true"><path class="w1" d="M20 100 A80 80 0 0 1 60 30.7"/><path class="w2" d="M63.4 28.8 A80 80 0 0 1 136.6 28.8"/><path class="w3" d="M140 30.7 A80 80 0 0 1 180 100"/><g class="needle"><line x1="100" y1="100" x2="100" y2="38"/><circle cx="100" cy="100" r="8"/></g></svg></div>
+                    <div class="fid-row"><span class="fid-word" data-fid-conf>Moderate</span><svg class="mini-gauge" viewBox="0 0 200 116" aria-hidden="true"><path class="w1" d="M20 100 A80 80 0 0 1 60 30.7"/><path class="w2" d="M63.4 28.8 A80 80 0 0 1 136.6 28.8"/><path class="w3" d="M140 30.7 A80 80 0 0 1 180 100"/><g class="needle"><g transform="translate(100 100) rotate(-62.7) scale(3.4) translate(-4.605 -6.894)"><path style="fill:#747378;stroke:none;stroke-dasharray:none" d="M16.0757 0.961386C16.226 0.785021 16.2577 0.536341 16.1563 0.327944C16.0432 0.0956357 15.7907 -0.0345688 15.5359 0.00800544L4.04027 1.92858C0.717702 2.48369 -1.0318 6.18253 0.646823 9.10312C2.31222 12.0007 6.34562 12.3735 8.51395 9.83036L16.0757 0.961386Z"/><path style="fill:#fff;stroke:none;stroke-dasharray:none" d="M4.29615 4.46698C2.9558 4.63811 2.00795 5.8634 2.17908 7.20375C2.3502 8.54411 3.5755 9.49196 4.91585 9.32083C6.2562 9.14971 7.20405 7.92441 7.03293 6.58406C6.8618 5.2437 5.63651 4.29586 4.29615 4.46698Z"/></g></g></svg></div>
                   </div>
                   <div class="fid-sec" data-fid-events-sec>
                     <p class="fid-sec-t"><img src="../assets/adventures/life-events.svg" alt="" width="20" height="20">Life Events</p>
@@ -241,7 +241,7 @@
 
           <div class="advisor-done" data-done hidden>
             <div class="readiness">
-              <div class="readiness-top"><span>Prospect Readiness</span><b data-stage>Preparation</b></div>
+              <div class="readiness-top"><span>Prospect Readiness</span><span class="ttm-stage"><img class="ttm" data-ttm src="../assets/ttm/TTM-3.svg" alt="" width="66" height="69"><b data-stage>Preparation</b></span></div>
               <div class="meter" data-meter aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
             </div>
             <div class="starter">
@@ -297,7 +297,7 @@
   </div>
 </section>
 
-<!-- ================= THE SOLUTION · scroll story ================= -->
+<!-- ================= THE SOLUTION · pinned story ================= -->
 <section class="section story" aria-labelledby="solution-title">
   <div class="container">
     <header class="solution-head" data-stagger>
@@ -308,12 +308,13 @@
       <blockquote>“Knomee is a tool that binds the client and advisor. It helps the client feel that this person cares, knows, and understands me. It powers the difference between a service provider and someone I trust.”</blockquote>
       <figcaption>— Meir Statman Ph.D., Professor of Finance, Santa Clara University &amp; Author</figcaption>
     </figure>
-
-    <div class="story-grid">
-      <div class="story-stage" aria-hidden="true">
-        <!-- Engage -->
-        <div class="stage-screen is-active" data-i="0">
-          <div class="mini-phone">
+  </div>
+  <div class="pin-track" style="--n:3" data-pin="story">
+    <div class="pin-sticky">
+      <div class="container pin-grid">
+        <div class="story-stage pin-stage" aria-hidden="true">
+          <div class="stage-screen is-active" data-i="0">
+            <div class="mini-phone">
             <div class="mp-top"><img src="../assets/adventures/financial-joy.svg" alt="" width="18" height="18">Financial Joy</div>
             <p class="mp-eyebrow">Money is a tool!</p>
             <p class="mp-q">I want money to help me with…</p>
@@ -323,10 +324,9 @@
           <span class="float-chip fc-1"><img src="../assets/adventures/confidence.svg" alt="" width="40" height="40"></span>
           <span class="float-chip fc-2"><img src="../assets/adventures/life-events.svg" alt="" width="40" height="40"></span>
           <span class="float-chip fc-3"><img src="../assets/adventures/future-you.svg" alt="" width="40" height="40"></span>
-        </div>
-        <!-- Prioritize -->
-        <div class="stage-screen" data-i="1">
-          <div class="mock mock-list">
+          </div>
+          <div class="stage-screen" data-i="1">
+            <div class="mock mock-list">
             <div class="mock-bar"><b>My Prospects</b></div>
             <div class="band band-1">Tier 1 — Ready Now</div>
             <div class="mrow"><span class="av">DR</span><span class="nm"><b>Dana R. <span class="new-tag">New</span></b><small>Retirement</small></span><span class="kq">92</span></div>
@@ -336,38 +336,39 @@
             <div class="band band-3">Tier 3 — Nurture</div>
             <div class="mrow"><span class="av">JL</span><span class="nm"><b>Jordan L.</b><small>Graduation</small></span><span class="kq tier-3">31</span></div>
           </div>
+          </div>
+          <div class="stage-screen" data-i="2">
+            <div class="starters">
+            <div class="st-card"><span class="bolt"><svg viewBox="0 0 24 24"><path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"/></svg></span><p><b>Dana R.</b>“What would a great first year of retirement look like for your family?”</p></div>
+            <div class="st-card"><span class="bolt"><svg viewBox="0 0 24 24"><path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"/></svg></span><p><b>Chris P.</b>“What do you want life to look like after the sale?”</p></div>
+            <div class="st-card"><span class="bolt"><svg viewBox="0 0 24 24"><path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"/></svg></span><p><b>Alex M.</b>“What does enough look like for you?”</p></div>
+          </div>
+          </div>
         </div>
-        <!-- Convert -->
-        <div class="stage-screen" data-i="2">
-          <div class="starters">
-            <div class="st-card"><span class="bolt"><svg viewBox="0 0 24 24"><path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"/></svg></span><p><b>Dana R.</b>Ask what a great first year of retirement looks like for her family.</p></div>
-            <div class="st-card"><span class="bolt"><svg viewBox="0 0 24 24"><path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"/></svg></span><p><b>Chris P.</b>Ask what he wants life to look like after the sale.</p></div>
-            <div class="st-card"><span class="bolt"><svg viewBox="0 0 24 24"><path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"/></svg></span><p><b>Alex M.</b>Ask what “enough” looks like before you talk numbers.</p></div>
+        <div class="pin-text">
+          <div class="pin-rail" aria-hidden="true"><span class="pin-rail-fill"></span><i class="on"></i><i></i><i></i></div>
+          <div class="pin-panels">
+            <article class="pin-panel story-step is-active" data-i="0">
+              <h3>Engage</h3>
+              <p>Understand what drives prospect decisions and tailor messaging to values &amp; motivations, not generic demographics.</p>
+              <div class="step-media" aria-hidden="true"></div>
+            </article>
+            <article class="pin-panel story-step" data-i="1">
+              <h3>Prioritize</h3>
+              <p>Find the right prospects for your business, and know who is ready to convert, so you can prioritize those prospects sooner.</p>
+              <div class="step-media" aria-hidden="true"></div>
+            </article>
+            <article class="pin-panel story-step" data-i="2">
+              <h3>Convert</h3>
+              <p>Say exactly what each prospect needs to hear, in their own words, to move decisions forward and close.</p>
+              <div class="step-media" aria-hidden="true"></div>
+            </article>
           </div>
         </div>
       </div>
-
-      <div class="story-track">
-        <span class="story-progress" aria-hidden="true"><i></i></span>
-        <ol class="story-steps">
-          <li class="story-step is-active" data-i="0">
-            <h3>Engage</h3>
-            <p>Understand what drives prospect decisions and tailor messaging to values &amp; motivations, not generic demographics.</p>
-            <div class="step-media" aria-hidden="true"></div>
-          </li>
-          <li class="story-step" data-i="1">
-            <h3>Prioritize</h3>
-            <p>Find the right prospects for your business, and know who is ready to convert, so you can prioritize those prospects sooner.</p>
-            <div class="step-media" aria-hidden="true"></div>
-          </li>
-          <li class="story-step" data-i="2">
-            <h3>Convert</h3>
-            <p>Say exactly what each prospect needs to hear, in their own words, to move decisions forward and close.</p>
-            <div class="step-media" aria-hidden="true"></div>
-          </li>
-        </ol>
-      </div>
     </div>
+  </div>
+  <div class="container">
     <div class="story-cta" data-reveal><a class="btn btn-primary btn-lg" href="https://www.knomee.com/demo">Talk to Sales <span class="arrow" aria-hidden="true">→</span></a></div>
   </div>
 </section>
@@ -385,49 +386,50 @@
   </div>
 </section>
 
-<!-- ================= FEATURES · four blocks, scroll-driven ================= -->
+<!-- ================= FEATURES · pinned, with arrows ================= -->
 <section class="section features" aria-label="Features">
-  <div class="container feat-grid">
-    <div class="feat-track">
-      <article class="feat-step is-active" id="feat-1" data-i="0">
-        <h3>Delight clients with interactive discovery</h3>
-        <p>Finally, an alternative to homework-like questionnaires. With Knomee, prospects &amp; clients get a guided experience that feels as engaging as their favorite wellness app and keeps advisors on top of every life change.</p>
-          <p class="feat-proof">100% of Knomee users report that it’s easy to use.</p>
-        <div class="step-media" aria-hidden="true"></div>
-      </article>
-      <article class="feat-step" id="feat-2" data-i="1">
-        <h3>Uncover insights they’ve never known how to explain</h3>
-        <p>Knomee uses behavioral finance to surface values, emotions, and decision readiness, and gives even meeting-averse clients the language to share them.</p>
-          <figure class="feat-quote">
-            <blockquote>“Knomee’s structured revelation and smart sequencing turn the unspoken drivers into clear, actionable advisor insights.”</blockquote>
-            <figcaption>Director of Advisor Experience, $40B Registered Investment Advisor</figcaption>
-          </figure>
-        <div class="step-media" aria-hidden="true"></div>
-      </article>
-      <article class="feat-step" id="feat-3" data-i="2">
-        <h3>Go deep with meaningful conversations every time</h3>
-        <p>Connect beyond products and market insights. Knomee reveals what matters most and what may be holding clients back, giving advisors the right conversation starters to build trust and inspire action.</p>
-          <figure class="feat-quote">
-            <blockquote>“Every advisor can review the markets. Few uncover what truly drives a client. Knomee makes that the easiest part of my job.”</blockquote>
-            <figcaption>CFP, Managing Partner &amp; Wealth Advisor, Nexa Wealth Management</figcaption>
-          </figure>
-        <div class="step-media" aria-hidden="true"></div>
-      </article>
-      <article class="feat-step" id="feat-4" data-i="3">
-        <h3>Scale behavioral discovery across your business</h3>
-        <p>Knomee is built to scale and SOC2 compliant. Every advisory team can deliver best-in-class experiences that build trust, help you stay connected through life changes, and create continuity across generations.</p>
-          <figure class="feat-quote">
-            <blockquote>“Before Knomee, behavioral finance lived in theory. Now it’s built into every client conversation - firmwide.”</blockquote>
-            <figcaption>Head of Financial Planning, top 5 Enterprise Wealth Firm</figcaption>
-          </figure>
-        <div class="step-media" aria-hidden="true"></div>
-      </article>
-    </div>
-    <div class="feat-side">
-      <div class="feat-sticky">
-        <div class="feat-stage" aria-hidden="true">
-        <div class="stage-screen is-active" data-i="0">
-          <div class="mini-phone mini-phone--events">
+  <div class="pin-track" style="--n:4" data-pin="features">
+    <div class="pin-sticky">
+      <div class="container pin-grid pin-grid--feat">
+        <div class="pin-panels">
+            <article class="pin-panel feat-step is-active" id="feat-1" data-i="0">
+              <h3>Delight clients with interactive discovery</h3>
+              <p>Finally, an alternative to homework-like questionnaires. With Knomee, prospects &amp; clients get a guided experience that feels as engaging as their favorite wellness app and keeps advisors on top of every life change.</p>
+                <p class="feat-proof">100% of Knomee users report that it’s easy to use.</p>
+              <div class="step-media" aria-hidden="true"></div>
+            </article>
+            <article class="pin-panel feat-step" id="feat-2" data-i="1">
+              <h3>Uncover insights they’ve never known how to explain</h3>
+              <p>Knomee uses behavioral finance to surface values, emotions, and decision readiness, and gives even meeting-averse clients the language to share them.</p>
+                <figure class="feat-quote">
+                  <blockquote>“Knomee’s structured revelation and smart sequencing turn the unspoken drivers into clear, actionable advisor insights.”</blockquote>
+                  <figcaption>Director of Advisor Experience, $40B Registered Investment Advisor</figcaption>
+                </figure>
+              <div class="step-media" aria-hidden="true"></div>
+            </article>
+            <article class="pin-panel feat-step" id="feat-3" data-i="2">
+              <h3>Go deep with meaningful conversations every time</h3>
+              <p>Connect beyond products and market insights. Knomee reveals what matters most and what may be holding clients back, giving advisors the right conversation starters to build trust and inspire action.</p>
+                <figure class="feat-quote">
+                  <blockquote>“Every advisor can review the markets. Few uncover what truly drives a client. Knomee makes that the easiest part of my job.”</blockquote>
+                  <figcaption>CFP, Managing Partner &amp; Wealth Advisor, Nexa Wealth Management</figcaption>
+                </figure>
+              <div class="step-media" aria-hidden="true"></div>
+            </article>
+            <article class="pin-panel feat-step" id="feat-4" data-i="3">
+              <h3>Scale behavioral discovery across your business</h3>
+              <p>Knomee is built to scale and SOC2 compliant. Every advisory team can deliver best-in-class experiences that build trust, help you stay connected through life changes, and create continuity across generations.</p>
+                <figure class="feat-quote">
+                  <blockquote>“Before Knomee, behavioral finance lived in theory. Now it’s built into every client conversation - firmwide.”</blockquote>
+                  <figcaption>Head of Financial Planning, top 5 Enterprise Wealth Firm</figcaption>
+                </figure>
+              <div class="step-media" aria-hidden="true"></div>
+            </article>
+        </div>
+        <div class="feat-side">
+          <div class="feat-stage pin-stage" aria-hidden="true">
+            <div class="stage-screen is-active" data-i="0">
+              <div class="mini-phone mini-phone--events">
             <div class="mp-top"><img src="../assets/adventures/life-events.svg" alt="" width="18" height="18">Life Events</div>
             <p class="mp-q">Add a Life Event</p>
             <div class="mp-events">
@@ -437,19 +439,19 @@
               <span class="is-on"><img src="../assets/life-events/new-baby.svg" alt="" width="40" height="40">New baby</span>
             </div>
           </div>
-        </div>
-        <div class="stage-screen" data-i="1">
-          <div class="mock mock-client">
+            </div>
+            <div class="stage-screen" data-i="1">
+              <div class="mock mock-client">
             <div class="mock-bar"><b>Morgan Household</b><span class="mock-pill mock-pill--client">Client</span></div>
             <div class="cl-grid">
               <div class="cl-card" style="--i:0">
                 <span class="cl-label">Confidence</span>
-                <div class="cl-dial"><svg viewBox="0 0 200 116"><path class="c1" d="M20 100 A80 80 0 0 1 60 30.7"/><path class="c2" d="M63.5 28.8 A80 80 0 0 1 136.5 28.8"/><path class="c3" d="M140 30.7 A80 80 0 0 1 180 100"/><g class="cl-needle"><path d="M100 100 L100 34"/><circle cx="100" cy="100" r="8"/></g></svg><b>Strong</b></div>
+                <div class="cl-dial"><svg viewBox="0 0 200 116"><path class="c1" d="M20 100 A80 80 0 0 1 60 30.7"/><path class="c2" d="M63.5 28.8 A80 80 0 0 1 136.5 28.8"/><path class="c3" d="M140 30.7 A80 80 0 0 1 180 100"/><g class="cl-needle"><g transform="translate(100 100) rotate(-62.7) scale(3.4) translate(-4.605 -6.894)"><path style="fill:#747378;stroke:none;stroke-dasharray:none" d="M16.0757 0.961386C16.226 0.785021 16.2577 0.536341 16.1563 0.327944C16.0432 0.0956357 15.7907 -0.0345688 15.5359 0.00800544L4.04027 1.92858C0.717702 2.48369 -1.0318 6.18253 0.646823 9.10312C2.31222 12.0007 6.34562 12.3735 8.51395 9.83036L16.0757 0.961386Z"/><path style="fill:#fff;stroke:none;stroke-dasharray:none" d="M4.29615 4.46698C2.9558 4.63811 2.00795 5.8634 2.17908 7.20375C2.3502 8.54411 3.5755 9.49196 4.91585 9.32083C6.2562 9.14971 7.20405 7.92441 7.03293 6.58406C6.8618 5.2437 5.63651 4.29586 4.29615 4.46698Z"/></g></g></svg><b>Strong</b></div>
               </div>
               <div class="cl-card" style="--i:1">
                 <span class="cl-label">Goal Readiness</span>
                 <div class="meter meter--client"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i></div>
-                <b class="cl-stage">Action</b>
+                <div class="cl-stage"><img class="ttm" src="../assets/ttm/TTM-4.svg" alt="" width="66" height="69"><b>Action</b></div>
               </div>
               <div class="cl-card cl-wide" style="--i:2">
                 <span class="cl-label">Life Events</span>
@@ -460,15 +462,15 @@
               </div>
             </div>
           </div>
-        </div>
-        <div class="stage-screen" data-i="2">
-          <div class="starters starters--panel">
-            <div class="st-card"><span class="bolt"><svg viewBox="0 0 24 24"><path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"/></svg></span><p><b>Positive Talk</b>Ask what they want the first twelve months of retirement to feel like.</p></div>
-            <div class="st-card"><span class="bolt"><svg viewBox="0 0 24 24"><path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"/></svg></span><p><b>Positive Talk</b>Ask who they’re planning for, and what they want those people to feel.</p></div>
+            </div>
+            <div class="stage-screen" data-i="2">
+              <div class="starters starters--panel">
+            <div class="st-card"><span class="bolt"><svg viewBox="0 0 24 24"><path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"/></svg></span><p><b>Positive Talk</b>“What do you want the first twelve months of retirement to feel like?”</p></div>
+            <div class="st-card"><span class="bolt"><svg viewBox="0 0 24 24"><path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"/></svg></span><p><b>Positive Talk</b>“Who are you planning for, and what do you want them to feel?”</p></div>
           </div>
-        </div>
-        <div class="stage-screen" data-i="3">
-          <div class="mock mock-table">
+            </div>
+            <div class="stage-screen" data-i="3">
+              <div class="mock mock-table">
             <div class="mock-bar"><b>My Prospects</b></div>
             <div class="band band-1">Tier 1 — Ready Now</div>
             <div class="trow" style="--i:0"><span class="av">DR</span><span class="nm"><b>Dana R. <span class="new-tag">New</span></b><small>Retirement</small></span><span class="kq" data-count="92">92</span></div>
@@ -478,14 +480,19 @@
             <div class="band band-3">Tier 3 — Nurture</div>
             <div class="trow" style="--i:3"><span class="av">JL</span><span class="nm"><b>Jordan L.</b><small>Graduation</small></span><span class="kq tier-3" data-count="31">31</span></div>
           </div>
+            </div>
+          </div>
+          <div class="feat-nav">
+            <button class="feat-arrow" type="button" data-prev aria-label="Previous"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg></button>
+            <nav class="feat-dots" aria-label="Features">
+              <a href="#feat-1" aria-label="Delight clients with interactive discovery" aria-current="step"><i></i></a>
+              <a href="#feat-2" aria-label="Uncover insights they’ve never known how to explain"><i></i></a>
+              <a href="#feat-3" aria-label="Go deep with meaningful conversations every time"><i></i></a>
+              <a href="#feat-4" aria-label="Scale behavioral discovery across your business"><i></i></a>
+            </nav>
+            <button class="feat-arrow" type="button" data-next aria-label="Next"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg></button>
+          </div>
         </div>
-        </div>
-        <nav class="feat-dots" aria-label="Features">
-          <a href="#feat-1" aria-label="Delight clients with interactive discovery" aria-current="step"><i></i></a>
-          <a href="#feat-2" aria-label="Uncover insights they’ve never known how to explain"><i></i></a>
-          <a href="#feat-3" aria-label="Go deep with meaningful conversations every time"><i></i></a>
-          <a href="#feat-4" aria-label="Scale behavioral discovery across your business"><i></i></a>
-        </nav>
       </div>
     </div>
   </div>
