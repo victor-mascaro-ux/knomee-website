@@ -603,8 +603,9 @@ img[src*="assets/adventures/"]:not([src$="award.svg"]), img[src*="assets/cards/"
 .fid-pill { display: inline-flex; align-items: center; padding: 6px 12px; border: 1px solid var(--k-line); border-radius: var(--radius-pill); background: var(--k-white); font-size: var(--text-base); color: var(--k-ink); }
 .fid-row { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-top: 8px; }
 .fid-word { font-size: var(--text-xl); font-weight: var(--weight-semibold); color: var(--k-ink); }
-.fid-event { display: flex; align-items: center; gap: 8px; margin-top: 8px; font-size: var(--text-md); font-weight: var(--weight-semibold); color: var(--k-ink); }
-.fid-event img { width: 22px; height: 22px; object-fit: contain; }
+.fid-event { display: flex; align-items: center; gap: 8px; margin-top: 8px; font-size: var(--text-md); font-weight: var(--weight-regular); color: var(--k-ink); }
+/* Smaller than the Life Events icon above it: the event, not the section. */
+.fid-event img { width: 16px; height: 16px; object-fit: contain; }
 
 /* ---------- Closing (versions restyle freely) ---------- */
 .closing { text-align: center; }

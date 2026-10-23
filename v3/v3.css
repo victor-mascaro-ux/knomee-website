@@ -261,7 +261,7 @@ svg use { pointer-events: none; }
 .ic-goal { display: flex; align-items: center; gap: 10px; }
 .ic-goal .ttm-ic { width: 30px; height: 31px; }
 .ic-goal-t { display: block; font-size: var(--text-sm); font-weight: var(--weight-semibold); line-height: 1.3; color: var(--k-ink); }
-.ic-goal .stage { display: block; font-size: var(--text-sm); }
+.ic-goal .stage { display: block; font-size: var(--text-sm); font-weight: var(--weight-regular); }
 .insight-card .tier-pill { transition: box-shadow 0.4s var(--ease-out); }
 /* Hover the card: it lifts, the score pops, the meter refills left to
    right, the tier pill glows. */

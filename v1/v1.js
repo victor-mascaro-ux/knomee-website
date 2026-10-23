@@ -194,7 +194,7 @@
       tween(kqShown, s, 700, (v) => { m.kq.textContent = v; m.mini.textContent = v; });
       kqShown = s; paintTier(m.kq, m.tier, s); paintTier(m.mini, null, s); bump(m.kq); bump(m.mini);
     };
-    const paintGoal = () => { m.goal.innerHTML = st.goal ? `<span class="ma-pill">${st.goal}</span>` : EMPTY; flash(m.goal); };
+    const paintGoal = () => { m.goal.innerHTML = st.goal ? `<span class="ma-goal">${st.goal}</span>` : EMPTY; flash(m.goal); };
     const paintLevel = () => {
       m.ready.innerHTML = st.level ? `<img class="ma-ttm" src="../assets/ttm/TTM-${st.level}.svg" alt="">${STAGES[st.level - 1]}` : EMPTY;
       flash(m.ready);

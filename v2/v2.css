@@ -492,8 +492,7 @@ html:not(.js) .pi-icon path, html:not(.js) .pi-icon rect { stroke-dashoffset: 0;
 .tcols { padding: 10px 18px 8px; border-bottom: 1px solid var(--k-line); font-size: var(--text-2xs); font-weight: var(--weight-semibold); letter-spacing: var(--tracking-group); text-transform: uppercase; color: var(--text-muted); animation: none; }
 .tcols span:first-child { grid-column: span 2; }
 .tcols span:last-child { text-align: right; }
-.ta { display: flex; align-items: flex-start; gap: 8px; font-size: var(--text-sm); line-height: 1.4; color: var(--k-body); }
-.ta img { flex: none; width: 20px; height: 20px; }
+.ta { font-size: var(--text-sm); line-height: 1.4; color: var(--k-body); }
 .ta span { display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; line-clamp: 2; overflow: hidden; }
 .trow:hover { background: var(--k-cloud-cool); }
 .starters--panel { width: min(440px, 100%); }

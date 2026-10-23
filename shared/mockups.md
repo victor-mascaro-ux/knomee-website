@@ -48,7 +48,8 @@ their own look. The shared pieces live in `shared/site.css`.
   client's own terms ("What does enough look like for you?"). Never an instruction
   to the advisor. It follows from what the person just answered and never repeats
   what the card already shows.
-- Life events read in ink, not teal.
+- Life events read in ink, not teal, in regular weight; an event's icon is
+  smaller than the Life Events section icon above it.
 - Readiness (Prospect or Goal) always shows its stage-of-change art,
   `assets/ttm/TTM-1…5.svg` for Pre-Contemplation … Maintenance, never a generic icon.
 - Where a card has room, readiness names the goal it is about (and its timeframe);
