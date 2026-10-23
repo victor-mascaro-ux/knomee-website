@@ -234,7 +234,6 @@
   <section class="section solution">
     <div class="container">
       <div class="solution-head" data-stagger>
-        <span class="tag-label tag-label--light" data-reveal>Until now</span>
         <h2 data-reveal><span class="solution-lead">The solution is Knomee:</span> Behavioral intelligence built into every prospect conversation</h2>
       </div>
       <ol class="steps" data-stagger data-reveal="fade">
@@ -250,9 +249,9 @@
         <li class="step" data-reveal>
           <div class="step-art step-art--see" aria-hidden="true">
             <div class="mini-head"><span>My Prospects</span><span>KQ Score</span></div>
-            <div class="mini-row"><span class="ac-avatar">PN</span><b>Priya Nair</b><span class="kq">84</span></div>
-            <div class="mini-row"><span class="ac-avatar">SO</span><b>Sam Okafor</b><span class="kq tier-2">61</span></div>
-            <div class="mini-row"><span class="ac-avatar">DW</span><b>Dana Whitfield</b><span class="kq tier-3">32</span></div>
+            <div class="mini-row"><span class="ac-avatar">P</span><b>Priya Nair</b><span class="kq">84</span></div>
+            <div class="mini-row"><span class="ac-avatar">S</span><b>Sam Okafor</b><span class="kq tier-2">61</span></div>
+            <div class="mini-row"><span class="ac-avatar">D</span><b>Dana Whitfield</b><span class="kq tier-3">32</span></div>
           </div>
           <h3>Prioritize</h3>
           <p>Find the right prospects for your business, and know who is ready to convert, so you can prioritize those prospects sooner.</p>
@@ -382,16 +381,24 @@
         <div class="ex-panels">
           <div class="panel is-active" id="p-uncover">
             <h3 class="ex-h">Uncover insights they’ve never known how to explain</h3>
-            <div class="panel-ui ui-table" aria-hidden="true">
-              <div class="ui-bar"><b>My Prospects</b><span class="ui-search"></span></div>
-              <div class="ui-cols"><span>Name</span><span>KQ Score</span></div>
-              <div class="ui-group g1">Tier 1 — Ready Now</div>
-              <div class="ui-row"><span class="ac-avatar">P</span><span class="ui-name"><span class="ui-nm">Priya Nair</span><small>Security · Supporting my family</small></span><span class="kq">84</span></div>
-              <div class="ui-row"><span class="ac-avatar">J</span><span class="ui-name"><span class="ui-nm">Jordan Ellis <span class="new-tag">New</span></span><small>Supporting my family · Enjoying the moment</small></span><span class="kq">78</span></div>
-              <div class="ui-group g2">Tier 2 — Considering</div>
-              <div class="ui-row"><span class="ac-avatar">S</span><span class="ui-name"><span class="ui-nm">Sam Okafor</span><small>Independence · Choice</small></span><span class="kq tier-2">61</span></div>
-              <div class="ui-group g3">Tier 3 — Nurture</div>
-              <div class="ui-row"><span class="ac-avatar">D</span><span class="ui-name"><span class="ui-nm">Dana Whitfield</span><small>Comfort</small></span><span class="kq tier-3">32</span></div>
+            <div class="panel-ui ui-fid" aria-hidden="true">
+              <div class="ui-bar ui-bar--client"><span class="fid-head"><span class="fid-avatar">J</span><b class="fid-title">Jordan Ellis’s Financial ID</b></span></div>
+              <div class="fid-grid">
+                <div class="fid-sec">
+                  <p class="fid-sec-t"><img src="../assets/adventures/financial-joy.svg" alt="">Financial Joy</p>
+                  <p class="fid-sub">I want money to help me with</p>
+                  <div class="fid-pills"><span class="fid-pill">Security</span><span class="fid-pill">Supporting my family</span></div>
+                </div>
+                <div class="fid-sec">
+                  <p class="fid-sec-t"><img src="../assets/adventures/confidence.svg" alt="">Confidence</p>
+                  <div class="fid-row"><span class="fid-word">Strong</span><svg class="dial fid-dial" viewBox="0 0 200 116"><path d="M20 100 A80 80 0 0 1 60 30.7" fill="none" stroke="var(--dial-1)" stroke-width="22"/><path d="M63.5 28.8 A80 80 0 0 1 136.5 28.8" fill="none" stroke="var(--dial-2)" stroke-width="22"/><path d="M140 30.7 A80 80 0 0 1 180 100" fill="none" stroke="var(--dial-3)" stroke-width="22"/><g class="needle" style="transform: rotate(52deg)"><g transform="translate(100 100) rotate(-62.7) scale(3.4) translate(-4.605 -6.894)"><path style="fill:#747378;stroke:none;stroke-dasharray:none" d="M16.0757 0.961386C16.226 0.785021 16.2577 0.536341 16.1563 0.327944C16.0432 0.0956357 15.7907 -0.0345688 15.5359 0.00800544L4.04027 1.92858C0.717702 2.48369 -1.0318 6.18253 0.646823 9.10312C2.31222 12.0007 6.34562 12.3735 8.51395 9.83036L16.0757 0.961386Z"/><path style="fill:#fff;stroke:none;stroke-dasharray:none" d="M4.29615 4.46698C2.9558 4.63811 2.00795 5.8634 2.17908 7.20375C2.3502 8.54411 3.5755 9.49196 4.91585 9.32083C6.2562 9.14971 7.20405 7.92441 7.03293 6.58406C6.8618 5.2437 5.63651 4.29586 4.29615 4.46698Z"/></g></g></svg></div>
+                </div>
+              </div>
+              <div class="fid-ins">
+                <div class="fid-in"><img src="../assets/adventures/financial-joy.svg" alt=""><div><b>Core Values</b><p>Security, family, and time together</p></div></div>
+                <div class="fid-in"><img src="../assets/adventures/outlook.svg" alt=""><div><b>Biggest Concern</b><p>Keeping the family steady if work changes</p></div></div>
+                <div class="fid-in"><img src="../assets/adventures/future-you.svg" alt=""><div><b>Future Vision</b><p>A paid-off home and more time with the kids</p></div></div>
+              </div>
             </div>
             <div class="panel-copy">
               <p>Knomee uses behavioral finance to surface values, emotions, and decision readiness, and gives even meeting-averse clients the language to share them.</p>
@@ -433,6 +440,7 @@
                 <div class="uc-card">
                   <span class="ac-label"><img class="sec-ic ttm-ic" src="../assets/ttm/TTM-4.svg" alt="">Goal Readiness</span>
                   <p class="uc-goal">Family beach vacation</p>
+                  <p class="uc-when"><svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6.2"/><path d="M8 4.6V8l2.6 1.6"/></svg>&lt;6 months</p>
                   <div class="meter meter--client"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i></div>
                   <div class="uc-stage"><img src="../assets/ttm/TTM-4.svg" alt=""><b>Action</b></div>
                 </div>
@@ -506,7 +514,7 @@
         </article>
         <article class="card card--bar card--hover rb rb-succession" data-reveal>
           <div class="rb-art" aria-hidden="true">
-            <span class="ac-avatar">EL</span><i></i><span class="ac-avatar av-teal">ME</span><i></i><span class="ac-avatar">NA</span>
+            <span class="ac-avatar">E</span><i></i><span class="ac-avatar av-teal">M</span><i></i><span class="ac-avatar">N</span>
           </div>
           <h3>Succession &amp; Continuity Support</h3>
           <p>Knomee creates and keeps a record of each client’s goals, values, and behaviors. With this, new advisors have a deep understanding of the client’s holistic financial identity from day one.</p>

@@ -54,7 +54,7 @@ invented. No marketing copy is written for the mockups.
 
 ## The solution
 
-- `Until now`
+- `Until now` (dropped from the prototypes at the design owner's request)
 - `The solution is Knomee:` / `Behavioral intelligence built into every prospect conversation`
 - Quote: `“Knomee is a tool that binds the client and advisor. It helps the client feel that this person cares, knows, and understands me. It powers the difference between a service provider and someone I trust.”`
 - Attribution: `— Meir Statman Ph.D., Professor of Finance, Santa Clara University & Author`

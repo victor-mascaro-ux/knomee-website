@@ -27,7 +27,6 @@
     relocation:          { label: 'Relocation' },
     'new-baby':          { label: 'New baby' },
   };
-  const STAGES = ['Pre-Contemplation', 'Contemplation', 'Preparation', 'Action', 'Maintenance'];
   const TIERS = { 1: 'Tier 1 · Ready Now', 2: 'Tier 2 · Considering', 3: 'Tier 3 · Nurture' };
   const GAUGE = '<svg class="mini-gauge" viewBox="0 0 200 116" aria-hidden="true"><path class="w1" d="M20 100 A80 80 0 0 1 60 30.7"/><path class="w2" d="M63.4 28.8 A80 80 0 0 1 136.6 28.8"/><path class="w3" d="M140 30.7 A80 80 0 0 1 180 100"/><g class="needle"><g transform="translate(100 100) rotate(-62.7) scale(3.4) translate(-4.605 -6.894)"><path style="fill:#747378;stroke:none;stroke-dasharray:none" d="M16.0757 0.961386C16.226 0.785021 16.2577 0.536341 16.1563 0.327944C16.0432 0.0956357 15.7907 -0.0345688 15.5359 0.00800544L4.04027 1.92858C0.717702 2.48369 -1.0318 6.18253 0.646823 9.10312C2.31222 12.0007 6.34562 12.3735 8.51395 9.83036L16.0757 0.961386Z"/><path style="fill:#fff;stroke:none;stroke-dasharray:none" d="M4.29615 4.46698C2.9558 4.63811 2.00795 5.8634 2.17908 7.20375C2.3502 8.54411 3.5755 9.49196 4.91585 9.32083C6.2562 9.14971 7.20405 7.92441 7.03293 6.58406C6.8618 5.2437 5.63651 4.29586 4.29615 4.46698Z"/></g></g></svg>';
   const turn = (v) => `rotate(${(v - 50) * 1.8}deg)`;
@@ -101,7 +100,7 @@
       });
       foot.classList.toggle('is-intro', name === 'intro');
       foot.style.visibility = name === 'building' ? 'hidden' : '';
-      next.hidden = !(name === 'intro' || q > -1);
+      next.hidden = q < 0;
       next.classList.toggle('is-final', name === 'events');
       back.classList.toggle('is-hidden', q < 0);
       restart.hidden = name !== 'id';
@@ -165,10 +164,9 @@
       const c = +range.value;
       const kqv = Math.min(97, 38 + Math.round(c * 0.3) + v.length * 5 + Math.min(e.length, 2) * 9);
       const tier = kqv >= 70 ? 1 : kqv >= 45 ? 2 : 3;
-      const stage = tier === 1 ? (e.length ? 3 : 2) : tier === 2 ? 1 : 0;
       // The values and the event are on the card already; the starter is just the ask.
       const starter = VALUES[v[0]].ask;
-      return { v, e, c, kqv, tier, stage, starter };
+      return { v, e, c, kqv, tier, starter };
     }
 
     async function finish() {
@@ -204,13 +202,7 @@
 
       const done = $('[data-done]', advisor);
       done.hidden = false;
-      $('[data-stage]', advisor).textContent = STAGES[r.stage];
-      const ttm = $('[data-ttm]', advisor);
-      ttm.classList.add('is-swapping');
-      setTimeout(() => { ttm.src = `../assets/ttm/TTM-${r.stage + 1}.svg`; ttm.classList.remove('is-swapping'); }, reduced.matches ? 0 : 160);
-      const bars = $$('[data-meter] i', advisor);
-      bars.forEach((b) => b.classList.remove('on'));
-      for (let n = 0; n <= r.stage; n++) { await sleep(130); bars[n].classList.add('on'); }
+      await sleep(260);
       const st = $('[data-starter]', advisor);
       st.classList.add('typing');
       await typeText(st, r.starter, 16);
@@ -247,6 +239,7 @@
       if (name === 'events') { finish(); return; }
       go(at + 1);
     });
+    $('.adv-go', root).addEventListener('click', () => { if (!busy) go(at + 1); });
     back.addEventListener('click', () => { if (!busy && QUESTIONS.includes(order[at]) && at > 0) go(at - 1); });
     restart.addEventListener('click', () => { if (!busy) reset(); });
     form.addEventListener('submit', (e) => e.preventDefault());

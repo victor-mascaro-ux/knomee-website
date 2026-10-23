@@ -65,16 +65,22 @@ svg use { pointer-events: none; }
 .prospect { display: flex; align-items: center; gap: 14px; padding: 14px 16px; }
 .avatar-i {
   flex: none; display: grid; place-items: center; width: var(--avatar-size); height: var(--avatar-size); border-radius: 50%;
-  background: var(--avatar-bg); color: var(--avatar-ink); font-size: var(--text-md); font-weight: var(--weight-semibold);
+  background: var(--avatar-bg); color: var(--avatar-ink); font-size: var(--text-xl); font-weight: var(--weight-semibold);
 }
 .p-main { flex: 1; min-width: 0; }
 .p-name { display: flex; align-items: center; gap: 8px; font-size: var(--text-lg); font-weight: var(--weight-regular); color: var(--k-ink); }
-.p-meta { display: flex; flex-wrap: nowrap; align-items: center; gap: 8px; margin-top: 6px; white-space: nowrap; }
-.p-meta .meter { flex: none; width: 56px; }
+/* The goal, and beside it its stage of change: the art exactly as wide as
+   the word under it. */
+.p-goal { display: flex; align-items: center; gap: 12px; margin-top: 8px; }
+.p-stage { flex: none; display: grid; justify-items: stretch; gap: 2px; width: min-content; }
+.p-stage img { width: 100%; height: auto; }
+.p-stage .stage { white-space: nowrap; line-height: 1.2; }
+.p-goal-t { font-size: var(--text-md); font-weight: var(--weight-semibold); line-height: 1.35; color: var(--k-ink); }
 /* Product labels: small, semibold, above or beside the value they name. */
 .mlabel { font-size: var(--text-sm); font-weight: var(--weight-semibold); line-height: 1.2; color: var(--k-slate); }
 .stage { font-size: var(--text-md); font-weight: var(--weight-semibold); color: var(--k-plum); }
 .kq-box { flex: none; display: grid; justify-items: center; gap: 4px; }
+.kq-box .mlabel { max-width: 64px; text-align: center; }
 
 /* A meter that fills step by step once its container arrives. */
 .meter[data-fill] i.on { background: var(--bar-off); }
@@ -165,10 +171,6 @@ svg use { pointer-events: none; }
 
 /* ---------- The solution ---------- */
 .solution-head { max-width: 900px; margin: 0 auto clamp(28px, 4vw, 40px); text-align: center; }
-.until {
-  display: inline-block; margin-bottom: var(--space-16); padding: 6px 16px; border-radius: var(--radius-pill);
-  background: var(--k-grape-light); color: var(--k-grape); font-size: var(--text-lg); font-weight: var(--weight-semibold);
-}
 .solution h2 { font-size: clamp(32px, 3.8vw, 48px); line-height: 1.12; }
 .solution h2 .quiet { display: block; margin-bottom: 0.25em; font-size: 0.6em; font-weight: var(--weight-medium); color: var(--k-slate); letter-spacing: -0.01em; }
 .pull--center { max-width: 820px; margin: 0 auto clamp(48px, 6vw, 72px); padding: 0; border: 0; text-align: center; }
@@ -256,7 +258,10 @@ svg use { pointer-events: none; }
 }
 .ic-top { display: flex; align-items: center; gap: 12px; }
 .ic-ready { display: grid; gap: 6px; margin-top: 6px; padding-top: 10px; border-top: 1px solid var(--k-line); }
-.ic-ready-top { display: flex; align-items: baseline; justify-content: space-between; gap: 8px; }
+.ic-goal { display: flex; align-items: center; gap: 10px; }
+.ic-goal .ttm-ic { width: 30px; height: 31px; }
+.ic-goal-t { display: block; font-size: var(--text-sm); font-weight: var(--weight-semibold); line-height: 1.3; color: var(--k-ink); }
+.ic-goal .stage { display: block; font-size: var(--text-sm); }
 .insight-card .tier-pill { transition: box-shadow 0.4s var(--ease-out); }
 /* Hover the card: it lifts, the score pops, the meter refills left to
    right, the tier pill glows. */
@@ -438,8 +443,9 @@ svg use { pointer-events: none; }
 .r-orbit circle { fill: none; stroke: var(--k-lilac); stroke-width: 1.5; stroke-dasharray: 2 7; stroke-linecap: round; }
 @keyframes orbit { to { transform: rotate(360deg); } }
 /* The lime dot sits on the dashed orbit itself and travels round with it. */
-.r-orbit .r-dot-ring { fill: var(--k-white); stroke: none; }
-.r-orbit .r-dot { fill: var(--k-lime); stroke: none; }
+.r-pin { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+.r-pin .r-dot-ring { fill: var(--k-white); stroke: none; }
+.r-pin .r-dot { fill: var(--k-lime); stroke: none; }
 .r-copy h2 { font-size: clamp(30px, 3.4vw, 44px); }
 .r-copy .lead { margin-top: var(--space-16); }
 .r-person { display: grid; gap: 2px; margin: var(--space-24) 0 var(--space-16); padding-left: 16px; border-left: 3px solid var(--k-grape); }
@@ -523,5 +529,3 @@ svg use { pointer-events: none; }
 .ttm-ic { flex: none; width: 22px; height: 22px; object-fit: contain; }
 /* The readiness art made the hero card's meta row too wide for one line:
    the meter narrows and the row may wrap, so the stage never runs under the score. */
-.prospect .p-meta { flex-wrap: wrap; row-gap: 4px; }
-.prospect .p-meta .meter { width: 56px; }

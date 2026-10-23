@@ -51,5 +51,12 @@ their own look. The shared pieces live in `shared/site.css`.
 - Life events read in ink, not teal.
 - Readiness (Prospect or Goal) always shows its stage-of-change art,
   `assets/ttm/TTM-1…5.svg` for Pre-Contemplation … Maintenance, never a generic icon.
+- Where a card has room, readiness names the goal it is about (and its timeframe);
+  the stage reads as "Action Stage" beside its art.
+- Avatars carry one initial (J, not JE), all at the same font size.
+- Financial Joy photos sit two to a row, three rows of two.
+- An adventure's intro starts with the product's Get Started button and
+  "Takes 1 min" under it, not an arrow.
+- Prospect tables give each prospect a Top Action.
 - Every adventure or section icon sits on its white disc with a soft drop shadow,
   and each card section carries its icon from the app.

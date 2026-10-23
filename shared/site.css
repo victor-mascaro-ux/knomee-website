@@ -575,8 +575,9 @@ p { margin: 0; }
 .joy-photo-label { font-size: var(--text-lg); line-height: 1.3; text-align: center; color: var(--text-strong); }
 .joy-photo.is-on .joy-photo-label, .joy-photo[aria-pressed="true"] .joy-photo-label { font-weight: var(--weight-bold); }
 .joy-photo.is-full { opacity: 0.45; cursor: default; }
-/* Inside a phone mockup: the same option, scaled down. */
-.joy-photos--sm { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 6px 8px; }
+/* Inside a phone mockup: the same option, scaled down, two to a row as in
+   the product (three rows of two). */
+.joy-photos--sm { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 6px 10px; }
 .joy-photos--sm .joy-photo { gap: 3px; }
 .joy-photos--sm .joy-photo-frame { border-radius: 11px; }
 .joy-photos--sm .joy-photo.is-on .joy-photo-frame::after { box-shadow: inset 0 0 0 4px var(--k-lime); }
@@ -591,7 +592,7 @@ img[src*="assets/adventures/"]:not([src$="award.svg"]), img[src*="assets/cards/"
 /* ---------- Financial ID (the client's side: ocean headings, outlined pills) ---------- */
 .fid { padding: 16px; border: 1px solid var(--k-line); border-radius: 16px; background: var(--k-white); text-align: left; }
 .fid-head { display: flex; align-items: center; gap: 10px; padding-bottom: 12px; }
-.fid-avatar { flex: none; display: grid; place-items: center; width: 36px; height: 36px; border-radius: 50%; background: var(--avatar-bg-client); color: var(--avatar-ink-client); font-size: var(--text-md); font-weight: var(--weight-bold); }
+.fid-avatar { flex: none; display: grid; place-items: center; width: 36px; height: 36px; border-radius: 50%; background: var(--avatar-bg-client); color: var(--avatar-ink-client); font-size: var(--text-xl); font-weight: var(--weight-bold); }
 .fid-title { font-size: var(--text-2xl); font-weight: var(--weight-bold); line-height: 1.2; color: var(--k-ocean); }
 .fid-sec { padding: 12px 0; border-top: 1px solid var(--k-line); }
 .fid-sec:last-child { padding-bottom: 0; }

@@ -192,7 +192,7 @@
               <section class="adv-screen adv-id" data-screen="id" data-adventure-name="Financial Joy" data-adventure-icon="financial-joy" aria-labelledby="adv-done-t">
                 <p class="adv-title adv-done-title" id="adv-done-t" tabindex="-1">You found Financial Joy</p>
                 <div class="fid">
-                  <div class="fid-head"><span class="fid-avatar" aria-hidden="true">JE</span><p class="fid-title">Jordan Ellis’s Financial ID</p></div>
+                  <div class="fid-head"><span class="fid-avatar" aria-hidden="true">J</span><p class="fid-title">Jordan Ellis’s Financial ID</p></div>
                   <div class="fid-sec">
                     <p class="fid-sec-t"><img src="../assets/adventures/financial-joy.svg" alt="" width="20" height="20">Financial Joy</p>
                     <p class="fid-sub">I want money to help me with</p>
@@ -211,6 +211,10 @@
             </form>
 
             <div class="adv-foot">
+              <div class="adv-start">
+                <button class="adv-go" type="button">Get Started</button>
+                <span class="adv-min"><svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6.2"/><path d="M8 4.6V8l2.6 1.6"/></svg> Takes 1 min</span>
+              </div>
               <button class="adv-back" type="button" aria-label="Back">
                 <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg>
               </button>
@@ -228,7 +232,7 @@
         <!-- The advisor's prospect profile, filling in live: product UI -->
         <aside class="advisor" data-state="waiting" aria-label="Prospect profile" data-reveal="right">
           <div class="advisor-person">
-            <span class="avatar-you" aria-hidden="true">JE</span>
+            <span class="avatar-you" aria-hidden="true">J</span>
             <div class="who"><span class="name-line"><b>Jordan Ellis</b><span class="new-tag" data-new hidden>New</span></span><span class="tier-pill tier-pill--nurture" data-tier>Prospect</span></div>
             <span class="kq kq-empty" data-kq>–</span>
           </div>
@@ -240,10 +244,6 @@
           </dl>
 
           <div class="advisor-done" data-done hidden>
-            <div class="readiness">
-              <div class="readiness-top"><span>Prospect Readiness</span><span class="ttm-stage"><img class="ttm" data-ttm src="../assets/ttm/TTM-3.svg" alt="" width="66" height="69"><b data-stage>Preparation</b></span></div>
-              <div class="meter" data-meter aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
-            </div>
             <div class="starter">
               <span class="bolt" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"/></svg></span>
               <div>
@@ -301,7 +301,6 @@
 <section class="section story" aria-labelledby="solution-title">
   <div class="container">
     <header class="solution-head" data-stagger>
-      <p class="until" data-reveal>Until now</p>
       <h2 id="solution-title" data-reveal>The solution is Knomee: <span>Behavioral intelligence built into every prospect conversation</span></h2>
     </header>
     <figure class="pull-quote pull-quote--wide" data-reveal>
@@ -329,12 +328,12 @@
             <div class="mock mock-list">
             <div class="mock-bar"><b>My Prospects</b></div>
             <div class="band band-1">Tier 1 — Ready Now</div>
-            <div class="mrow"><span class="av">DR</span><span class="nm"><b>Dana R. <span class="new-tag">New</span></b><small>Retirement</small></span><span class="kq">92</span></div>
-            <div class="mrow"><span class="av">CP</span><span class="nm"><b>Chris P.</b><small>Sale of business</small></span><span class="kq">87</span></div>
+            <div class="mrow"><span class="av">D</span><span class="nm"><b>Dana R. <span class="new-tag">New</span></b><small>Retirement</small></span><span class="kq">92</span></div>
+            <div class="mrow"><span class="av">C</span><span class="nm"><b>Chris P.</b><small>Sale of business</small></span><span class="kq">87</span></div>
             <div class="band band-2">Tier 2 — Considering</div>
-            <div class="mrow"><span class="av">AM</span><span class="nm"><b>Alex M.</b><small>New baby</small></span><span class="kq tier-2">64</span></div>
+            <div class="mrow"><span class="av">A</span><span class="nm"><b>Alex M.</b><small>New baby</small></span><span class="kq tier-2">64</span></div>
             <div class="band band-3">Tier 3 — Nurture</div>
-            <div class="mrow"><span class="av">JL</span><span class="nm"><b>Jordan L.</b><small>Graduation</small></span><span class="kq tier-3">31</span></div>
+            <div class="mrow"><span class="av">J</span><span class="nm"><b>Jordan L.</b><small>Graduation</small></span><span class="kq tier-3">31</span></div>
           </div>
           </div>
           <div class="stage-screen" data-i="2">
@@ -450,6 +449,8 @@
               </div>
               <div class="cl-card" style="--i:1">
                 <span class="cl-label">Goal Readiness</span>
+                <p class="cl-goal">Buy a house by the beach</p>
+                <p class="cl-when"><svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6.2"/><path d="M8 4.6V8l2.6 1.6"/></svg>5–10 years</p>
                 <div class="meter meter--client"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i></div>
                 <div class="cl-stage"><img class="ttm" src="../assets/ttm/TTM-4.svg" alt="" width="66" height="69"><b>Action</b></div>
               </div>
@@ -472,13 +473,14 @@
             <div class="stage-screen" data-i="3">
               <div class="mock mock-table">
             <div class="mock-bar"><b>My Prospects</b></div>
+            <div class="tcols"><span>Name</span><span>Top Action</span><span>KQ Score</span></div>
             <div class="band band-1">Tier 1 — Ready Now</div>
-            <div class="trow" style="--i:0"><span class="av">DR</span><span class="nm"><b>Dana R. <span class="new-tag">New</span></b><small>Retirement</small></span><span class="kq" data-count="92">92</span></div>
-            <div class="trow" style="--i:1"><span class="av">CP</span><span class="nm"><b>Chris P.</b><small>Sale of business</small></span><span class="kq" data-count="87">87</span></div>
+            <div class="trow" style="--i:0"><span class="av">D</span><span class="nm"><b>Dana R. <span class="new-tag">New</span></b><small>Retirement</small></span><span class="ta"><img src="../assets/cards/top-action.svg" alt="" width="20" height="20"><span>Call now; lead with the first year of retirement</span></span><span class="kq" data-count="92">92</span></div>
+            <div class="trow" style="--i:1"><span class="av">C</span><span class="nm"><b>Chris P.</b><small>Sale of business</small></span><span class="ta"><img src="../assets/cards/top-action.svg" alt="" width="20" height="20"><span>Book a planning call before the sale closes</span></span><span class="kq" data-count="87">87</span></div>
             <div class="band band-2">Tier 2 — Considering</div>
-            <div class="trow" style="--i:2"><span class="av">AM</span><span class="nm"><b>Alex M.</b><small>New baby</small></span><span class="kq tier-2" data-count="64">64</span></div>
+            <div class="trow" style="--i:2"><span class="av">A</span><span class="nm"><b>Alex M.</b><small>New baby</small></span><span class="ta"><img src="../assets/cards/top-action.svg" alt="" width="20" height="20"><span>Share family protection content before the birth</span></span><span class="kq tier-2" data-count="64">64</span></div>
             <div class="band band-3">Tier 3 — Nurture</div>
-            <div class="trow" style="--i:3"><span class="av">JL</span><span class="nm"><b>Jordan L.</b><small>Graduation</small></span><span class="kq tier-3" data-count="31">31</span></div>
+            <div class="trow" style="--i:3"><span class="av">J</span><span class="nm"><b>Jordan L.</b><small>Graduation</small></span><span class="ta"><img src="../assets/cards/top-action.svg" alt="" width="20" height="20"><span>Quarterly light-touch check-in</span></span><span class="kq tier-3" data-count="31">31</span></div>
           </div>
             </div>
           </div>
@@ -526,7 +528,7 @@
     <div class="bento" data-stagger>
       <article class="card card--hover card--bar b-int" data-reveal>
         <div class="hub" aria-hidden="true">
-          <svg class="hub-lines" viewBox="0 0 360 200" preserveAspectRatio="none"><path d="M180 100 L64 56"/><path d="M180 100 L296 56"/><path d="M180 100 L64 150"/><path d="M180 100 L296 150"/></svg>
+          <svg class="hub-lines" viewBox="0 0 360 200" preserveAspectRatio="none"><path d="M180 100 L64 56"/><path d="M180 100 L296 56"/><path d="M180 100 L64 150"/><path d="M180 100 L296 150"/><g class="hub-pulses"><path pathLength="100" d="M64 56 L180 100"/><path pathLength="100" d="M296 56 L180 100"/><path pathLength="100" d="M64 150 L180 100"/><path pathLength="100" d="M296 150 L180 100"/></g></svg>
           <span class="hub-core"><img src="../assets/logo-white.svg" alt="" width="80" height="14"></span>
           <span class="hub-node n1"><img src="https://images.squarespace-cdn.com/content/v1/66d9b67dc340d3744c681338/b76bf138-4df5-4a59-ad2a-1c7dd1a5f3e1/Redtail_Logo_2025_4C.png" alt="Redtail" width="96" height="28"></span>
           <span class="hub-node n2"><img src="https://images.squarespace-cdn.com/content/v1/66d9b67dc340d3744c681338/a5cbca31-dc56-437d-8a7a-ac82b9a9e446/HubSpot_Logo.svg.png" alt="HubSpot" width="96" height="28"></span>

@@ -277,7 +277,7 @@
     const sticky = $('.ex-sticky', sec);
     const panels = $$('.panel', sec);
     const items = $$('.ex-item', sec);
-    panels.forEach((p) => $$('.ui-group, .ui-row, .uc-card, .us-q, .us-values', p).forEach((el, i) => el.style.setProperty('--r', i)));
+    panels.forEach((p) => $$('.ui-group, .ui-row, .uc-card, .us-q, .us-values, .ui-fid .fid-sec, .fid-in', p).forEach((el, i) => el.style.setProperty('--r', i)));
     const pinned = window.matchMedia('(min-width: 901px)');
     const headerH = () => parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--header-h')) || 72;
     const span = () => Math.max(1, track.offsetHeight - sticky.offsetHeight);
@@ -286,14 +286,20 @@
       if (i === at) return;
       at = i;
       panels.forEach((p, n) => { p.classList.toggle('is-active', n === i); p.classList.toggle('is-before', n < i); });
-      items.forEach((it, n) => it.classList.toggle('is-active', n === i));
+      items.forEach((it, n) => { it.classList.toggle('is-active', n === i); it.classList.toggle('is-done', n < i); });
     };
     let queued = false;
     const update = () => {
       queued = false;
       if (!pinned.matches) { panels.forEach((p) => p.classList.remove('is-before')); at = -1; return; }
       const p = Math.min(0.999, Math.max(0, (headerH() - track.getBoundingClientRect().top) / span()));
-      set(Math.floor(p * panels.length));
+      const i = Math.floor(p * panels.length);
+      set(i);
+      // Progress through this feature's stretch: the content rises with it and
+      // the heading's line fills, so even a small scroll shows.
+      const lp = p * panels.length - i;
+      items[i].style.setProperty('--lp', lp.toFixed(3));
+      if (!reduced.matches) panels[i].style.setProperty('--drift', ((0.25 - lp) * 90).toFixed(1) + 'px');
     };
     addEventListener('scroll', () => { if (!queued) { queued = true; requestAnimationFrame(update); } }, { passive: true });
     addEventListener('resize', update);
