@@ -275,9 +275,9 @@
 .step-art--engage span:nth-child(3) { transition-delay: 0.24s; margin-left: -20px; }
 .step-art--engage img { width: 30px; height: 30px; border-radius: 50%; object-fit: cover; }
 .step.is-in .step-art--engage span { opacity: 1; transform: none; }
-.step-art--see { align-content: center; gap: 8px; padding: 0 18px; }
+.step-art--see { align-content: center; gap: 6px; padding: 0 18px; }
 .mini-row {
-  display: flex; align-items: center; gap: 10px; padding: 8px 10px; border-radius: 12px; background: var(--k-white); box-shadow: var(--elev-1);
+  display: flex; align-items: center; gap: 10px; padding: 6px 10px; border-radius: 12px; background: var(--k-white); box-shadow: var(--elev-1);
   opacity: 0; transform: translateX(16px); transition: opacity 0.45s var(--ease-out), transform 0.55s var(--ease-pop);
 }
 .mini-row .ac-avatar { width: 28px; height: 28px; }
@@ -295,6 +295,26 @@
 .bubble--me { justify-self: end; padding: 6px; border-radius: 16px 16px 4px 16px; background: var(--k-teal-light); transition-delay: 0.3s; }
 .bubble--me img { width: 32px; height: 32px; }
 .step.is-in .bubble { opacity: 1; transform: none; }
+/* Hover, on top of the card's lift: each card's art answers in its own way.
+   Engage: the values fan out and their photos come closer. */
+.step-art--engage img { transition: transform 0.45s var(--ease-pop); }
+.step.is-in:hover .step-art--engage span { transition-delay: 0s; }
+.step.is-in:hover .step-art--engage span:nth-child(1) { transform: translateX(-10px) rotate(-3deg); }
+.step.is-in:hover .step-art--engage span:nth-child(2) { transform: translateX(12px) rotate(2deg); transition-delay: 0.05s; }
+.step.is-in:hover .step-art--engage span:nth-child(3) { transform: translateX(-6px) rotate(-1.5deg); transition-delay: 0.1s; }
+.step:hover .step-art--engage img { transform: scale(1.18); }
+/* Prioritize: the ready prospect steps forward and the scores pop in turn. */
+.step.is-in:hover .mini-row { transition-delay: 0s; }
+.step.is-in:hover .mini-row:nth-child(2) { transform: scale(1.04); box-shadow: var(--elev-2); }
+.step.is-in:hover .mini-row:nth-child(3), .step.is-in:hover .mini-row:nth-child(4) { transform: translateX(6px); opacity: 0.85; }
+.step:hover .mini-row .kq { animation: scorePop 0.5s var(--ease-pop) both; }
+.step:hover .mini-row:nth-child(3) .kq { animation-delay: 0.08s; }
+.step:hover .mini-row:nth-child(4) .kq { animation-delay: 0.16s; }
+@keyframes scorePop { 40% { transform: scale(1.18); } }
+/* Convert: the question rises and the reply wiggles, as if it is on its way. */
+.step.is-in:hover .bubble { transition-delay: 0s; transform: translateY(-4px) scale(1.02); box-shadow: var(--elev-2); }
+.step.is-in:hover .bubble--me { transform: none; box-shadow: none; animation: replyWiggle 0.7s var(--ease-pop) 0.1s; }
+@keyframes replyWiggle { 25% { transform: rotate(-10deg) scale(1.12); } 55% { transform: rotate(7deg) scale(1.12); } 80% { transform: rotate(-3deg) scale(1.05); } }
 .solution-foot { display: grid; grid-template-columns: 1fr auto; gap: var(--space-32); align-items: center; margin-top: clamp(40px, 5vw, 64px); }
 .pull--dark { background: rgba(255, 255, 255, 0.08); border: 1px solid rgba(255, 255, 255, 0.14); }
 .pull--dark blockquote { color: var(--k-white); }

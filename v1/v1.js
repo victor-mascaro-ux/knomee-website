@@ -157,7 +157,7 @@
       kq: $('[data-m-kq]', wrap), tier: $('[data-m-tier]', wrap), meter: $('[data-m-meter]', wrap), stage: $('[data-m-stage]', wrap),
       goal: $('[data-m-goal]', wrap), ready: $('[data-m-ready]', wrap), event: $('[data-m-event]', wrap),
       starter: $('[data-m-starter]', wrap), mini: $('[data-mini-kq]', wrap),
-      stageArt: $('[data-m-stage-ic]', wrap), readyArt: $('[data-m-ready-ic]', wrap),
+      readyArt: $('[data-m-ready-ic]', wrap),
     };
     // The starter is a question for the client, built from their goal and event.
     const EVENT_Q = { 'Retirement': 'retirement', 'New Business': 'the new business', 'Property Purchase': 'the property purchase', 'Graduation': 'the graduation', 'New Baby': 'the new baby', 'Relocation': 'the move' };
@@ -181,7 +181,7 @@
     const score = () => (st.goal ? Math.min(96, 30 + (st.level ? +st.level * 12 : 0) + (st.event ? 10 : 0)) : null);
     const paintScore = () => {
       const s = score();
-      setMeter(m.meter, st.level ? +st.level : 0, m.stage, m.stageArt);
+      setMeter(m.meter, st.level ? +st.level : 0, m.stage);
       m.readyArt.src = `../assets/ttm/TTM-${st.level || 1}.svg`;
       if (s === null) {
         m.kq.textContent = '–'; m.kq.className = 'kq kq-lg tier-3';
@@ -216,6 +216,16 @@
       nav.classList.toggle('is-final', i === 3);
     };
 
+    // A click on an answer moves on by itself after a beat, long enough to see
+    // the choice land; arrow keys only move the choice. Next stays for going
+    // forward again after Back.
+    let auto = 0;
+    const later = () => {
+      clearTimeout(auto);
+      const from = at;
+      auto = setTimeout(() => { if (at === from) advance(); }, reduced.matches ? 0 : 450);
+    };
+
     // Every question is a single choice: click, or arrow keys to move and pick.
     const radios = (items, key, paint) => {
       const pick = (b) => {
@@ -224,7 +234,7 @@
       };
       items.forEach((b, i) => {
         b.tabIndex = i === 0 ? 0 : -1;
-        b.addEventListener('click', () => pick(b));
+        b.addEventListener('click', () => { pick(b); later(); });
         b.addEventListener('keydown', (e) => {
           const d = { ArrowRight: 1, ArrowDown: 1, ArrowLeft: -1, ArrowUp: -1 }[e.key];
           if (!d) return;
@@ -237,7 +247,8 @@
     };
     const clears = [radios(goals, 'goal', paintGoal), radios(levels, 'level', paintLevel), radios(events, 'event', paintEvent)];
 
-    nextBtn.addEventListener('click', async () => {
+    const advance = async () => {
+      clearTimeout(auto);
       const need = ['goal', 'level', 'event'][at];
       if (need && !st[need]) { nudge(); return; }
       if (at < 2) { go(at + 1); const f = $('button', steps[at]); if (f) f.focus({ preventScroll: true }); return; }
@@ -251,10 +262,12 @@
       await window.Knomee.typeText(m.starter, text, 18);
       m.starter.classList.remove('typing');
       flash(m.starter);
-    });
-    back.addEventListener('click', () => { if (at > 0) go(at - 1); });
+    };
+    nextBtn.addEventListener('click', advance);
+    back.addEventListener('click', () => { clearTimeout(auto); if (at > 0) go(at - 1); });
 
     $('[data-restart]', wrap).addEventListener('click', () => {
+      clearTimeout(auto);
       st.goal = null; st.level = null; st.event = null;
       clears.forEach((c) => c());
       m.goal.innerHTML = EMPTY; m.ready.innerHTML = EMPTY; m.event.innerHTML = EMPTY; m.starter.innerHTML = EMPTY;
