@@ -292,12 +292,17 @@
     window.addEventListener('resize', update);
     update();
     // Scroll the page to step i's slice of the track, so the stage never leaves.
-    const goTo = (i) => {
+    const goTo = (i, instant = false) => {
       const k = Math.max(0, Math.min(n - 1, i));
       const top = window.scrollY + track.getBoundingClientRect().top - headerH() + span() * (k + 0.5) / n;
-      window.scrollTo({ top, behavior: reduced.matches ? 'auto' : 'smooth' });
+      window.scrollTo({ top, behavior: instant ? 'instant' : reduced.matches ? 'auto' : 'smooth' });
     };
-    return { goTo, get at() { return at; }, n, pinned };
+    // Whether the stage is pinned in view right now.
+    const holding = () => {
+      const r = track.getBoundingClientRect();
+      return pinned.matches && r.top <= headerH() + 2 && r.bottom >= window.innerHeight - 2;
+    };
+    return { goTo, holding, get at() { return at; }, n, pinned };
   }
 
   function story() {
@@ -329,6 +334,30 @@
       e.preventDefault();
       ctl.goTo(k);
     }));
+
+    /* Left alone while pinned, the carousel moves on by itself. It steps the
+       page to the next slice, so scroll and step stay in sync, and wraps from
+       the last back to the first. Scrolling, or a pointer resting on the
+       stage, restarts the wait; reduced motion turns it off. */
+    const DWELL = 5000;
+    const side = $('.feat-side', track);
+    let timer = 0;
+    let idle = 0;
+    let resting = false;
+    track.style.setProperty('--dwell', `${DWELL}ms`);
+    const stop = () => { clearTimeout(timer); track.classList.remove('is-auto'); };
+    const arm = () => {
+      stop();
+      if (reduced.matches || resting || document.hidden || !ctl.holding()) return;
+      void track.offsetWidth; // restart the dot's fill
+      track.classList.add('is-auto');
+      timer = setTimeout(() => (ctl.at >= ctl.n - 1 ? ctl.goTo(0, true) : ctl.goTo(ctl.at + 1)), DWELL);
+    };
+    window.addEventListener('scroll', () => { stop(); clearTimeout(idle); idle = setTimeout(arm, 700); }, { passive: true });
+    side.addEventListener('pointerenter', () => { resting = true; stop(); });
+    side.addEventListener('pointerleave', () => { resting = false; arm(); });
+    document.addEventListener('visibilitychange', arm);
+    arm();
   }
 
   adventure();

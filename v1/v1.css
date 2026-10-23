@@ -130,7 +130,6 @@
 .kq-stack--row { display: inline-flex; align-items: center; gap: 8px; }
 .ac-who { display: grid; justify-items: start; gap: 4px; }
 .ac-who b { display: inline-flex; align-items: center; gap: 6px; }
-.ac-stage { font-size: var(--text-base); font-weight: var(--weight-semibold); color: var(--k-plum); }
 .step-art--see .mini-head { justify-self: stretch; }
 .mini-head, .ui-cols { display: flex; justify-content: space-between; padding: 0 10px 2px; font-size: var(--text-2xs); font-weight: var(--weight-semibold); letter-spacing: var(--tracking-group); text-transform: uppercase; color: var(--k-slate); }
 .ui-cols { padding: 10px 6px 0; }
@@ -303,6 +302,16 @@
 
 /* ---------- Interactive discovery: the live mirror ---------- */
 .try { background: var(--k-plum-wash); }
+/* Wide screens: the words on the left and the prototype on the right, so
+   both are in view at once. */
+@media (min-width: 1200px) {
+  .try { padding: clamp(56px, 6vw, 88px) 0; }
+  .try > .container { display: grid; grid-template-columns: minmax(0, 0.72fr) minmax(0, 1.6fr); gap: clamp(40px, 4vw, 64px); align-items: center; }
+  .try .try-head { display: block; margin: 0; }
+  .try .try-head .lead { margin-top: var(--space-20); }
+  .try .mirror { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+  .try .mirror-you, .try .mirror-advisor { padding: 28px; }
+}
 .try-head { display: grid; grid-template-columns: 1fr 1.1fr; gap: clamp(24px, 4vw, 56px); align-items: end; margin-bottom: clamp(32px, 4vw, 48px); }
 .easy { display: inline-flex; align-items: center; gap: 10px; margin-top: var(--space-16); padding: 8px 16px 8px 10px; border-radius: var(--radius-pill); background: var(--k-white); box-shadow: var(--elev-1); font-weight: var(--weight-semibold); color: var(--k-plum); }
 .easy-dot { width: 22px; height: 22px; border-radius: 50%; background: var(--k-teal) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Cpath d='M2.5 6.2 5 8.5l4.5-5' fill='none' stroke='%23240446' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/12px no-repeat; }
@@ -449,6 +458,9 @@
 .us-q p { font-size: var(--text-lg); font-weight: var(--weight-medium); color: var(--k-plum); }
 .us-q .new-tag { flex: none; margin-top: 3px; }
 .ui-bar--client b { color: var(--k-forest); }
+/* The household's standing: the pill, and its bars to the right of it. */
+.ui-bar-end { display: inline-flex; align-items: center; gap: 12px; }
+.ui-bar-end .meter { width: 120px; }
 .uc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 14px; }
 .uc-card { padding: 14px; border: 1px solid var(--k-line); border-radius: 14px; }
 .uc-wide { grid-column: 1 / -1; }
@@ -457,9 +469,10 @@
 .uc-big { display: block; margin-top: 6px; font-size: var(--text-2xl); font-weight: var(--weight-bold); color: var(--k-forest); text-align: center; }
 .uc-card .dial + .uc-big { color: var(--k-plum); }
 .uc-card .meter { margin: 10px 0 14px; }
-.uc-stage { display: flex; align-items: center; justify-content: center; gap: 10px; }
+.uc-stage { display: flex; align-items: center; gap: 10px; margin-top: 16px; }
 .uc-stage img { width: 44px; height: 44px; object-fit: contain; }
 .uc-stage b { font-size: var(--text-2xl); font-weight: var(--weight-bold); color: var(--k-forest); }
+.uc-stage span { font-size: var(--text-sm); font-weight: var(--weight-semibold); color: var(--k-slate); }
 .uc-goal { margin-top: 10px; font-size: var(--text-md); font-weight: var(--weight-semibold); color: var(--k-ink); }
 .uc-when { display: flex; align-items: center; gap: 6px; margin-top: 2px; font-size: var(--text-sm); color: var(--text-muted); }
 .uc-when svg { width: 13px; height: 13px; fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }

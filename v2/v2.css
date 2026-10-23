@@ -39,7 +39,8 @@
 /* ---------- The playable adventure: phone + prospect profile, in its own plum panel ---------- */
 .v2-play { padding: clamp(48px, 6vw, 80px) 0 0; }
 .play-door {
-  position: relative; isolation: isolate; overflow: hidden; display: flex; justify-content: center;
+  position: relative; isolation: isolate; overflow: hidden;
+  display: grid; grid-template-columns: auto minmax(0, 340px); justify-content: center; align-items: center; column-gap: clamp(40px, 5vw, 72px);
   padding: clamp(28px, 5vw, 64px) clamp(16px, 4vw, 48px); border-radius: 28px; background: var(--door);
 }
 .play-door::before { content: ""; position: absolute; z-index: -1; left: 50%; top: -200px; width: 900px; height: 520px; margin-left: -450px; border-radius: 50%; background: radial-gradient(closest-side, rgba(185, 141, 220, 0.38), rgba(185, 141, 220, 0)); }
@@ -274,20 +275,16 @@ input:focus-visible + .chip-body { box-shadow: var(--ring); border-radius: 12px;
   .hero-copy .cta-row .btn { width: 100%; }
 }
 
-/* ---------- Stats: a card lifted over the hero's edge ---------- */
-.v2-stats { position: relative; z-index: 2; margin-top: clamp(-88px, -7vw, -64px); }
-.stats-card {
-  display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); padding: clamp(20px, 3vw, 32px) 0;
-  border-radius: 24px; background: var(--k-white); border: 1px solid var(--k-line); box-shadow: 0 24px 60px rgba(36, 4, 70, 0.12);
+/* ---------- Stats: in the plum panel, two by two beside the prototype ---------- */
+.play-stats { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 28px 32px; }
+.play-stats .stat { padding-top: 16px; border-top: 1px solid rgba(255, 255, 255, 0.16); }
+.play-stats .stat-num { font-size: clamp(40px, 4vw, 56px); color: var(--k-white); }
+.play-stats .stat-label { font-size: var(--text-lg); color: rgba(255, 255, 255, 0.78); }
+@media (max-width: 1179px) {
+  .play-door { grid-template-columns: minmax(0, 1fr); justify-items: center; row-gap: 40px; }
+  .play-stats { width: 100%; max-width: 680px; grid-template-columns: repeat(4, minmax(0, 1fr)); }
 }
-.stats-card .stat { position: relative; padding: 0 clamp(16px, 2.4vw, 32px); text-align: center; }
-.stats-card .stat + .stat::before { content: ""; position: absolute; left: 0; top: 12%; bottom: 12%; width: 1px; background: var(--k-line); }
-.stats-card .stat-num { font-size: clamp(36px, 4vw, 52px); }
-.stats-card .stat-label { font-size: var(--text-lg); }
-@media (max-width: 760px) {
-  .stats-card { grid-template-columns: 1fr 1fr; row-gap: 24px; }
-  .stats-card .stat:nth-child(3)::before { display: none; }
-}
+@media (max-width: 760px) { .play-stats { grid-template-columns: 1fr 1fr; } }
 
 /* ---------- Hero video ---------- */
 .video--hero { border-radius: 28px; }
@@ -474,6 +471,12 @@ html:not(.js) .pi-icon path, html:not(.js) .pi-icon rect { stroke-dashoffset: 0;
 .feat-dots i { display: block; width: 8px; height: 8px; border-radius: 4px; background: var(--bar-off); transition: width 0.45s var(--ease-pop), background var(--dur-slow) var(--ease-out); }
 .feat-dots a:hover i { background: var(--k-lilac); }
 .feat-dots a[aria-current="step"] i { width: 28px; background: var(--k-plum); }
+/* Auto-advance: the current dot fills over the wait, then the next one starts. */
+.feat-dots i { position: relative; overflow: hidden; }
+.feat-dots i::after { content: ""; position: absolute; inset: 0; border-radius: inherit; background: var(--k-plum); transform: scaleX(0); transform-origin: left; }
+.is-auto .feat-dots a[aria-current="step"] i { background: var(--k-lilac); }
+.is-auto .feat-dots a[aria-current="step"] i::after { animation: dotFill var(--dwell, 5s) linear forwards; }
+@keyframes dotFill { to { transform: scaleX(1); } }
 .feat-proof { display: flex; width: fit-content; align-items: center; gap: 10px; margin-top: 20px; padding: 10px 16px 10px 12px; border-radius: var(--radius-pill); background: var(--k-teal-light); color: var(--k-ocean); font-weight: var(--weight-semibold); font-size: var(--text-lg); align-self: flex-start; }
 .feat-proof::before { content: ""; flex: none; width: 22px; height: 22px; border-radius: 50%; background: var(--k-teal) center/12px no-repeat url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Cpath d='M2.5 6.2 5 8.5l4.5-5' fill='none' stroke='%23240446' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E"); }
 .feat-quote { margin: 22px 0 0; padding-left: 18px; border-left: 3px solid var(--k-teal); }
@@ -492,7 +495,8 @@ html:not(.js) .pi-icon path, html:not(.js) .pi-icon rect { stroke-dashoffset: 0;
 .tcols { padding: 10px 18px 8px; border-bottom: 1px solid var(--k-line); font-size: var(--text-2xs); font-weight: var(--weight-semibold); letter-spacing: var(--tracking-group); text-transform: uppercase; color: var(--text-muted); animation: none; }
 .tcols span:first-child { grid-column: span 2; }
 .tcols span:last-child { text-align: right; }
-.ta { font-size: var(--text-sm); line-height: 1.4; color: var(--k-body); }
+/* The action keeps clear of the score by about what the name leaves before it. */
+.ta { padding-right: 28px; font-size: var(--text-sm); line-height: 1.4; color: var(--k-body); }
 .ta span { display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; line-clamp: 2; overflow: hidden; }
 .trow:hover { background: var(--k-cloud-cool); }
 .starters--panel { width: min(440px, 100%); }
@@ -599,7 +603,7 @@ html:not(.js) .pi-icon path, html:not(.js) .pi-icon rect { stroke-dashoffset: 0;
 @media (max-width: 899px) { .bento { grid-template-columns: 1fr 1fr; } .b-int { grid-column: span 2; } }
 @media (max-width: 600px) {
   .trow { grid-template-columns: 38px minmax(0, 1fr) auto; row-gap: 6px; }
-  .trow .ta { grid-column: 2 / -1; grid-row: 2; }
+  .trow .ta { grid-column: 2 / -1; grid-row: 2; padding-right: 0; }
   .tcols { display: none; }
 }
 @media (max-width: 600px) { .bento { grid-template-columns: 1fr; } .b-int { grid-column: auto; } .hub-node { padding: 8px 10px; } .hub-node img { height: 20px; } }

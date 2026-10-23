@@ -53,8 +53,6 @@
     const kq = $('[data-kq]', root);
     const pill = $('[data-tier]', root);
     const meter = $('[data-meter]', root);
-    const stageWord = $('[data-stage]', root);
-    const stageArt = $('[data-stage-ic]', root);
     const tags = $('[data-tags]', root);
     const starter = $('[data-starter]', root);
     const pauseBtn = $('.stage-pause', root);
@@ -102,13 +100,13 @@
       $$('.joy-photo', root).forEach((c) => c.classList.remove('is-on'));
       scr.confidence.classList.remove('is-strong');
       kqVal = 0; kq.textContent = '–'; paintTier(kq, pill, 0);
-      setMeter(meter, 0, stageWord, stageArt); tags.innerHTML = ''; starter.textContent = '';
+      setMeter(meter, 0); tags.innerHTML = ''; starter.textContent = '';
     };
 
     if (reduced.matches) {
       show('fid'); scr.confidence.classList.add('is-strong');
       chip('security').classList.add('is-on'); chip('family').classList.add('is-on');
-      addTag('Security'); addTag('Supporting my family'); kq.textContent = '82'; paintTier(kq, pill, 82); setMeter(meter, 4, stageWord, stageArt); starter.textContent = STARTER;
+      addTag('Security'); addTag('Supporting my family'); kq.textContent = '82'; paintTier(kq, pill, 82); setMeter(meter, 4); starter.textContent = STARTER;
       return;
     }
 
@@ -117,15 +115,15 @@
         reset();
         await wait(1000);
         tapOn(chip('security')); await wait(180); chip('security').classList.add('is-on');
-        await wait(260); addTag('Security'); setMeter(meter, 1, stageWord, stageArt); setKQ(24);
+        await wait(260); addTag('Security'); setMeter(meter, 1); setKQ(24);
         await wait(1100);
         tapOn(chip('family')); await wait(180); chip('family').classList.add('is-on');
-        await wait(260); addTag('Supporting my family'); setMeter(meter, 2, stageWord, stageArt); setKQ(46);
+        await wait(260); addTag('Supporting my family'); setMeter(meter, 2); setKQ(46);
         await wait(1100);
         show('confidence');
         await wait(700); scr.confidence.classList.add('is-strong');
-        await wait(600); setMeter(meter, 3, stageWord, stageArt); setKQ(68);
-        await wait(800); setMeter(meter, 4, stageWord, stageArt); setKQ(82);
+        await wait(600); setMeter(meter, 3); setKQ(68);
+        await wait(800); setMeter(meter, 4); setKQ(82);
         await wait(1400); show('done');
         await wait(2100); show('fid');
         await wait(700); await type(STARTER);
