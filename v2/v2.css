@@ -253,6 +253,10 @@ input:focus-visible + .chip-body { box-shadow: var(--ring); border-radius: 12px;
 .starter { display: flex; gap: 10px; margin-top: 14px; padding: 12px; border-radius: 14px; background: var(--k-plum-wash); }
 .bolt { flex: none; display: grid; place-items: center; width: 28px; height: 28px; border-radius: 50%; background: var(--k-tangerine); }
 .bolt svg { width: 15px; height: 15px; fill: var(--k-white); }
+/* Each starter strategy keeps its colour from the product: Positive Talk
+   amber, Demonstrate Curiosity teal. */
+.bolt--curiosity { background: var(--k-teal); }
+.bolt--curiosity svg { width: 18px; height: 18px; }
 .starter-label { display: block; font-size: var(--text-xs); font-weight: var(--weight-semibold); color: var(--k-grape); }
 .starter-text { margin-top: 3px; min-height: 3.9em; font-size: var(--text-base); line-height: 1.45; color: var(--k-ink); }
 .starter-text.typing::after { content: ""; display: inline-block; width: 2px; height: 1em; margin-left: 2px; vertical-align: -2px; background: var(--k-grape); animation: caret 0.8s steps(1) infinite; }
@@ -315,6 +319,17 @@ input:focus-visible + .chip-body { box-shadow: var(--ring); border-radius: 12px;
 html:not(.js) .pi-icon path, html:not(.js) .pi-icon rect { stroke-dashoffset: 0; }
 .pi-icon .faint { opacity: 0.35; }
 @keyframes drawIn { to { stroke-dashoffset: 0; } }
+/* Hover: the icon tile tips and grows, its drawing runs again stroke by
+   stroke, and the faint signal bars fill in. */
+.pi-icon { transition: transform 0.45s var(--ease-pop); }
+.problem-item:hover .pi-icon { transform: rotate(-6deg) scale(1.08); }
+.problem-item.is-in:hover .pi-icon path, .problem-item.is-in:hover .pi-icon rect { animation: drawIn 0.9s var(--ease-standard) 0.25s forwards, drawAgain 0.7s var(--ease-standard) both; }
+.problem-item.is-in:hover .pi-icon svg > :nth-child(2) { animation-delay: 0.25s, 0.08s; }
+.problem-item.is-in:hover .pi-icon svg > :nth-child(3) { animation-delay: 0.25s, 0.16s; }
+.problem-item.is-in:hover .pi-icon svg > :nth-child(4) { animation-delay: 0.25s, 0.24s; }
+.pi-icon .faint { transition: opacity 0.3s ease-out 0.3s; }
+.problem-item:hover .pi-icon .faint { opacity: 1; }
+@keyframes drawAgain { from { stroke-dashoffset: 1; } to { stroke-dashoffset: 0; } }
 @media (max-width: 899px) { .problem-grid, .problem-items { grid-template-columns: 1fr; } }
 
 /* ---------- The solution: scroll story ---------- */

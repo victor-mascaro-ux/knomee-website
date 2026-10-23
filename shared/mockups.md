@@ -59,5 +59,10 @@ their own look. The shared pieces live in `shared/site.css`.
 - An adventure's intro starts with the product's Get Started button and
   "Takes 1 min" under it, not an arrow.
 - Prospect tables give each prospect a Top Action.
+- Interactive questions move on by themselves after a short beat once a tap
+  answers them (a single choice, or the limit of a multi-pick); sliders and
+  under-the-limit picks wait for Next, and Next still works after Back.
+- Conversation starters use the product's strategies and vary them
+  (Positive Talk amber, Demonstrate Curiosity teal), never two of one kind.
 - Every adventure or section icon sits on its white disc with a soft drop shadow,
   and each card section carries its icon from the app.

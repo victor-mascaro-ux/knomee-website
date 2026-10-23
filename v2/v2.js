@@ -150,12 +150,23 @@
       b.setAttribute('aria-pressed', String(!on));
       b.classList.toggle('is-on', !on);
       paintValues();
+      // The third pick answers the question (as in the product); fewer wait for Next.
+      if (!on && chosen.length >= MAX) later(700); else clearTimeout(auto);
     }));
     range.addEventListener('input', () => {
       if (!touched.confidence) { touched.confidence = true; flash(rows.confidence); }
       paintConfidence();
     });
-    $$('input[name="event"]', form).forEach((inp) => inp.addEventListener('change', () => { touched.events = true; paintEvents(); }));
+    // One life event, one tap: a tap moves on; arrow keys only move the choice.
+    const eventGrid = $('.event-grid', root);
+    let tapped = false;
+    eventGrid.addEventListener('pointerdown', () => { tapped = true; });
+    eventGrid.addEventListener('keydown', () => { tapped = false; });
+    $$('input[name="event"]', form).forEach((inp) => inp.addEventListener('change', () => {
+      touched.events = true; paintEvents();
+      if (tapped) later(450);
+      tapped = false;
+    }));
     paintConfidence();
 
     function score() {
@@ -231,17 +242,28 @@
       go(order.indexOf('values'));
     }
 
-    next.addEventListener('click', () => {
+    // An answer that settles the question moves on by itself after a beat,
+    // long enough to see it land. Next stays for going forward after Back,
+    // and for the slider, which waits to be let go of on purpose.
+    let auto = 0;
+    function later(ms) {
+      clearTimeout(auto);
+      const from = at;
+      auto = setTimeout(() => { if (at === from && !busy) advance(); }, reduced.matches ? 0 : ms);
+    }
+    function advance() {
+      clearTimeout(auto);
       if (busy) return;
       const name = order[at];
       if (name === 'values' && !picked('value').length) { bump(valueGrid); return; }
       if (name === 'confidence' && !touched.confidence) { touched.confidence = true; paintConfidence(); flash(rows.confidence); }
       if (name === 'events') { finish(); return; }
       go(at + 1);
-    });
+    }
+    next.addEventListener('click', advance);
     $('.adv-go', root).addEventListener('click', () => { if (!busy) go(at + 1); });
-    back.addEventListener('click', () => { if (!busy && QUESTIONS.includes(order[at]) && at > 0) go(at - 1); });
-    restart.addEventListener('click', () => { if (!busy) reset(); });
+    back.addEventListener('click', () => { clearTimeout(auto); if (!busy && QUESTIONS.includes(order[at]) && at > 0) go(at - 1); });
+    restart.addEventListener('click', () => { clearTimeout(auto); if (!busy) reset(); });
     form.addEventListener('submit', (e) => e.preventDefault());
 
     go(0, { focus: false });
